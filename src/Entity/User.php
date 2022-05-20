@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -45,6 +47,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="date")
      */
     private $dateCreation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="expediteur")
+     */
+    private $messagesEnvoyes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="destinataire")
+     */
+    private $messagesReceptionnes;
+
+    public function __construct()
+    {
+        $this->messagesEnvoyes = new ArrayCollection();
+        $this->messagesReceptionnes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +173,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessagesEnvoyes(): Collection
+    {
+        return $this->messagesEnvoyes;
+    }
+
+    public function addMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if (!$this->messagesEnvoyes->contains($messagesEnvoye)) {
+            $this->messagesEnvoyes[] = $messagesEnvoye;
+            $messagesEnvoye->setExpediteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if ($this->messagesEnvoyes->removeElement($messagesEnvoye)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesEnvoye->getExpediteur() === $this) {
+                $messagesEnvoye->setExpediteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessagesReceptionnes(): Collection
+    {
+        return $this->messagesReceptionnes;
+    }
+
+    public function addMessagesReceptionne(Message $messagesReceptionne): self
+    {
+        if (!$this->messagesReceptionnes->contains($messagesReceptionne)) {
+            $this->messagesReceptionnes[] = $messagesReceptionne;
+            $messagesReceptionne->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesReceptionne(Message $messagesReceptionne): self
+    {
+        if ($this->messagesReceptionnes->removeElement($messagesReceptionne)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesReceptionne->getDestinataire() === $this) {
+                $messagesReceptionne->setDestinataire(null);
+            }
+        }
 
         return $this;
     }
