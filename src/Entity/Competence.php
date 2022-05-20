@@ -61,9 +61,15 @@ class Competence
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Composant::class, mappedBy="competence")
+     */
+    private $composants;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->composants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,6 +185,36 @@ class Competence
             // set the owning side to null (unless already changed)
             if ($commentaire->getCompetence() === $this) {
                 $commentaire->setCompetence(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Composant>
+     */
+    public function getComposants(): Collection
+    {
+        return $this->composants;
+    }
+
+    public function addComposant(Composant $composant): self
+    {
+        if (!$this->composants->contains($composant)) {
+            $this->composants[] = $composant;
+            $composant->setCompetence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComposant(Composant $composant): self
+    {
+        if ($this->composants->removeElement($composant)) {
+            // set the owning side to null (unless already changed)
+            if ($composant->getCompetence() === $this) {
+                $composant->setCompetence(null);
             }
         }
 

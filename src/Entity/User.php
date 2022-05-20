@@ -68,12 +68,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Composant::class, mappedBy="concepteur")
+     */
+    private $composantsCrees;
+
     public function __construct()
     {
         $this->messagesEnvoyes = new ArrayCollection();
         $this->messagesReceptionnes = new ArrayCollection();
         $this->competencesCrees = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->composantsCrees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -303,6 +309,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commentaire->getAuteur() === $this) {
                 $commentaire->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Composant>
+     */
+    public function getComposantsCrees(): Collection
+    {
+        return $this->composantsCrees;
+    }
+
+    public function addComposantsCree(Composant $composantsCree): self
+    {
+        if (!$this->composantsCrees->contains($composantsCree)) {
+            $this->composantsCrees[] = $composantsCree;
+            $composantsCree->setConcepteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComposantsCree(Composant $composantsCree): self
+    {
+        if ($this->composantsCrees->removeElement($composantsCree)) {
+            // set the owning side to null (unless already changed)
+            if ($composantsCree->getConcepteur() === $this) {
+                $composantsCree->setConcepteur(null);
             }
         }
 

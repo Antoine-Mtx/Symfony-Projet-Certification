@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Type
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $couleur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Composant::class, mappedBy="type")
+     */
+    private $composants;
+
+    public function __construct()
+    {
+        $this->composants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,36 @@ class Type
     public function setCouleur(?string $couleur): self
     {
         $this->couleur = $couleur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Composant>
+     */
+    public function getComposants(): Collection
+    {
+        return $this->composants;
+    }
+
+    public function addComposant(Composant $composant): self
+    {
+        if (!$this->composants->contains($composant)) {
+            $this->composants[] = $composant;
+            $composant->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComposant(Composant $composant): self
+    {
+        if ($this->composants->removeElement($composant)) {
+            // set the owning side to null (unless already changed)
+            if ($composant->getType() === $this) {
+                $composant->setType(null);
+            }
+        }
 
         return $this;
     }
