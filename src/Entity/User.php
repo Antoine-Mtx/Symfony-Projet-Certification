@@ -58,10 +58,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $messagesReceptionnes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="concepteur")
+     */
+    private $competencesCrees;
+
     public function __construct()
     {
         $this->messagesEnvoyes = new ArrayCollection();
         $this->messagesReceptionnes = new ArrayCollection();
+        $this->competencesCrees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -231,6 +237,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($messagesReceptionne->getDestinataire() === $this) {
                 $messagesReceptionne->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Competence>
+     */
+    public function getCompetencesCrees(): Collection
+    {
+        return $this->competencesCrees;
+    }
+
+    public function addCompetencesCree(Competence $competencesCree): self
+    {
+        if (!$this->competencesCrees->contains($competencesCree)) {
+            $this->competencesCrees[] = $competencesCree;
+            $competencesCree->setConcepteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetencesCree(Competence $competencesCree): self
+    {
+        if ($this->competencesCrees->removeElement($competencesCree)) {
+            // set the owning side to null (unless already changed)
+            if ($competencesCree->getConcepteur() === $this) {
+                $competencesCree->setConcepteur(null);
             }
         }
 

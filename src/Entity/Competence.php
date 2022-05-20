@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\DomaineRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\CompetenceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=DomaineRepository::class)
+ * @ORM\Entity(repositoryClass=CompetenceRepository::class)
  */
-class Domaine
+class Competence
 {
     /**
      * @ORM\Id
@@ -25,9 +23,14 @@ class Domaine
     private $intitule;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateCreation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -40,14 +43,16 @@ class Domaine
     private $icone;
 
     /**
-     * @ORM\OneToMany(targetEntity=Competence::class, mappedBy="domaine")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="competencesCrees")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $competences;
+    private $concepteur;
 
-    public function __construct()
-    {
-        $this->competences = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=Domaine::class, inversedBy="competences")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $domaine;
 
     public function getId(): ?int
     {
@@ -71,9 +76,21 @@ class Domaine
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
@@ -102,32 +119,26 @@ class Domaine
         return $this;
     }
 
-    /**
-     * @return Collection<int, Competence>
-     */
-    public function getCompetences(): Collection
+    public function getConcepteur(): ?User
     {
-        return $this->competences;
+        return $this->concepteur;
     }
 
-    public function addCompetence(Competence $competence): self
+    public function setConcepteur(?User $concepteur): self
     {
-        if (!$this->competences->contains($competence)) {
-            $this->competences[] = $competence;
-            $competence->setDomaine($this);
-        }
+        $this->concepteur = $concepteur;
 
         return $this;
     }
 
-    public function removeCompetence(Competence $competence): self
+    public function getDomaine(): ?Domaine
     {
-        if ($this->competences->removeElement($competence)) {
-            // set the owning side to null (unless already changed)
-            if ($competence->getDomaine() === $this) {
-                $competence->setDomaine(null);
-            }
-        }
+        return $this->domaine;
+    }
+
+    public function setDomaine(?Domaine $domaine): self
+    {
+        $this->domaine = $domaine;
 
         return $this;
     }
