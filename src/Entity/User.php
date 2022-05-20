@@ -63,11 +63,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $competencesCrees;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="auteur")
+     */
+    private $commentaires;
+
     public function __construct()
     {
         $this->messagesEnvoyes = new ArrayCollection();
         $this->messagesReceptionnes = new ArrayCollection();
         $this->competencesCrees = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -267,6 +273,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($competencesCree->getConcepteur() === $this) {
                 $competencesCree->setConcepteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getAuteur() === $this) {
+                $commentaire->setAuteur(null);
             }
         }
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompetenceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +55,16 @@ class Competence
      * @ORM\JoinColumn(nullable=false)
      */
     private $domaine;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="competence")
+     */
+    private $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -139,6 +151,36 @@ class Competence
     public function setDomaine(?Domaine $domaine): self
     {
         $this->domaine = $domaine;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setCompetence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getCompetence() === $this) {
+                $commentaire->setCompetence(null);
+            }
+        }
 
         return $this;
     }
