@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Domaine;
+use App\Form\DomaineType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
