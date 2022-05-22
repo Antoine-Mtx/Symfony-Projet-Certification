@@ -4,11 +4,9 @@
 
 {% block body %}
 
-<h1>Branches des Mathématiques {{ domaines | length }}</h1>
+<h1>Branches des Mathématiques</h1>
 
 <p><a href="{{ path('add_domaine') }}"><button type="button" class="btn btn-success">Ajouter une branche</button></a></p>
-
-<p> {{ domaine.description }} </p>
 
 <table class="table table-striped">
     <thead>
