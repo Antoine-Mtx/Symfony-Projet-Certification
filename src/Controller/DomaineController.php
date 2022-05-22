@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Domaine;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +47,24 @@ class DomaineController extends AbstractController
 
         return $this->render('domaine/add.html.twig', [
             'formDomaine' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/domaine/{id}", name="show_domaine")
+     */
+    public function show(ManagerRegistry $doctrine, int $id): Response
+    {
+        $domaine = $doctrine->getRepository(Domaine::class)->find($id); // on récupère l'objet de la classe "domaine" ayant pour id "$id"
+
+        if (! $domaine) {
+            throw $this->createNotFoundException(
+                "Aucun domaine répertorié avec l'id $id"
+            );
+        }
+
+        return $this->render('domaine/show.html.twig', [ // notre méthode rend le template "domaine/show.html.twig" où on pourra afficher les indomaines accessibles de notre objet domaine avec "{{ domaine }}"
+            'domaine' => $domaine,
         ]);
     }
 }
