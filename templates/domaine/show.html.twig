@@ -1,0 +1,21 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Détail du domaine #{{ domaine.id }}{% endblock %}
+
+{% block body %}
+
+<h1>{{ domaine }}</h1>
+
+<h2>Description</h2>
+
+<p> {{ domaine.description }} </p>
+
+<h2>Compétences</h2>
+
+<ul>
+    {% for competence in domaine.competences %}
+    <li><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
