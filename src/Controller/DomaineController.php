@@ -21,5 +21,30 @@ class DomaineController extends AbstractController
         ]);
     }
 
-    
+    /**
+     * @Route("/domaine/add", name="add_domaine")
+     * @Route("/domaine/update/{id}", name="update_domaine")
+     */
+    public function add(ManagerRegistry $doctrine, Domaine $domaine = NULL, Request $request) {
+
+        if (! $domaine) {
+            $domaine = new Domaine();
+        }
+
+        $entityManager = $doctrine->getManager();
+        $form = $this->createForm(DomaineType::class, $domaine); // on crée un formulaire dévolu à l'ajout de domaine
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $domaine = $form->getData();
+            $entityManager->persist($domaine);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('index_domaine');
+        }
+
+        return $this->render('domaine/add.html.twig', [
+            'formDomaine' => $form->createView(),
+        ]);
+    }
 }
