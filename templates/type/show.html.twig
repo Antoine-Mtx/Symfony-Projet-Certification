@@ -1,0 +1,13 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Détail du type #{{ type.id }}{% endblock %}
+
+{% block body %}
+
+<h1>{{ type }}</h1>
+
+<h2>Description</h2>
+
+<p> {{ type.description }} </p>
+
+{% endblock %}

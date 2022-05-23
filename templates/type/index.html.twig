@@ -1,20 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TypeController!{% endblock %}
+{% block title %}Types de composants{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1>Types de composants</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/Symfony-Projet-Certification/src/Controller/TypeController.php'|file_link(0) }}">src/Controller/TypeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/Symfony-Projet-Certification/templates/type/index.html.twig'|file_link(0) }}">templates/type/index.html.twig</a></code></li>
-    </ul>
-</div>
+<p><a href="{{ path('add_type') }}"><button type="button" class="btn btn-success">Ajouter un type de composant</button></a></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>type</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for type in types %}
+        <tr>
+            <td><a href="{{ path('show_type', {'id': type.id}) }}">{{ type }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table> 
 {% endblock %}
