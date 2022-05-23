@@ -109,4 +109,9 @@ class Composant
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return ucfirst($this->intitule);
+    }
 }
