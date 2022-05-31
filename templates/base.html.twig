@@ -20,8 +20,15 @@
         {% endblock %}
     </head>
     <body>
-
         <main class="container">
+        <header class="navbar-light navbar-sticky header-static">
+            {% include "base/nav.html.twig" %}
+        </header>
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% block body %}
         
         {% endblock %}

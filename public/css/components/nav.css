@@ -1,0 +1,8 @@
+.navbar-brand-img {
+    width: 3rem;
+    height: 100%;
+    object-fit: cover;
+}
+.navbar {
+    display: flex;
+}

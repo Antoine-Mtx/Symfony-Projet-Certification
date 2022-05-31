@@ -1,9 +1,9 @@
 <!-- Profile START -->
 <div class="dropdown ms-1 ms-lg-0">
-    <a class="avatar avatar-sm p-0 show" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="true">
+    <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"> <!-- .avatar-sm permet de rendre la classe .avatar plus compacte ; data-bs-auto-close="outside" désigne la zone à cliquer pour fermer le menu déroulant -->
         <img class="avatar-img rounded-circle" src="{{ asset("images/avatars/01.jpg") }}" alt="avatar">
     </a>
-    <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3 show" aria-labelledby="profileDropdown" data-bs-popper="none">
+    <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3" aria-labelledby="profileDropdown" data-bs-popper="none">
         <!-- Profile info -->
         <li class="px-3">
             <div class="d-flex align-items-center">
@@ -21,7 +21,7 @@
         <!-- Links -->
         <li><a class="dropdown-item" href="#"><i class="bi bi-person fa-fw me-2"></i>Mon profil</a></li>
         <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Paramètres</a></li>
-        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li>
+        <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Aide</a></li>
         <li><a class="dropdown-item bg-danger-soft-hover" href="#"><i class="bi bi-power fa-fw me-2"></i>Déconnexion</a></li>
         <li> <hr class="dropdown-divider"></li>
         <!-- Dark mode switch START -->
