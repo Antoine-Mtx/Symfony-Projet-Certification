@@ -1,0 +1,56 @@
+<div class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+        <!-- Logo START -->
+        <a class="navbar-brand" href="./index.html">
+            <img class="light-mode-item navbar-brand-img" src="/images/logo.png" alt="logo">
+            {# <img class="dark-mode-item navbar-brand-img" src="/images/logo-dark.png" alt="logo"> #}
+        </a>
+        <!-- Logo END -->
+
+        <!-- Responsive navbar toggler -->
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-animation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+		</button>
+    </div>
+<!-- Main navbar START -->
+
+    <!-- Nav Main menu START -->
+        <ul class="navbar-nav navbar-nav-scroll me-auto">
+            <!-- Nav item 1 Accueil -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accueil</a> <!-- data-bs-toggle : affiche/retire une liste déroulante ; aria-haspopup : 
+            </li>
+
+            <!-- Nav item 2 Contenu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="contentMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contenu</a>
+                <ul class="dropdown-menu" aria-labelledby="contentMenu">
+                    <!-- Dropdown submenu -->
+                    <li class="dropdown-submenu dropend">
+                        <a class="dropdown-item dropdown-toggle" href="#">Disciplines</a>
+                        <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                            <li> <a class="dropdown-item" href="course-categories.html">Mathématiques <span class="badge bg-success ms-2 smaller">New</span></a></li>
+                            <li> <hr class="dropdown-divider"></li>
+                        </ul>
+                    </li>
+                    <!-- Dropdown submenu -->
+                    <li class="dropdown-submenu dropend">
+                        <a class="dropdown-item dropdown-toggle" href="#">Domaines</a>
+                        <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                            <li> <a class="dropdown-item" href="course-categories.html">Arithmétique <span class="badge bg-success ms-2 smaller">New</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Nav Main menu END -->
+
+    {% include "components/navSearch.html.twig" %}
+    {% include "components/profile.html.twig" %}
+    </div>
+    <!-- Main navbar END -->
+</div>
