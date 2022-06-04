@@ -66,6 +66,11 @@ class Competence
      */
     private $composants;
 
+    /**
+     * @ORM\Column(type="string", length=70)
+     */
+    private $synopsis;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -224,5 +229,22 @@ class Competence
     public function __toString()
     {
         return ucfirst($this->intitule);
+    }
+
+    // public function toDisplay()
+    // {
+    //     include "../competence/card.html.twig";
+    // }
+
+    public function getSynopsis(): ?string
+    {
+        return $this->synopsis;
+    }
+
+    public function setSynopsis(string $synopsis): self
+    {
+        $this->synopsis = $synopsis;
+
+        return $this;
     }
 }
