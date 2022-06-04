@@ -7,6 +7,16 @@
     padding: 0.625rem 0;
     border-radius: 0.625rem;
 }
+#navFirstPartContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#navSecondPartContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 /*  @media (min-width: 576px) {
 .justify-content-sm-center {
     -webkit-box-pack: center !important;
