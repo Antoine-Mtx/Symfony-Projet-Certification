@@ -114,4 +114,9 @@ class Type
 
         return $this;
     }
+
+    public function __toString(): ?string
+    {
+        return ucfirst($this->intitule);
+    }
 }

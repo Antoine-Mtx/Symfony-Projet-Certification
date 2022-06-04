@@ -1,13 +1,21 @@
 ﻿{% extends 'base.html.twig' %}
 
-{% block title %}Détail du type #{{ type.id }}{% endblock %}
+{% block title %}Composant : {{ type }}{% endblock %}
 
 {% block body %}
 
-<h1>{{ type }}</h1>
+<div style="height: 150px; background-image: url({{ asset("images/maths.jpg") }}); background-size: cover;">
+
+</div>
+
+<h1 class="text-center">Composant : {{ type }}</h1>
 
 <h2>Description</h2>
 
 <p> {{ type.description }} </p>
+
+<h2>Mise en forme standard</h2>
+
+{% include "type/card.html.twig" %}
 
 {% endblock %}
