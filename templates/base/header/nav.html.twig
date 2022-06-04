@@ -1,0 +1,46 @@
+<div class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div id="navFirstPartContainer">
+        {% include "base/header/brand.html.twig" %}
+        {% include "base/header/navSearch.html.twig" %}
+        {% include "base/header/navbarToggler.html.twig" %}
+    </div>
+
+    <div id="navSecondPartContainer">
+        <!-- Nav Main menu START -->
+        <nav>
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+                <!-- Nav item 1 Accueil -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{{ path('app_home') }}" aria-haspopup="true" aria-expanded="false">Accueil</a> <!-- data-bs-toggle : affiche/retire une liste déroulante ; aria-haspopup :  -->
+                </li>
+
+                <!-- Nav item 2 Contenu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="contentMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contenu</a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="contentMenu">
+                        <li class="dropdown-submenu dropend">
+                            <a class="dropdown-item" href="#">Disciplines <span class="badge bg-info">à venir</span></a>
+                        </li>
+                        <!-- Dropdown submenu -->
+                        <li class="dropdown-submenu dropend">
+                            <a class="dropdown-item" href="{{ path('index_domaine') }}">Domaines</a>
+                            <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
+                                <li> <a class="dropdown-item" href="course-categories.html">Arithmétique <span class="badge bg-success ms-2 smaller">New</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- Nav Main menu END -->
+
+    <!-- Profile START -->
+    {% if app.user %}
+        {% include "base/header/profile.html.twig" %}
+    {% else %}
+        <a href="{{ path('app_login') }}"><button type="button" class="btn btn-primary m-1">Connexion</button></a>
+        <a href="{{ path('app_register') }}"><button type="button" class="btn btn-primary m-1">Inscription</button></a>
+    {% endif %}
+    <!-- Profile END -->
+    </div>
+</div>
