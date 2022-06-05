@@ -2,6 +2,33 @@
 @import 'components/nav.css';
 @import 'components/profile.css';
 
+h1 {
+    text-align: center;
+    margin: 1rem 0;
+}
+#logo {
+    filter: sepia(100%);
+}
+.banner {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+.skill-card-gallery {
+    display: inline-flex;
+}
+.bg-navy {
+    background-color:rgb(0, 0, 128, 0.85);
+}
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
 .nav-pills-bg-soft {
     background-color: rgba(6, 106, 201, 0.1);
     padding: 0.625rem 0;
