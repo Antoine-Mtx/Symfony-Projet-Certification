@@ -4,22 +4,13 @@
 
 {% block body %}
 
-<h1>Types de composants</h1>
+<h1 class="text-center">Types de composants</h1>
+
+<div class="skill-card-gallery">
+    {% for type in types %}
+            {% include "type/card.html.twig" %}
+    {% endfor %}
+</div>
 
 <p><a href="{{ path('add_type') }}"><button type="button" class="btn btn-success">Ajouter un type de composant</button></a></p>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>type</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for type in types %}
-        <tr>
-            <td><a href="{{ path('show_type', {'id': type.id}) }}">{{ type }}</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table> 
 {% endblock %}
