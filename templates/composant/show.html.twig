@@ -1,0 +1,21 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Ajout de composant{% endblock %}
+
+{% block body %}
+
+<div style="height: 150px; background-image: url({{ asset("images/maths.jpg") }}); background-size: cover;">
+
+</div>
+
+<h1 class="text-center">Composant : {{ composant }}</h1>
+
+<h2>Description</h2>
+
+<p> {{ composant.description }} </p>
+
+<h2>Mise en forme standard</h2>
+
+{% include "composant/card.html.twig" %}
+
+{% endblock %}
