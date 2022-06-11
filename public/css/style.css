@@ -10,12 +10,12 @@ h1 {
     filter: sepia(100%);
 }
 .banner {
+    height: 0.125vw;
+    max-height: 150px;
     width: 100vw;
     position: relative;
     left: 50%;
-    right: 50%;
     margin-left: -50vw;
-    margin-right: -50vw;
 }
 .skill-card-gallery {
     display: inline-flex;
