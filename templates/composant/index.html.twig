@@ -8,20 +8,14 @@
 
 <p><a href="{{ path('add_composant') }}"><button type="button" class="btn btn-success">Ajouter un composant</button></a></p>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>composant</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="skill-card-gallery">
+    <div class="row g-4">
         {% for composant in composants %}
-        <tr>
-            <td><a href="{{ path('show_composant', {'id': composant.id}) }}">{{ composant }}</a></td>
-        </tr>
+            {% include "type/card.html.twig" %}
         {% endfor %}
-    </tbody>
-</table>
+    </div>
+</div>
+
 
 {% endblock %}
 

@@ -15,7 +15,7 @@ class ComposantController extends AbstractController
     /**
      * @Route("/composant", name="index_composant")
      */
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, Request $request): Response
     {
         $composants = $doctrine->getRepository(Composant::class)->findAll(); // on désigne le repository de la classe "composant" à notre gestionnaire $doctrine puis on utilise la méthode findAll() pour récupérer toutes les instances de cette classe
 
