@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="d-inline-flex m-4">
+<div class="d-inline-flex align-items-center m-4">
     <div class="avatar me-3">
         <img class="avatar-img" src="{{ app.user.avatar ? asset("images/avatars/"~ app.user.avatar) : asset("images/avatars/default.jpg") }}" alt="avatar">
     </div>
@@ -14,7 +14,7 @@
 <section class="row">
     <div class="col-3">
         <!-- Dashboard menu -->
-        <nav class="list-group list-group-item-secondary list-group-borderless">
+        <nav id="nav-profile" class="list-group list-group-item-secondary list-group-borderless">
             <a class="list-group-item active" href="#"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Tableau de bord</a>
             <a class="list-group-item" href="#"><i class="bi bi-tools fa-fw me-2"></i></i>Mes compétences</a>
             <a class="list-group-item" href="#"><i class="bi bi-people fa-fw me-2"></i>Mes échanges</a>

@@ -1,7 +1,14 @@
-.avatar-img {
+.avatar-img-profile {
     width: 3rem;
+    object-fit: cover;
+}
+.avatar-img {
+    width: 3.5rem;
     height: 100%;
     object-fit: cover;
+}
+#nav-profile {
+    min-width: 190px;
 }
 .rounded-circle {
     border-radius: 50%;

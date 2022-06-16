@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Competence;
 use App\Form\ComposantType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,23 +17,23 @@ class CompetenceType extends AbstractType
     {
         $builder
             ->add('intitule')
+            ->add('synopsis')
             ->add('description')
-            ->add('dateCreation')
+            // ->add('dateCreation')
             ->add('image')
             ->add('icone')
-            ->add('synopsis')
-            ->add('concepteur')
+            // ->add('concepteur')
             ->add('domaine')
-            ->add('composants', CollectionType::class, [
-                // chaque élément du tableau sera de type "Composant"
-                'entry_type' => ComposantType::class,
-                'prototype' => true,
-                'allow_add' => true,
-                'allow_delete' => true,
-                // pas de référence à setComposant dans l'entité Competence
-                'by_reference' => false,
-                // 'choice_label' => 'composant',
-            ])
+            // ->add('composants', CollectionType::class, [
+            //     // chaque élément du tableau sera de type "Composant"
+            //     'entry_type' => ComposantType::class,
+            //     'prototype' => true,
+            //     'allow_add' => true,
+            //     'allow_delete' => true,
+            //     // pas de référence à setComposant dans l'entité Competence
+            //     'by_reference' => false,
+            //     // 'choice_label' => 'composant',
+            // ])
             ->add('Valider', SubmitType::class)
         ;
     }
@@ -43,4 +44,5 @@ class CompetenceType extends AbstractType
             'data_class' => Competence::class,
         ]);
     }
+
 }

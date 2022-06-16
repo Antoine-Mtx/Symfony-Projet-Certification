@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Domaine;
 use App\Form\DomaineType;
+use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DomaineController extends AbstractController
@@ -28,7 +30,7 @@ class DomaineController extends AbstractController
      * @Route("/domaine/add", name="add_domaine")
      * @Route("/domaine/update/{id}", name="update_domaine")
      */
-    public function add(ManagerRegistry $doctrine, Domaine $domaine = NULL, Request $request) {
+    public function add(ManagerRegistry $doctrine, Domaine $domaine = NULL, Request $request, FileUploader $fileUploader) {
 
         if (! $domaine) {
             $domaine = new Domaine();
@@ -40,6 +42,12 @@ class DomaineController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $domaine = $form->getData();
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('imageFilename')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $domaine->setImageFilename($imageFileName);
+            }
             $entityManager->persist($domaine);
             $entityManager->flush();
 

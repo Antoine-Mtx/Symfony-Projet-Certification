@@ -42,10 +42,10 @@ class ComposantRepository extends ServiceEntityRepository
 //    /**
 //     * @return Composant[] Returns an array of Composant objects
 //     */
-//    public function findByExampleField($value): array
+//    public function findByType($value): array
 //    {
 //        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
+//            ->andWhere('c.type = :val')
 //            ->setParameter('val', $value)
 //            ->orderBy('c.id', 'ASC')
 //            ->setMaxResults(10)
@@ -63,4 +63,13 @@ class ComposantRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    /**
+     * Récupère les composants ciblés par la recherche
+     * @return Composant[]
+     */
+    public function findSearch()
+    {
+        return $this->findAll();
+    }
 }

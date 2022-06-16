@@ -4,19 +4,24 @@
 
 {% block body %}
 
-<img src="{{ domaine.icon }}" alt="{{ domaine }} icon">
-<h1 class="text-center">{{ domaine }}</h1>
+
+<h1 class="text-center">
+    <img src="{{ asset('images/domaineIcons/') ~ domaine.iconeFilename }}" alt="{{ domaine }} icon">
+    {{ domaine }}
+</h1>
 
 <h2>Description</h2>
+
+<img src="{{ asset('images/domaineImages/') ~ domaine.imageFilename }}" alt="{{ domaine }} image">
 
 <p> {{ domaine.description }} </p>
 
 <h2>Compétences</h2>
 
+<div class="row g-4">
     {% for competence in domaine.competences %}
-    
-    {% include "../competence/card.html.twig" %}
-
+        {% include "competence/card.html.twig" %}
     {% endfor %}
+</div>
 
 {% endblock %}

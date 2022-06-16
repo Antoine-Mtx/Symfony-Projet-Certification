@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Composant;
 use App\Entity\Competence;
 use App\Form\CompetenceType;
+use App\Repository\ComposantRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -30,32 +33,50 @@ class CompetenceController extends AbstractController
      * @Route("/competence/add", name="add_competence")
      * @Route("/competence/update/{id}", name="update_competence")
      */
-    public function add(ManagerRegistry $doctrine, Competence $competence = NULL, Request $request) {
+    public function add(ManagerRegistry $doctrine, ComposantRepository $composantRepository, Competence $competence = NULL, Request $request) {
 
+        // si la compétence existe on est dans le cas "update", sinon on est dans le cas "add" et il faut créer une instance de la classe Competence
         if (! $competence) {
             $competence = new Competence();
         }
 
+        // on va utiliser doctrine pour ajouter / actualiser notre compétence au niveau de la base de données
         $entityManager = $doctrine->getManager();
+        // une compétence étant un assemblage de composants, on se servira également du repository de Composant pour rechercher ceux dont on a besoin
+        $composants = $composantRepository->findAll();
+        // dd($composants); // dd signifie "dump and die"
 
-        $form = $this->createForm(CompetenceType::class, $competence); // on crée un formulaire dévolu à l'ajout de "competence" de competence
+        // on crée un formulaire dévolu à l'ajout de compétence
+        $form = $this->createForm(CompetenceType::class, $competence);
         $form->handleRequest($request);
 
+        // on récupère l'utilisateur connecté
         $user = $this->getUser();
+        // on récupère la date du jour
+        $aujourdhui = new DateTime();
 
+        // on vérifie que le formulaire rempli est conforme
         if ($form->isSubmitted() && $form->isValid()) {
+            // on définit les attributs de notre objet competence avec les données du formulaires
             $competence = $form->getData();
+            // on définit l'utilisateur connecté comme concepteur
+            $competence->setConcepteur($user);
+            // on définit la date du jour comme date de création de la compétence
+            $competence->setDateCreation($aujourdhui);
+            // on prépare l'objet à l'enregistrement
             $entityManager->persist($competence);
+            // on l'enregistre dans notre base de données
             $entityManager->flush();
 
+            // une fois la compétence créée, on redirige l'utilisateur vers la liste des compétences triée de la plus récente vers la plus ancienne
             return $this->redirectToRoute('index_competence');
         }
 
         return $this->render('competence/add.html.twig', [
             'formCompetence' => $form->createView(),
             'title' => "Ajouter",
-            'id' => $user->getId(),
-            'competenceId' => $competence->getId(),
+            // 'competenceId' => $competence->getId(),
+            'composants' => $composants,
         ]);
     }
 
@@ -64,14 +85,17 @@ class CompetenceController extends AbstractController
      * @ParamConverter("competence", options={"mapping": {"idCompetence": "id"}})
      * @ParamConverter("composant", options={"mapping": {"idComposant": "id"}})
      */
-    public function addComposant(ManagerRegistry $doctrine, Composant $composant, Competence $competence, Request $request)
+    public function addComposant(ManagerRegistry $doctrine, ComposantRepository $composantRepository, Composant $composant, Competence $competence, Request $request)
     {
         $entityManager = $doctrine->getManager();
         $competence->addComposant($composant);
         $entityManager->flush();
 
+        $composants = $composantRepository->findAll();
+
         return $this->redirectToRoute('show_competence', [
             'id' => $competence->getId(),
+            'composants' => $composants,
         ]);
     }
 

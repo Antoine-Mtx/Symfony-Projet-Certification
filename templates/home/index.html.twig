@@ -3,17 +3,16 @@
 {% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
-<section class="py-0 py-xl-5">
-	<div class="container">
+<section class="my-4">
+	<div class="container-lg">
 		<div class="row g-4">
 			<!-- Counter item -->
 			<div class="col-sm-6 col-xl-3">
-				<div class="d-flex justify-content-center align-items-center p-4 bg-warning bg-opacity-15 rounded-3">
-					<span class="display-6 lh-1 text-warning mb-0"><i class="fas fa-tv"></i></span>
+				<div class="d-flex justify-content-center align-items-center p-4 bg-primary bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-primary mb-0"><i class="fa-solid fa-book fa-lg"></i></span>
 					<div class="ms-4 h6 fw-normal mb-0">
 						<div class="d-flex">
-							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">à définir</h5>
-							<span class="mb-0 h5">K</span>
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{{ domaines | length}}</h5>
 						</div>
 						<p class="mb-0">Domaines d'apprentissage</p>
 					</div>
@@ -21,38 +20,36 @@
 			</div>
 			<!-- Counter item -->
 			<div class="col-sm-6 col-xl-3">
-				<div class="d-flex justify-content-center align-items-center p-4 bg-blue bg-opacity-10 rounded-3">
-					<span class="display-6 lh-1 text-blue mb-0"><i class="fas fa-user-tie"></i></span>
+				<div class="d-flex justify-content-center align-items-center p-4 bg-warning bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-warning mb-0"><i class="bi bi-person-fill fa-lg"></i><sup><i class="bi bi-lightbulb fa-xs"></i></sup></span>
 					<div class="ms-4 h6 fw-normal mb-0">
 						<div class="d-flex">
 							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-delay="200" data-purecounter-duration="0">200</h5>
 							<span class="mb-0 h5">+</span>
 						</div>
-						<p class="mb-0">Concepteurs de cours</p>
+						<p class="mb-0">Concepteurs de contenu</p>
 					</div>
 				</div>
 			</div>
 			<!-- Counter item -->
 			<div class="col-sm-6 col-xl-3">
-				<div class="d-flex justify-content-center align-items-center p-4 bg-purple bg-opacity-10 rounded-3">
-					<span class="display-6 lh-1 text-purple mb-0"><i class="fas fa-user-graduate"></i></span>
+				<div class="d-flex justify-content-center align-items-center p-4 bg-success bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-success mb-0"><i class="bi bi-person-video3 fa-lg"></i></span>
 					<div class="ms-4 h6 fw-normal mb-0">
 						<div class="d-flex">
-							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60" data-purecounter-delay="200" data-purecounter-duration="0">60</h5>
-							<span class="mb-0 h5">K+</span>
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60" data-purecounter-delay="200" data-purecounter-duration="0">{{ utilisateurs | length }}</h5>
 						</div>
-						<p class="mb-0">Apprenants éclairés</p>
+						<p class="mb-0">Apprenants pleins de volonté</p>
 					</div>
 				</div>
 			</div>
 			<!-- Counter item -->
 			<div class="col-sm-6 col-xl-3">
 				<div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
-					<span class="display-6 lh-1 text-info mb-0"><i class="bi bi-patch-check-fill"></i></span>
+					<span class="display-6 lh-1 text-info mb-0"><i class="bi bi-patch-check-fill fa-lg"></i></span>
 					<div class="ms-4 h6 fw-normal mb-0">
 						<div class="d-flex">
-							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300" data-purecounter-duration="0">6</h5>
-							<span class="mb-0 h5">K+</span>
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300" data-purecounter-duration="0">{{ competences | length }}</h5>
 						</div>
 						<p class="mb-0">Compétences à développer</p>
 					</div>
@@ -63,7 +60,7 @@
 </section>
 
 <section>
-	<div class="container">
+	<div class="container-lg">
 		<!-- Title -->
 		<div class="row mb-4">
 			<div class="col-lg-8 mx-auto text-center">

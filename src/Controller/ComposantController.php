@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Composant;
 use App\Form\ComposantType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -30,24 +31,43 @@ class ComposantController extends AbstractController
      */
     public function add(ManagerRegistry $doctrine, Composant $composant = NULL, Request $request) {
 
+        // si le composant existe on est dans le cas "update", sinon on est dans le cas "add" et il faut créer une instance de la classe Composant
         if (! $composant) {
             $composant = new Composant();
         }
 
+        // on va utiliser doctrine pour ajouter / actualiser notre composant au niveau de la base de données
         $entityManager = $doctrine->getManager();
-        $form = $this->createForm(ComposantType::class, $composant); // on crée un formulaire dévolu à l'ajout de "composant" de composant
+
+        // on crée un formulaire dévolu à l'ajout de composant
+        $form = $this->createForm(ComposantType::class, $composant);
         $form->handleRequest($request);
 
+        // on récupère l'utilisateur connecté
+        $user = $this->getUser();
+        // on récupère la date du jour
+        $aujourdhui = new DateTime();
+
+        // on vérifie que le formulaire rempli est conforme
         if ($form->isSubmitted() && $form->isValid()) {
+            // on définit les attributs de notre objet competence avec les données du formulaires
             $composant = $form->getData();
+            // on définit l'utilisateur connecté comme concepteur
+            $competence->setConcepteur($user);
+            // on définit la date du jour comme date de création de la compétence
+            $competence->setDateCreation($aujourdhui);
+            // on prépare l'objet à l'enregistrement
             $entityManager->persist($composant);
+            // on l'enregistre dans notre base de données
             $entityManager->flush();
 
+            // une fois la compétence créée, on redirige l'utilisateur vers la liste des compétences triée de la plus récente vers la plus ancienne
             return $this->redirectToRoute('index_composant');
         }
 
         return $this->render('composant/add.html.twig', [
             'formComposant' => $form->createView(),
+            'composantId' => $composant->getId(),
         ]);
     }
 

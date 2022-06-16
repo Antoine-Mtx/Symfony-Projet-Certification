@@ -39,6 +39,11 @@ class Type
      */
     private $composants;
 
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $affichage;
+
     public function __construct()
     {
         $this->composants = new ArrayCollection();
@@ -118,5 +123,17 @@ class Type
     public function __toString(): ?string
     {
         return ucfirst($this->intitule);
+    }
+
+    public function getAffichage(): ?string
+    {
+        return $this->affichage;
+    }
+
+    public function setAffichage(string $affichage): self
+    {
+        $this->affichage = $affichage;
+
+        return $this;
     }
 }

@@ -6,6 +6,7 @@
 
 <h1>Compétences existantes</h1>
 
+<div class="row g-4">
 {% for competence in competences %}
     <div class="col-sm-6 col-lg-4 col-xl-3">
         <div class="card shadow h-100">
@@ -14,7 +15,7 @@
                 <!-- Badge and favorite -->
                 <div class="d-flex justify-content-between mb-2">
                     <a href="#" class="badge bg-purple bg-opacity-10 text-purple">All level</a>
-                    <a href="#" class="h6 mb-0"><i class="far fa-heart"></i></a>
+                    <a href="#" class="h6 mb-0"><i class="bi bi-lightbulb active"></i></a>
                 </div>
                 <!-- Image -->
                 <img src="{{ asset("images/competences/" ~ competence.image) }}" class="card-img-top" alt="competence image">
@@ -43,5 +44,6 @@
     </div>
     <!-- Card item END -->
 {% endfor %}
+</div>
 
 {% endblock %}

@@ -45,6 +45,11 @@ class Composant
      */
     private $concepteur;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date_creation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,5 +118,17 @@ class Composant
     public function __toString()
     {
         return ucfirst($this->intitule);
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->date_creation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $date_creation): self
+    {
+        $this->date_creation = $date_creation;
+
+        return $this;
     }
 }
