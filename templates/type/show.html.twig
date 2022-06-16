@@ -4,10 +4,6 @@
 
 {% block body %}
 
-<div style="height: 150px; background-image: url({{ asset("images/maths.jpg") }}); background-size: cover;">
-
-</div>
-
 <h1 class="text-center">Composant : {{ type }}</h1>
 
 <h2>Description</h2>
@@ -16,6 +12,12 @@
 
 <h2>Mise en forme standard</h2>
 
-{% include "type/card.html.twig" %}
+<div class="d-flex justify-content-center">
+    {% if type.affichage == 'carte' %}
+        {% include "type/card.html.twig" %}
+    {% elseif type.affichage == 'graphique' %}
+        {% include "type/graphique.html.twig" %}    
+    {% endif %}
+</div>
 
 {% endblock %}
