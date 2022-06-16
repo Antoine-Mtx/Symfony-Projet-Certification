@@ -23,10 +23,5 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Service\FileUploader:
-        # parameters:
-        #     images_directory: '%kernel.project_dir%/public/images'
-            # domaineImages_directory: '%kernel.project_dir%/public/images/domaineImages'
-            # domaineIcons_directory: '%kernel.project_dir%/public/images/domaineIcons'
         arguments:
-            # $targetDirectory: '%images_directory%'
-            $targetDirectory: '%kernel.project_dir%/public/images'
+            $targetDirectory: '%kernel.project_dir%/public/upload'
