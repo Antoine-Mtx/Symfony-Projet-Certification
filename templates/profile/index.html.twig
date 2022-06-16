@@ -6,7 +6,7 @@
 
 <div class="d-inline-flex align-items-center m-4">
     <div class="avatar me-3">
-        <img class="avatar-img" src="{{ app.user.avatar ? asset("images/avatars/"~ app.user.avatar) : asset("images/avatars/default.jpg") }}" alt="avatar">
+        <img class="avatar-img" src="{{ app.user.avatar ? asset("upload/avatar/"~ app.user.avatar) : asset("upload/avatar/default.jpg") }}" alt="avatar">
     </div>
     <h1>{{ app.user }}</h1>
 </div>
@@ -19,14 +19,15 @@
             <a class="list-group-item" href="#"><i class="bi bi-tools fa-fw me-2"></i></i>Mes compétences</a>
             <a class="list-group-item" href="#"><i class="bi bi-people fa-fw me-2"></i>Mes échanges</a>
             <a class="list-group-item" href="#"><i class="bi bi-star fa-fw me-2"></i>Mes commentaires</a>
-            <a class="list-group-item" href="#"><i class="bi bi-pencil-square fa-fw me-2"></i>Modifier mon profil</a>
-            <a class="list-group-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Paramètres</a>
-            <a class="list-group-item" href="#"><i class="bi bi-trash fa-fw me-2"></i>Supprimer profil</a>
+            <a class="list-group-item" href="{{ path('update_profile') }}"><i class="bi bi-pencil-square fa-fw me-2"></i>Modifier mon profil</a>
+            <a class="list-group-item" href="{{ path('update_account') }}"><i class="bi bi-gear fa-fw me-2"></i>Paramètres du compte</a>
+            <a class="list-group-item" href="{{ path('delete_profile') }}"><i class="bi bi-trash fa-fw me-2"></i>Supprimer profil</a>
             <a class="list-group-item text-danger bg-danger-soft-hover" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Déconnexion</a>
         </nav>
     </div>
     <div class="main-content col-9">
-        {% include "profile/components/mySkills.html.twig" %}
+        {% include "profile/components/skills.html.twig" %}
+        {# {% include "profile/components/update.html.twig" %} #}
     </div>
 </section>
 {% endblock %}
