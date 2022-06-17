@@ -3,9 +3,23 @@
 {% block title %}Ajout d'un domaine{% endblock %}
 
 {% block body %}
-
-    <h1>Ajout d'un domaine</h1>
-
-    {{ form(formDomaine) }}
+    
+    <div class="card border bg-transparent rounded-3 my-4">
+        <!-- Card header -->
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="card-header-title mb-0 text-center">Ajout d'un domaine</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            {{ form_start(formDomaine) }}
+                {{ form_row(formDomaine.intitule) }}
+                {{ form_row(formDomaine.description) }}
+                {{ form_row(formDomaine.imageFilename) }}
+                {{ form_row(formDomaine.iconeFilename) }}
+        </div>
+        <div class="card-footer bg-transparent text-center">
+            {{ form_end(formDomaine) }}
+        </div>
+    </div>
 
 {% endblock %}

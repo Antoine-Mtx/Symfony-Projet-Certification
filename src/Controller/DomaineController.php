@@ -45,9 +45,16 @@ class DomaineController extends AbstractController
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('imageFilename')->getData();
             if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
+                $imageFileName = $fileUploader->upload($imageFile, "/domaine/img");
                 $domaine->setImageFilename($imageFileName);
             }
+            /** @var UploadedFile $iconeFile */
+            $iconeFile = $form->get('iconeFilename')->getData();
+            if ($iconeFile) {
+                $iconeFileName = $fileUploader->upload($iconeFile, "/domaine/icon");
+                $domaine->setIconeFilename($iconeFileName);
+            }
+
             $entityManager->persist($domaine);
             $entityManager->flush();
 

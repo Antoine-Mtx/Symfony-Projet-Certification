@@ -18,7 +18,7 @@ class ComposantType extends AbstractType
         $builder
             ->add('type')
             ->add('intitule', TextType::class)
-            // ->add('contenu', TextareaType::class)
+            ->add('contenu', TextareaType::class)
             ->add('Valider', SubmitType::class)
         ;
     }

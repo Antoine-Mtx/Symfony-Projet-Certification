@@ -84,7 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $avatar;
+    private $avatarFilename;
 
     public function __construct()
     {
@@ -371,14 +371,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAvatar(): ?string
+    public function getAvatarFilename(): ?string
     {
-        return $this->avatar;
+        return $this->avatarFilename;
     }
 
-    public function setAvatar(?string $avatar): self
+    public function setAvatarFilename(?string $avatarFilename): self
     {
-        $this->avatar = $avatar;
+        $this->avatarFilename = $avatarFilename;
 
         return $this;
     }

@@ -14,20 +14,20 @@ class FileUploader
     private $slugger;
 
     // SluggerInterface permet d'injecter directement un slugger grâce au câblage automatique des services
-    public function __construct($targetDirectory, SluggerInterface $slugger)
+    public function __construct(string $targetDirectory, SluggerInterface $slugger)
     {
         $this->targetDirectory = $targetDirectory;
         $this->slugger = $slugger;
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file, string $subdirectoryPath)
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            $file->move($this->getTargetDirectory().$subdirectoryPath, $fileName);
         } catch (FileException $e) {
             // ... handle exception if something happens during file upload
         }

@@ -4,12 +4,24 @@
 
 {% block body %}
 
-    <h1>Modification du profil</h1>
-
-    {{ form_start(formProfile) }}
-        {{ form_row(formProfile.pseudo) }}
-        {{ form_row(formProfile.avatar) }}
-        <button type="submit" class="btn btn-primary">Valider les modifications</button>
-    {{ form_end(formProfile) }}
+    <div class="card border bg-transparent rounded-3 mb-0">
+        <!-- Card header -->
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="card-header-title mb-0 text-center">Modification du profil</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            {{ form_start(formProfile) }}
+                {{ form_row(formProfile.pseudo) }}
+                <div class="d-inline-flex align-items-center gap-3">
+                    <img class="avatar-img rounded-circle" src="{{ app.user.avatarFilename ? asset("upload/user/avatar/"~ app.user.avatarFilename) : asset("upload/user/avatar/default.jpg") }}" alt="avatar">
+                    {{ form_widget(formProfile.avatarFilename) }}
+                </div>
+        </div>
+        <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary centered">Valider les modifications</button>
+            {{ form_end(formProfile) }}
+        </div>
+    </div>
 
 {% endblock %}

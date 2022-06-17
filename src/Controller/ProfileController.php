@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Form\ProfileType;
+use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
@@ -24,7 +26,7 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/update", name="update_profile")
      */
-    public function update(ManagerRegistry $doctrine, Request $request): Response
+    public function update(ManagerRegistry $doctrine, Request $request, FileUploader $fileUploader): Response
     {
     $entityManager = $doctrine->getManager();
     $user = $this->getUser();
@@ -34,6 +36,12 @@ class ProfileController extends AbstractController
 
     if ($form->isSubmitted() && $form->isValid()) {
         $profile = $form->getData();
+        /** @var UploadedFile $avatarFile */
+        $avatarFile = $form->get('avatarFilename')->getData();
+        if ($avatarFile) {
+            $avatarFilename = $fileUploader->upload($avatarFile, "/user/avatar");
+            $user->setAvatarFilename($avatarFilename);
+        }
         $entityManager->persist($profile);
         $entityManager->flush();
 

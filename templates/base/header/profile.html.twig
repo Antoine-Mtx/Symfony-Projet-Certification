@@ -1,7 +1,7 @@
 <!-- Profile START -->
 <div class="dropdown ms-1 ms-lg-0">
     <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false"> <!-- .avatar-sm permet de rendre la classe .avatar plus compacte ; data-bs-auto-close="outside" désigne la zone à cliquer pour fermer le menu déroulant -->
-        <img class="avatar-img-profile rounded-circle" src="{{ app.user.avatar ? asset("upload/avatar/"~ app.user.avatar) : asset("upload/avatar/default.jpg") }}" alt="avatar">
+        <img class="avatar-img-profile rounded-circle" src="{{ app.user.avatarFilename ? asset("upload/user/avatar/"~ app.user.avatarFilename) : asset("upload/user/avatar/default.jpg") }}" alt="avatar">
     </a>
     <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3" aria-labelledby="profileDropdown" data-bs-popper="none">
         <!-- Profile info -->
@@ -9,7 +9,7 @@
             <div class="d-flex align-items-center">
                 <!-- Avatar -->
                 <div class="avatar me-3">
-                    <img class="avatar-img-profile rounded-circle shadow" src="{{ app.user.avatar ? asset("upload/avatar/"~ app.user.avatar) : asset("upload/avatar/default.jpg") }}" alt="avatar">
+                    <img class="avatar-img-profile rounded-circle shadow" src="{{ app.user.avatarFilename ? asset("upload/user/avatar/"~ app.user.avatarFilename) : asset("upload/user/avatar/default.jpg") }}" alt="avatar">
                 </div>
                 <div>
                     <h6 class="m-0">{{ app.user.pseudo }}</h6>

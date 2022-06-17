@@ -23,9 +23,9 @@ class Composant
     private $intitule;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string")
      */
-    private $contenu = [];
+    private $contenu;
 
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="composants")
@@ -67,12 +67,12 @@ class Composant
         return $this;
     }
 
-    public function getContenu(): ?array
+    public function getContenu(): ?string
     {
         return $this->contenu;
     }
 
-    public function setContenu(array $contenu): self
+    public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
 

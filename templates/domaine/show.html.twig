@@ -4,24 +4,33 @@
 
 {% block body %}
 
+    <div class="card border bg-transparent rounded-3 my-4">
+        <!-- Card header -->
+        <div class="card-header bg-transparent border-bottom d-inline-flex justify-content-center align-items-center">
+            <img class="icon" src={% if domaine.iconeFilename %}"{{ asset('upload/domaine/icon/') ~ domaine.iconeFilename }}"{% else %}"{{ asset('upload/domaine/icon/default.png') }}"{% endif %} alt="{{ domaine }} icon">
+            <h1 class="card-header-title">{{ domaine }}</h1>
+        </div>
+        <!-- Card body -->
+        <div class="card-body text-center">
+            <div class="col-12">
+                <img class="image" src="{{ asset('upload/domaine/img/') ~ domaine.imageFilename }}" alt="{{ domaine }} image">
+            </div>
+        </div>
+        <div class="card-footer bg-transparent">
+            {{ domaine.description }}
+        </div>
+    </div>
 
-<h1 class="text-center">
-    <img src="{{ asset('images/domaineIcons/') ~ domaine.iconeFilename }}" alt="{{ domaine }} icon">
-    {{ domaine }}
-</h1>
+    <h2 class="text-center my-4">Compétences</h2>
 
-<h2>Description</h2>
-
-<img src="{{ asset('images/domaineImages/') ~ domaine.imageFilename }}" alt="{{ domaine }} image">
-
-<p> {{ domaine.description }} </p>
-
-<h2>Compétences</h2>
-
-<div class="row g-4">
-    {% for competence in domaine.competences %}
-        {% include "competence/card.html.twig" %}
-    {% endfor %}
-</div>
+    <div class="row g-4">
+        {% if domaine.competences | length != 0 %}
+            {% for competence in domaine.competences %}
+                {% include "competence/card.html.twig" %}
+            {% endfor %}
+        {% else %}
+            <p>Pas encore de compétences disponibles dans ce domaine</p>                
+        {% endif %}
+    </div>
 
 {% endblock %}

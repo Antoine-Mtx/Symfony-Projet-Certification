@@ -4,8 +4,21 @@
 
 {% block body %}
 
-    <h1>Ajout d'un type de composant</h1>
-
-    {{ form(formType) }}
+    <div class="card border bg-transparent rounded-3 my-4">
+        <!-- Card header -->
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="card-header-title mb-0 text-center">Ajout d'un type de composant</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            {{ form_start(formType) }}
+                {{ form_row(formType.intitule) }}
+                {{ form_row(formType.description) }}
+                {{ form_row(formType.couleur) }}
+        </div>
+        <div class="card-footer text-center mb-0">
+            {{ form_end(formType) }}
+        </div>
+    </div>
 
 {% endblock %}
