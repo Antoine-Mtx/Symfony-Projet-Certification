@@ -38,7 +38,7 @@ class AccountController extends AbstractController
             $oldPassword = $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
 
-            if (!$userPasswordHasher->isPasswordValid($user, $oldPassword)) {            
+            if ($userPasswordHasher->isPasswordValid($user, $oldPassword)) {            
                 $user->setPassword($userPasswordHasher->hashPassword($user, $newPassword));
             }
 
