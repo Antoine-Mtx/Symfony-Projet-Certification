@@ -83,4 +83,19 @@ class DomaineController extends AbstractController
             'domaine' => $domaine,
         ]);
     }
+
+    /**
+     * @Route("/domaine/delete/{id}", name="delete_domaine")
+     */
+    public function delete(ManagerRegistry $doctrine, Domaine $domaine, Request $request): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($domaine);
+        $entityManager->flush();
+
+        // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
+        return $this->redirectToRoute('index_domaine');
+    }
+
+
 }

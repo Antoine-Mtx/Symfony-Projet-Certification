@@ -9,6 +9,7 @@
         <div class="card-header bg-transparent border-bottom d-inline-flex justify-content-center align-items-center">
             <img class="icon" src={% if domaine.iconeFilename %}"{{ asset('upload/domaine/icon/') ~ domaine.iconeFilename }}"{% else %}"{{ asset('upload/domaine/icon/default.png') }}"{% endif %} alt="{{ domaine }} icon">
             <h1 class="card-header-title">{{ domaine }}</h1>
+            <a href="{{ path('delete_domaine', {'id' : domaine.id}) }}"><button>Supprimer</button></a>
         </div>
         <!-- Card body -->
         <div class="card-body text-center">

@@ -45,6 +45,8 @@ class ProfileController extends AbstractController
         $entityManager->persist($profile);
         $entityManager->flush();
 
+        $this->addFlash('success', 'Votre profil a bien été mis à jour');
+
         return $this->redirectToRoute('index_profile');
     }
 
