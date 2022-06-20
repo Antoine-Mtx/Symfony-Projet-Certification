@@ -87,7 +87,7 @@ class DomaineController extends AbstractController
     /**
      * @Route("/domaine/delete/{id}", name="delete_domaine")
      */
-    public function delete(ManagerRegistry $doctrine, Domaine $domaine, Request $request): Response
+    public function delete(ManagerRegistry $doctrine, Domaine $domaine): Response
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($domaine);

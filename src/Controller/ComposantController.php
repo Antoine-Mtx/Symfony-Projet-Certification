@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Composant;
 use App\Form\ComposantType;
+use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ class ComposantController extends AbstractController
      * @Route("/composant/add", name="add_composant")
      * @Route("/composant/update/{id}", name="update_composant")
      */
-    public function add(ManagerRegistry $doctrine, Composant $composant = NULL, Request $request) {
+    public function add(ManagerRegistry $doctrine, Composant $composant = NULL, Request $request, FileUploader $fileUploader) {
 
         // si le composant existe on est dans le cas "update", sinon on est dans le cas "add" et il faut créer une instance de la classe Composant
         if (! $composant) {
@@ -50,18 +51,27 @@ class ComposantController extends AbstractController
 
         // on vérifie que le formulaire rempli est conforme
         if ($form->isSubmitted() && $form->isValid()) {
-            // on définit les attributs de notre objet competence avec les données du formulaires
+            // on définit les attributs de notre objet composant avec les données du formulaires
             $composant = $form->getData();
             // on définit l'utilisateur connecté comme concepteur
-            $competence->setConcepteur($user);
-            // on définit la date du jour comme date de création de la compétence
-            $competence->setDateCreation($aujourdhui);
+            $composant->setConcepteur($user);
+            // on définit la date du jour comme date de création du composant
+            $composant->setDateCreation($aujourdhui);
+            
+            /** @var UploadedFile $file */
+            $file = $form->get('filename')->getData();
+            if ($file) {
+                $filename = $fileUploader->upload($file, "/composant/graph");
+                // on définit le chemin de notre fichier
+                $composant->setFilename($filename);
+            }
+
             // on prépare l'objet à l'enregistrement
             $entityManager->persist($composant);
-            // on l'enregistre dans notre base de données
+            // on enregistre l'objet créé dans notre base de données
             $entityManager->flush();
 
-            // une fois la compétence créée, on redirige l'utilisateur vers la liste des compétences triée de la plus récente vers la plus ancienne
+            // une fois le composant créé, on redirige l'utilisateur vers la liste des composants
             return $this->redirectToRoute('index_composant');
         }
 
@@ -88,4 +98,17 @@ class ComposantController extends AbstractController
             'composant' => $composant,
         ]);
     }
+
+    /**
+     * @Route("/composant/delete/{id}", name="delete_composant")
+     */
+    public function delete(ManagerRegistry $doctrine, Composant $composant): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($composant);
+        $entityManager->flush();
+
+        // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
+        return $this->redirectToRoute('index_composant');
+    }    
 }

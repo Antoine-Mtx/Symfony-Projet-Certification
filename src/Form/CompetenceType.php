@@ -2,11 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Composant;
 use App\Entity\Competence;
 use App\Form\ComposantType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -24,6 +26,20 @@ class CompetenceType extends AbstractType
             ->add('icone')
             // ->add('concepteur')
             ->add('domaine')
+            ->add('composants', CollectionType::class, [
+                // chaque élément du tableau sera de type "Composant"
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'label' => "choisir composant : ",
+                    'class' => Composant::class
+                ],
+                'prototype' => true,
+                'allow_add' => true,
+                'allow_delete' => true,
+                // pas de référence à setComposant dans l'entité Competence
+                'by_reference' => false,
+                // 'choice_label' => 'composant',
+            ])
             // ->add('composants', CollectionType::class, [
             //     // chaque élément du tableau sera de type "Composant"
             //     'entry_type' => ComposantType::class,

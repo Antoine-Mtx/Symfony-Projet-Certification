@@ -23,9 +23,9 @@ class Composant
     private $intitule;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $contenu;
+    private $filename;
 
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="composants")
@@ -35,7 +35,7 @@ class Composant
 
     /**
      * @ORM\ManyToOne(targetEntity=Competence::class, inversedBy="composants")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $competence;
 
@@ -49,6 +49,11 @@ class Composant
      * @ORM\Column(type="date")
      */
     private $date_creation;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $textContent;
 
     public function getId(): ?int
     {
@@ -67,14 +72,14 @@ class Composant
         return $this;
     }
 
-    public function getContenu(): ?string
+    public function getFilename(): ?string
     {
-        return $this->contenu;
+        return $this->filename;
     }
 
-    public function setContenu(string $contenu): self
+    public function setFilename(string $filename): self
     {
-        $this->contenu = $contenu;
+        $this->filename = $filename;
 
         return $this;
     }
@@ -128,6 +133,18 @@ class Composant
     public function setDateCreation(\DateTimeInterface $date_creation): self
     {
         $this->date_creation = $date_creation;
+
+        return $this;
+    }
+
+    public function getTextContent(): ?string
+    {
+        return $this->textContent;
+    }
+
+    public function setTextContent(?string $textContent): self
+    {
+        $this->textContent = $textContent;
 
         return $this;
     }

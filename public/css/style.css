@@ -3,6 +3,14 @@
 @import 'components/profile.css';
 @import 'components/footer.css';
 
+
+.competence-choice.active {
+    border: solid green 5px;
+}
+.competence-choice {
+    cursor: pointer;
+}
+
 .icon {
     width: 4rem;
     object-fit: cover;

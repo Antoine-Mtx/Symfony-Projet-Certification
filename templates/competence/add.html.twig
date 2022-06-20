@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'une compétence{% endblock %}
+{% block title %}Création d'une compétence{% endblock %}
 
 {% block body %}
 
@@ -11,6 +11,8 @@
     {{ form_row(formCompetence.domaine) }}
 	{{ form_row(formCompetence.synopsis) }}
 	{{ form_row(formCompetence.description) }}
+	{{ form_row(formCompetence.image) }}
+	{{ form_row(formCompetence.icone) }}
 
     <h2 class="center">Choisissez vos composants</h2>
 	{# <div class="form-group row ">
@@ -28,17 +30,31 @@
 		<button type="button" class="add-another-collection-widget btn btn-primary" data-list-selector="#composant-fields-list">Ajouter un composant</button>
 	</div> #}
 	{# empêche l'apparition d'une légende "composants", si la collection est vide (en cas de création d'une nouvelle compétence) #}
-	<div class="container">
-		<div class="grid">
-		<pre>
-			{{ dump(composants) }}
-		</pre>
-			{% for composant in composants %}
-				{% include "commposant/card.html.twig" with {composant: composant} only %}
-			{% endfor %}
-		</div>
+	<div class="row g-4 my-3">
+		{% for composant in composants %}
+			<div class="col-sm-12 col-lg-6 competence-choice" data-id={{ composant.id }}>
+				{% if composant.type.affichage == 'carte' %}
+					{% include "composant/type/card.html.twig" %}
+				{% elseif composant.type.affichage == 'graphique' %}
+					{% include "composant/type/graph.html.twig" %}    
+				{% endif %}
+				{# {% include "composant/type/card.html.twig" with {composant: composant} only %} #}
+			</div>
+		{% endfor %}
 	</div>
+	<ul id="gestionComposants" data-prototype= "{{ form_row(formCompetence.composants.vars.prototype)|e('html_attr') }}">
+
+        {% for composant in formCompetence.composants %}
+
+            <li>{{ form_row(composant) }}</li>
+
+        {% endfor %}
+
+    </ul>
 	{# {% do formCompetence.composants.setRendered %} #}
 
 	{{ form_end(formCompetence) }}
+
+	<script src="/js/script.js"></script>
+
 {% endblock %}

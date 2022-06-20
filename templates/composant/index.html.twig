@@ -11,7 +11,11 @@
 <div class="skill-card-gallery">
     <div class="row g-4">
         {% for composant in composants %}
-            {% include "type/card.html.twig" %}
+            {% if composant.type.affichage == 'carte' %}
+                {% include "type/card.html.twig" %}
+            {% elseif composant.type.affichage == 'graphique' %}
+                {% include "type/graph.html.twig" %}    
+            {% endif %}
         {% endfor %}
     </div>
 </div>

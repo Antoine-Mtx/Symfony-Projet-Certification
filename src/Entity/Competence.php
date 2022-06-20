@@ -62,7 +62,7 @@ class Competence
     private $commentaires;
 
     /**
-     * @ORM\OneToMany(targetEntity=Composant::class, mappedBy="competence")
+     * @ORM\OneToMany(targetEntity=Composant::class, mappedBy="competence", cascade={"persist"})
      */
     private $composants;
 
