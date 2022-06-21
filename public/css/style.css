@@ -10,7 +10,6 @@
 .competence-choice {
     cursor: pointer;
 }
-
 .icon {
     width: 4rem;
     object-fit: cover;
@@ -31,12 +30,12 @@
     flex-direction: column;
     justify-content: space-between;
 }
-.bi-lightbulb:hover {
+/* .bi-lightbulb:hover {
     background-color: #f7ff3c;
     opacity: 100;
     border-radius: 50%;
     backdrop-filter: blur(1rem);
-}
+} */
 .badge {
     margin-left: 1rem;
 }

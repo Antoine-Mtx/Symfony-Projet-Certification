@@ -93,7 +93,7 @@ class DomaineController extends AbstractController
         $entityManager->remove($domaine);
         $entityManager->flush();
 
-        // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
+        // on redirige l'utilisateur vers la liste des domaines
         return $this->redirectToRoute('index_domaine');
     }
 
