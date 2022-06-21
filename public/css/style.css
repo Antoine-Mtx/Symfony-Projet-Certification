@@ -3,9 +3,12 @@
 @import 'components/profile.css';
 @import 'components/footer.css';
 
-
+fieldset {
+    display: none;
+}
 .competence-choice.active {
     border: solid green 5px;
+    border-radius: 10px;
 }
 .competence-choice {
     cursor: pointer;

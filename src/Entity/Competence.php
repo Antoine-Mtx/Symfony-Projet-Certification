@@ -37,12 +37,12 @@ class Competence
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
+    private $imageFilename;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $icone;
+    private $iconeFilename;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="competencesCrees")
@@ -118,26 +118,26 @@ class Competence
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImageFilename(): ?string
     {
-        return $this->image;
+        return $this->imageFilename;
     }
 
-    public function setImage(?string $image): self
+    public function setImageFilename(?string $imageFilename): self
     {
-        $this->image = $image;
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }
 
-    public function getIcone(): ?string
+    public function getIconeFilename(): ?string
     {
-        return $this->icone;
+        return $this->iconeFilename;
     }
 
-    public function setIcone(?string $icone): self
+    public function setIconeFilename(?string $iconeFilename): self
     {
-        $this->icone = $icone;
+        $this->iconeFilename = $iconeFilename;
 
         return $this;
     }

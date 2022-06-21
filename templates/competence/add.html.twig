@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{# {% block _user_registration_form_agreeTerms_row %}
-        {% for composant in composants %}
+{% block _competence_composants_row %}
+        {# {% for composant in composants %} #}
             {% if composant.type.affichage == 'carte' %}
                 {% include "type/card.html.twig" %}
             {% elseif composant.type.affichage == 'graphique' %}
                 {% include "type/graph.html.twig" %}    
             {% endif %}
-        {% endfor %}
-{% endblock %} #}
+        {# {% endfor %} #}
+{% endblock %}
 
 {% block title %}Création d'une compétence{% endblock %}
 
@@ -21,8 +21,10 @@
     {{ form_row(formCompetence.domaine) }}
 	{{ form_row(formCompetence.synopsis) }}
 	{{ form_row(formCompetence.description) }}
-	{{ form_row(formCompetence.image) }}
-	{{ form_row(formCompetence.icone) }}
+	{{ form_row(formCompetence.imageFilename) }}
+	{{ form_row(formCompetence.iconeFilename) }}
+	{# <form name ="session_storage" onload='this.form.submit()'><br>
+	<input type="text" value=sessionStorage.getItem('competence_composants_list')> #}
 
     <h2 class="center">Choisissez vos composants</h2>
 	{# <div class="form-group row ">
@@ -40,9 +42,10 @@
 		<button type="button" class="add-another-collection-widget btn btn-primary" data-list-selector="#composant-fields-list">Ajouter un composant</button>
 	</div> #}
 	{# empêche l'apparition d'une légende "composants", si la collection est vide (en cas de création d'une nouvelle compétence) #}
+
 	<div class="row g-4 my-3">
-		{% for composant in composants %}
-			<div class="col-sm-12 col-lg-6 competence-choice" data-id={{ composant.id }}>
+		{% for composant in composantsDisponibles %}
+			<div class="col-sm-6 col-lg-3 col-lg-4 competence-choice" data-id={{ composant.id }}>
 				{% if composant.type.affichage == 'carte' %}
 					{% include "composant/type/card.html.twig" %}
 				{% elseif composant.type.affichage == 'graphique' %}
@@ -51,7 +54,8 @@
 				{# {% include "composant/type/card.html.twig" with {composant: composant} only %} #}
 			</div>
 		{% endfor %}
-	</div>
+
+	{# </div>
 	<ul id="gestionComposants" data-prototype= "{{ form_row(formCompetence.composants.vars.prototype)|e('html_attr') }}">
 
         {% for composant in formCompetence.composants %}
@@ -60,8 +64,7 @@
 
         {% endfor %}
 
-    </ul>
-	{# {% do formCompetence.composants.setRendered %} #}
+    </ul> #}
 
 	{{ form_end(formCompetence) }}
 
