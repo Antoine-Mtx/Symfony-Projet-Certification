@@ -33,7 +33,7 @@ class CompetenceController extends AbstractController
 
     /**
      * @Route("/competence/add", name="add_competence")
-     * @Route("/competence/update/{id}", name="update_competence")
+     * @Route("/competence/{id}/update", name="update_competence")
      */
     public function add(ManagerRegistry $doctrine, ComposantRepository $composantRepository, Competence $competence = NULL, Request $request, FileUploader $fileUploader) {
 
