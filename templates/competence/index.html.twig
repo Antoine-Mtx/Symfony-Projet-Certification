@@ -18,7 +18,7 @@
                     <a href="#" class="h6 mb-0"><i class="bi bi-lightbulb active"></i></a>
                 </div>
                 <!-- Image -->
-                <img src="{{ asset("upload/competences/icon" ~ competence.iconeFilename) }}" class="card-img-top" alt="competence image">
+                <img src="{{ asset("upload/competence/icon/" ~ competence.iconeFilename) }}" class="card-img-top" alt="competence image">
                 <!-- Title -->
                 <h5 class="card-title fw-normal"><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h5>
                 <p class="mb-2 text-truncate-2">{{ competence.intitule }}</p>

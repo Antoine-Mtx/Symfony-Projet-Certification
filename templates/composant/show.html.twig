@@ -17,9 +17,9 @@
 <h2>Mise en forme standard</h2>
 
     {% if composant.type.affichage == 'carte' %}
-        {% include "type/card.html.twig" %}
+        {% include "composant/type/card.html.twig" %}
     {% elseif composant.type.affichage == 'graphique' %}
-        {% include "type/graph.html.twig" %}    
+        {% include "composant/type/graph.html.twig" %}    
     {% endif %}
 
 {% endblock %}
