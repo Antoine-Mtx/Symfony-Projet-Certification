@@ -44,8 +44,12 @@ class CompetenceController extends AbstractController
 
         // on va utiliser doctrine pour ajouter / actualiser notre compétence au niveau de la base de données
         $entityManager = $doctrine->getManager();
+    
         // une compétence étant un assemblage de composants, on se sert du repository de Composant pour rechercher les composants dont on a besoin ET qui n'ont pas déjà été affectés à une autre compétence
         $composantsDisponibles = $composantRepository->findBy(['competence' => NULL]);
+
+        // dans le cas où on édite une compétence existante, on va également récupérer les composants qui lui ont été affectés
+        $composantsAffectes = $competence->getComposants();
 
         // on crée un formulaire dévolu à l'ajout de compétence
         $form = $this->createForm(CompetenceType::class, $competence);
@@ -100,9 +104,8 @@ class CompetenceController extends AbstractController
 
         return $this->render('competence/add.html.twig', [
             'formCompetence' => $form->createView(),
-            'title' => "Ajouter",
-            // 'competenceId' => $competence->getId(),
             'composantsDisponibles' => $composantsDisponibles,
+            'composantsAffectes' => $composantsAffectes,
         ]);
     }
 
@@ -130,7 +133,7 @@ class CompetenceController extends AbstractController
      * @ParamConverter("competence", options={"mapping": {"idCompetence": "id"}})
      * @ParamConverter("composant", options={"mapping": {"idComposant": "id"}})
      */
-    public function removecomposant(ManagerRegistry $doctrine, Composant $composant, Competence $competence)
+    public function removeComposant(ManagerRegistry $doctrine, Composant $composant, Competence $competence)
     {
 
         $entityManager = $doctrine->getManager();
@@ -160,5 +163,23 @@ class CompetenceController extends AbstractController
         return $this->render('competence/show.html.twig', [ // notre méthode rend le template "competence/show.html.twig" où on pourra afficher les incompetences accessibles de notre objet competence avec "{{ competence }}"
             'competence' => $competence,
         ]);
+    }
+
+    /**
+     * @Route("/competence/delete/{id}", name="delete_competence")
+     */
+    public function delete(ManagerRegistry $doctrine, Competence $competence): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $composants = $competence->getComposants();
+
+        foreach ($composants as $composant) {
+            $composant->removeCompetence($competence);
+        }
+        $entityManager->remove($competence);
+        $entityManager->flush();
+
+        // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
+        return $this->redirectToRoute('mes_competences');
     }
 }

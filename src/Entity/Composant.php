@@ -108,6 +108,13 @@ class Composant
         return $this;
     }
 
+    public function removeCompetence(?Competence $competence): self
+    {
+        $this->competence = NULL;
+
+        return $this;
+    }
+
     public function getConcepteur(): ?User
     {
         return $this->concepteur;

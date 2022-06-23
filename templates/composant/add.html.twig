@@ -4,9 +4,22 @@
 
 {% block body %}
 
-    <h1>Quel type de composant souhaitez-vous créer ?</h1>
-
-    {{ form_start(formComposant) }}
-    {{ form_end(formComposant) }}
+    <div class="card border bg-transparent rounded-3 my-4">
+        <!-- Card header -->
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="card-header-title mb-0 text-center">Créez / Modifiez votre composant</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            {{ form_start(formComposant) }}
+                {{ form_row(formComposant.type) }}
+                {{ form_row(formComposant.intitule) }}
+                {{ form_row(formComposant.filename) }}
+                {{ form_row(formComposant.textContent) }}
+        </div>
+        <div class="card-footer bg-transparent text-center">
+            {{ form_end(formComposant) }}
+        </div>
+    </div>
 
 {% endblock %}

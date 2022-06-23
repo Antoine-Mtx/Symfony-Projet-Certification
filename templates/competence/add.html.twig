@@ -1,32 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block _competence_composants_row %}
-        {# {% for composant in composants %} #}
+{# {% block _competence_composants_row %}
+        {% for composant in composants %}
             {% if composant.type.affichage == 'carte' %}
                 {% include "type/card.html.twig" %}
             {% elseif composant.type.affichage == 'graphique' %}
                 {% include "type/graph.html.twig" %}    
             {% endif %}
-        {# {% endfor %} #}
-{% endblock %}
+        {% endfor %}
+{% endblock %} #}
 
-{% block title %}Création d'une compétence{% endblock %}
+{% block title %}Créez / Modifiez votre compétence{% endblock %}
 
 {% block body %}
 
-    <h1>Quelle compétence souhaitez-vous créer ?</h1>
+    <div class="card border bg-transparent rounded-3 my-4">
+        <!-- Card header -->
+        <div class="card-header bg-transparent border-bottom">
+            <h3 class="card-header-title mb-0 text-center">Créez / Modifiez votre compétence</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+			{{ form_start(formCompetence) }}
+				{{ form_row(formCompetence.intitule) }}
+				{{ form_row(formCompetence.domaine) }}
+				{{ form_row(formCompetence.synopsis) }}
+				{{ form_row(formCompetence.description) }}
+				{{ form_row(formCompetence.imageFilename) }}
+				{{ form_row(formCompetence.iconeFilename) }}
+			{% if composantsAffectes | length > 0 %}
+				<h4 class="center">Composants attribués à cette compétence</h4>
+				<div class="row g-4 my-3">
+					{% for composant in composantsAffectes %}
+						<div class="col-sm-6 col-lg-3 col-lg-4 competence-choice update" data-id={{ composant.id }}>
+							{% if composant.type.affichage == 'carte' %}
+								{% include "composant/type/card.html.twig" %}
+							{% elseif composant.type.affichage == 'graphique' %}
+								{% include "composant/type/graph.html.twig" %}    
+							{% endif %}
+							{# {% include "composant/type/card.html.twig" with {composant: composant} only %} #}
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<h4 class="center">Choisissez vos composants</h4>
 
-    {{ form_start(formCompetence) }}
-    {{ form_row(formCompetence.intitule) }}
-    {{ form_row(formCompetence.domaine) }}
-	{{ form_row(formCompetence.synopsis) }}
-	{{ form_row(formCompetence.description) }}
-	{{ form_row(formCompetence.imageFilename) }}
-	{{ form_row(formCompetence.iconeFilename) }}
+			<div class="row g-4 my-3">
+				{% for composant in composantsDisponibles %}
+					<div class="col-sm-6 col-lg-3 col-lg-4 competence-choice" data-id={{ composant.id }}>
+						{% if composant.type.affichage == 'carte' %}
+							{% include "composant/type/card.html.twig" %}
+						{% elseif composant.type.affichage == 'graphique' %}
+							{% include "composant/type/graph.html.twig" %}    
+						{% endif %}
+						{# {% include "composant/type/card.html.twig" with {composant: composant} only %} #}
+					</div>
+				{% endfor %}
+			</div>
+        </div>
+        <div class="card-footer bg-transparent text-center">
+            {{ form_end(formCompetence) }}
+        </div>
+    </div>
+
 	{# <form name ="session_storage" onload='this.form.submit()'><br>
 	<input type="text" value=sessionStorage.getItem('competence_composants_list')> #}
 
-    <h2 class="center">Choisissez vos composants</h2>
+
+
 	{# <div class="form-group row ">
 		<div class="col-form-label col-sm-2">&nbsp;</div>
 		<div id="composant-fields-list" class="col-sm-10 remove-collection-widget" data-prototype="{{ form_widget(formCompetence.composants.vars.prototype)|e }}" data-competence="{{competenceId}}" data-widget-tags="{{ '<p></p>'|e }}" data-widget-counter="{{ formCompetence.composants|length }}">
@@ -43,20 +84,9 @@
 	</div> #}
 	{# empêche l'apparition d'une légende "composants", si la collection est vide (en cas de création d'une nouvelle compétence) #}
 
-	<div class="row g-4 my-3">
-		{% for composant in composantsDisponibles %}
-			<div class="col-sm-6 col-lg-3 col-lg-4 competence-choice" data-id={{ composant.id }}>
-				{% if composant.type.affichage == 'carte' %}
-					{% include "composant/type/card.html.twig" %}
-				{% elseif composant.type.affichage == 'graphique' %}
-					{% include "composant/type/graph.html.twig" %}    
-				{% endif %}
-				{# {% include "composant/type/card.html.twig" with {composant: composant} only %} #}
-			</div>
-		{% endfor %}
 
-	{# </div>
-	<ul id="gestionComposants" data-prototype= "{{ form_row(formCompetence.composants.vars.prototype)|e('html_attr') }}">
+
+	{# <ul id="gestionComposants" data-prototype= "{{ form_row(formCompetence.composants.vars.prototype)|e('html_attr') }}">
 
         {% for composant in formCompetence.composants %}
 
@@ -66,7 +96,7 @@
 
     </ul> #}
 
-	{{ form_end(formCompetence) }}
+	
 
 	<script src="/js/script.js"></script>
 

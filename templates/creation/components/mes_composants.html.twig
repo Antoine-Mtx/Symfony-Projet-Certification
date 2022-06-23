@@ -1,0 +1,110 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mes composants{% endblock %}
+
+{% block body %}
+
+<div class="card border bg-transparent rounded-3 my-3">
+    <!-- Card header START -->
+    <div class="card-header bg-transparent border-bottom">
+        <h3 class="mb-0">Mes composants</h3>
+    </div>
+    <!-- Card header END -->
+
+    <!-- Card body START -->
+    <div class="card-body">
+
+        <!-- Search and select START -->
+        <div class="row g-3 align-items-center justify-content-between mb-4">
+            <!-- Search -->
+            <div class="col-md-8">
+                <form class="rounded position-relative">
+                    <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn bg-transparent px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6 "></i></button>
+                </form>
+            </div>
+
+            <!-- Select option -->
+            <div class="col-md-3">
+                <!-- Short by filter -->
+                {# <form>
+
+                </form> #}
+            </div>
+        </div>
+        <!-- Search and select END -->
+
+        <!-- Course list table START -->
+        <div class="table-responsive border-0">
+            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                <!-- Table head -->
+                <thead>
+                    <tr>
+                        <th scope="col" class="border-0 rounded-start">Composant</th>
+                        <th scope="col" class="border-0">Créé le</th>
+                        <th scope="col" class="border-0 rounded-end">Action</th>
+                    </tr>
+                </thead>
+
+                <!-- Table body START -->
+                <tbody>
+                    <!-- Table item -->
+                    {% for composant in mes_composants %}
+                        <tr>
+                            <!-- Composants -->
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <!-- Image -->
+                                    <div class="w-60px">
+                                        <img src="assets/images/courses/4by3/08.jpg" class="rounded" alt="">
+                                    </div>
+                                    <div class="mb-0 ms-2">
+                                        <!-- Title -->
+                                        <h6><a href="{{ path('show_composant', {'id': composant.id}) }}">{{ composant.type }} : {{ composant.intitule }}</a></h6>
+                                        <!-- Info -->
+                                        <div class="d-sm-flex">
+                                            {% if composant.competence %}
+                                                <p class="h6 fw-light mb-0 small me-3">affecté à la compétence <a href="{{ path('show_competence', {'id': composant.competence.id }) }}">{{ composant.competence }}</a></p>
+                                            {% else %}
+                                                <p class="h6 fw-light mb-0 small me-3">non affecté pour le moment</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- Learners item -->
+                            <td class="text-center text-sm-start">{{ composant.dateCreation | date("d/m/Y") }}</td>
+                            <!-- Action item -->
+                            <td>
+                                <a href="{{ path('update_composant', {'id': composant.id }) }}" class="btn btn-sm btn-success btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
+                                <a href="{{ path('delete_composant', {'id': composant.id }) }}" class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>
+                            </td>
+                        </tr>                            
+                    {% endfor %}
+                </tbody>
+                <!-- Table body END -->
+            </table>
+        </div>
+        <!-- Course list table END -->
+
+        <!-- Pagination START -->
+        <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+            <!-- Content -->
+            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
+            <!-- Pagination -->
+            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                    <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
+                    <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Pagination END -->
+    </div>
+    <!-- Card body START -->
+</div>
+
+{% endblock %}

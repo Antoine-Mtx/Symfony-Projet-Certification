@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon espace création{% endblock %}
+
+{% block body %}
+
+    <div class="d-inline-flex align-items-center m-4">
+        <div class="avatar me-3">
+            <img class="avatar-img rounded-circle" src="{{ app.user.avatarFilename ? asset("upload/user/avatar/"~ app.user.avatarFilename) : asset("upload/user/avatar/default.jpg") }}" alt="avatar">
+        </div>
+        <h1>{{ app.user }}</h1>
+    </div>
+    <a class="btn btn-primary" href="{{ path('index_profile') }}">Aller vers mon profil</a>
+
+    <section class="row">
+        <div class="col-3">
+            <!-- Dashboard menu -->
+            <nav id="nav-profile" class="list-group list-group-item-secondary list-group-borderless">
+                <a class="list-group-item active" href="#"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Tableau de bord Créateur</a>
+                <a class="list-group-item" href="{{ path('mes_competences') }}"><i class="bi bi-tools fa-fw me-2"></i></i>Mes compétences</a>
+                <a class="list-group-item" href="{{ path('mes_composants') }}"><i class="bi bi-nut fa-fw me-2"></i>Mes composants</a>
+                <a class="list-group-item" href="{{ path('add_competence') }}"><i class="bi bi-tools fa-fw me-2"></i></i>Créer une compétence</a>
+                <a class="list-group-item" href="{{ path('add_composant') }}"><i class="bi bi-nut fa-fw me-2"></i>Créer un composant</a>
+            </nav>
+        </div>
+        <div class="main-content col-9">
+            {% include "profile/components/skills.html.twig" %}
+        </div>
+    </section>
+    
+{% endblock %}

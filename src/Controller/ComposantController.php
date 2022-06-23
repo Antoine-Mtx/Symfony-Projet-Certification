@@ -105,10 +105,16 @@ class ComposantController extends AbstractController
     public function delete(ManagerRegistry $doctrine, Composant $composant): Response
     {
         $entityManager = $doctrine->getManager();
+        $competence = $composant->getCompetence();
+
+        if ($competence) {
+            $competence->removeComposant($composant);
+        }
+        
         $entityManager->remove($composant);
         $entityManager->flush();
 
         // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
-        return $this->redirectToRoute('index_composant');
+        return $this->redirectToRoute('mes_composants');
     }    
 }

@@ -10,11 +10,19 @@ fieldset {
     border: solid green 5px;
     border-radius: 10px;
 }
-.competence-choice {
+.competence-choice.update.active {
+    border: solid red 5px;
+    border-radius: 10px;
+}
+.competence-choice, .competence-choice.update {
     cursor: pointer;
 }
 .icon {
     width: 4rem;
+    object-fit: cover;
+}
+.idea-icon {
+    width: 3.5rem;
     object-fit: cover;
 }
 .skill-img {
