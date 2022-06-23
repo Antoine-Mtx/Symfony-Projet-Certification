@@ -49,7 +49,10 @@ class CompetenceController extends AbstractController
         $composantsDisponibles = $composantRepository->findBy(['competence' => NULL]);
 
         // dans le cas où on édite une compétence existante, on va également récupérer les composants qui lui ont été affectés
-        $composantsAffectes = $competence->getComposants();
+        $composantsAvantUpdate = $competence->getComposants();
+        
+        // je crée un tableau me permettant de "photographier" la liste des composants de la compétence avant update : l'objet $composantsActuels étant lié à la compétence, lorsqu'on ajoute / retire un composant de la compétence, il est également ajouté / retiré de $composantsActuels
+        $composantsAvantUpdateArray = $composantsAvantUpdate->toArray();
 
         // on crée un formulaire dévolu à l'ajout de compétence
         $form = $this->createForm(CompetenceType::class, $competence);
@@ -78,15 +81,20 @@ class CompetenceController extends AbstractController
                 $iconeFileName = $fileUploader->upload($iconeFile, "/competence/icon");
                 $competence->setIconeFilename($iconeFileName);
             }
+            
+            foreach ($composantsAvantUpdateArray as $composantActuel) {
+                $composantActuel->removeCompetence($competence);
+            }
 
             // on récupère la liste des composants qui constituent notre compétence
-            $composantsAjoutes = $form->get('composants')->getData();
+            $composantsChoisis = $form->get('composants')->getData();
 
             // on parcourt cette liste et on renseigne la propriété compétence de chacun de ces composants
-            foreach ($composantsAjoutes as $index => $composant) {
-                $composantAhydrater = $composantRepository->find($composant);
-                $composantAhydrater->setCompetence($competence);
+            foreach ($composantsChoisis as $index => $composant) {
+                $composant->setCompetence($competence);
             }
+
+            $composantsChoisisArray = $composantsChoisis->toArray();
 
             // on définit l'utilisateur connecté comme concepteur
             $competence->setConcepteur($user);
@@ -95,17 +103,17 @@ class CompetenceController extends AbstractController
 
             // on prépare l'objet à l'enregistrement
             $entityManager->persist($competence);
-            // on l'enregistre dans notre base de données
+            // on enregistre dans notre base de données
             $entityManager->flush();
 
-            // une fois la compétence créée, on redirige l'utilisateur vers la liste des compétences triée de la plus récente vers la plus ancienne
-            return $this->redirectToRoute('index_competence');
+            // une fois la compétence créée, on redirige l'utilisateur vers la liste des compétences qu'il a créées, triées de la plus récente vers la plus ancienne
+            return $this->redirectToRoute('mes_competences');
         }
 
         return $this->render('competence/add.html.twig', [
             'formCompetence' => $form->createView(),
             'composantsDisponibles' => $composantsDisponibles,
-            'composantsAffectes' => $composantsAffectes,
+            'composantsAvantUpdate' => $composantsAvantUpdate,
         ]);
     }
 
