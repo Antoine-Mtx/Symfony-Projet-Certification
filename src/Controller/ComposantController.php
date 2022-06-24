@@ -72,7 +72,7 @@ class ComposantController extends AbstractController
             $entityManager->flush();
 
             // une fois le composant créé, on redirige l'utilisateur vers la liste des composants
-            return $this->redirectToRoute('index_composant');
+            return $this->redirectToRoute('mes_composants');
         }
 
         return $this->render('composant/add.html.twig', [
