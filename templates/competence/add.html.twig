@@ -28,10 +28,10 @@
 				{{ form_row(formCompetence.description) }}
 				{{ form_row(formCompetence.imageFilename) }}
 				{{ form_row(formCompetence.iconeFilename) }}
-			{% if composantsAvantUpdate | length > 0 %}
+			{% if composantsActuels | length > 0 %}
 				<h4 class="center">Composants attribués à cette compétence</h4>
 				<div class="row g-4 my-3">
-					{% for composant in composantsAvantUpdate %}
+					{% for composant in composantsActuels %}
 						<div class="col-sm-6 col-lg-3 col-lg-4 competence-choice update" data-id={{ composant.id }}>
 							{% if composant.type.affichage == 'carte' %}
 								{% include "composant/type/card.html.twig" %}

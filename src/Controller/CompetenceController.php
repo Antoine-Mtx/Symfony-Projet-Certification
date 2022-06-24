@@ -49,10 +49,10 @@ class CompetenceController extends AbstractController
         $composantsDisponibles = $composantRepository->findBy(['competence' => NULL]);
 
         // dans le cas où on édite une compétence existante, on va également récupérer les composants qui lui ont été affectés
-        $composantsAvantUpdate = $competence->getComposants();
+        $composantsActuels = $competence->getComposants();
         
         // je crée un tableau me permettant de "photographier" la liste des composants de la compétence avant update : l'objet $composantsActuels étant lié à la compétence, lorsqu'on ajoute / retire un composant de la compétence, il est également ajouté / retiré de $composantsActuels
-        $composantsAvantUpdateArray = $composantsAvantUpdate->toArray();
+        $composantsAvantUpdateArray = $composantsActuels->toArray();
 
         // on crée un formulaire dévolu à l'ajout de compétence
         $form = $this->createForm(CompetenceType::class, $competence);
@@ -82,19 +82,14 @@ class CompetenceController extends AbstractController
                 $competence->setIconeFilename($iconeFileName);
             }
             
-            foreach ($composantsAvantUpdateArray as $composantActuel) {
-                $composantActuel->removeCompetence($competence);
+            foreach ($composantsAvantUpdateArray as $composantAvantUpdate) {
+                $composantAvantUpdate->removeCompetence($competence);
             }
-
-            // on récupère la liste des composants qui constituent notre compétence
-            $composantsChoisis = $form->get('composants')->getData();
 
             // on parcourt cette liste et on renseigne la propriété compétence de chacun de ces composants
-            foreach ($composantsChoisis as $index => $composant) {
+            foreach ($composantsActuels as $index => $composant) {
                 $composant->setCompetence($competence);
             }
-
-            $composantsChoisisArray = $composantsChoisis->toArray();
 
             // on définit l'utilisateur connecté comme concepteur
             $competence->setConcepteur($user);
@@ -113,7 +108,7 @@ class CompetenceController extends AbstractController
         return $this->render('competence/add.html.twig', [
             'formCompetence' => $form->createView(),
             'composantsDisponibles' => $composantsDisponibles,
-            'composantsAvantUpdate' => $composantsAvantUpdate,
+            'composantsActuels' => $composantsActuels,
         ]);
     }
 
