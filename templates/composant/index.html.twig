@@ -50,7 +50,7 @@
                 <!-- Table body START -->
                 <tbody>
                     <!-- Table item -->
-                    {% for composant in composants %}
+                    {% for composant in composantsDeLaPage %}
                         <tr>
                             <!-- Composants -->
                             <td>
@@ -90,22 +90,33 @@
         </div>
         <!-- Course list table END -->
 
-        <!-- Pagination START -->
-        <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
-            <!-- Content -->
-            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-            <!-- Pagination -->
-            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-                <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                    <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
-                    <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- Pagination END -->
+        {% if nbPages > 1 %}
+            <!-- Pagination START -->
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+                <!-- Content -->
+                <p class="mb-0 text-center text-sm-start">Affiche les éléments {{ indexPremierComposant }} à  {{ indexDernierComposant }} des {{ nbComposants }} composants</p>
+                <!-- Pagination -->
+                <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                    <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                        {% if page != 1 %}
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': 1}) }}"><i class="fa-solid fa-angles-left"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page - 1}) }}"><i class="fa-solid fa-angle-left"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page - 1}) }}">{{ page - 1 }}</a></li>
+                        {% endif %}
+                        <li class="page-item mb-0 active"><a class="page-link" href="{{ path('page_composant', {'page': page}) }}">{{ page }}</a></li>
+                        {% if (nbPages == 2 and page != nbPages) or (nbPages > 2 and page != nbPages) %}
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page + 1}) }}">{{ page + 1 }}</a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page + 1}) }}"><i class="fa-solid fa-angle-right"></i></a></li>
+                        {% endif %}
+                        {% if page != nbPages %}
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': nbPages}) }}"><i class="fa-solid fa-angles-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            <!-- Pagination END -->
+        {% endif %}
+
     </div>
     <!-- Card body START -->
 </div>

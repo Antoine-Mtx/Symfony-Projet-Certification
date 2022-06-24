@@ -14,15 +14,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ComposantController extends AbstractController
 {
+
+    // la liste des composants étant massive, on met en place une pagination et on définit donc l'argument $page par défaut à la valeur 1
+
     /**
      * @Route("/composant", name="index_composant")
+     * @Route("/composant/page/{page}", name="page_composant")
+     * 
+     * @param integer $page
      */
-    public function index(ManagerRegistry $doctrine, Request $request): Response
+    public function index(ManagerRegistry $doctrine, Request $request, int $page = 1): Response
     {
-        $composants = $doctrine->getRepository(Composant::class)->findAll(); // on désigne le repository de la classe "composant" à notre gestionnaire $doctrine puis on utilise la méthode findAll() pour récupérer toutes les instances de cette classe
+        $nbComposants = $doctrine->getRepository(Composant::class)->count([]);
+
+        // configuration de la pagination
+        $nbComposantsParPage = 3;
+        $nbPages = ceil($nbComposants / $nbComposantsParPage);
+        $composantsDeLaPage = $doctrine->getRepository(Composant::class)->findBy([], ['date_creation' => 'DESC'], $nbComposantsParPage, ($page - 1) * $nbComposantsParPage);  // on désigne le repository de la classe "composant" à notre gestionnaire $doctrine puis on utilise la méthode findBy() pour récupérer tous les composants de la page concernée
+
+        $indexPremierComposant = ($page - 1) * $nbComposantsParPage + 1;
+        $indexDernierComposant = min($indexPremierComposant + $nbComposantsParPage - 1, $nbComposants);
 
         return $this->render('composant/index.html.twig', [
-            'composants' => $composants,
+            'composantsDeLaPage' => $composantsDeLaPage,
+            'page' => $page,
+            'nbPages' => $nbPages,
+            'nbComposants' => $nbComposants,
+            'indexPremierComposant' => $indexPremierComposant,
+            'indexDernierComposant' => $indexDernierComposant,            
         ]);
     }
 

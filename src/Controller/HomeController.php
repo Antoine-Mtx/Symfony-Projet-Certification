@@ -21,10 +21,18 @@ class HomeController extends AbstractController
         $utilisateurs = $doctrine->getRepository(User::class)->findAll();
         $competences = $doctrine->getRepository(Competence::class)->findAll();
 
+        $nbConcepteurs = 0;
+        foreach ($utilisateurs as $index => $utilisateur) {
+            if (in_array("concepteur", $utilisateur->getRoles())) {
+                $nbConcepteurs ++;
+            }
+        }
+
         return $this->render('home/index.html.twig', [
             'domaines' => $domaines,
             'utilisateurs' => $utilisateurs,
             'competences' => $competences,
+            'nbConcepteurs' => $nbConcepteurs,
         ]);
     }
 }
