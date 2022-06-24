@@ -94,10 +94,14 @@
             <!-- Pagination START -->
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
                 <!-- Content -->
-                <p class="mb-0 text-center text-sm-start">Affiche les éléments {{ indexPremierComposant }} à  {{ indexDernierComposant }} des {{ nbComposants }} composants</p>
+                <p class="mb-0 text-center text-sm-start">Affiche les composants {{ indexPremierComposant }} à  {{ indexDernierComposant }} sur les {{ nbComposants }} existants</p>
                 <!-- Pagination -->
                 <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
                     <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                        {% if page == 1 %}
+                            <li class="page-item mb-0"><a class="page-link disabled" tabindex="-1" href="#"><i class="fa-solid fa-angles-left"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link disabled" tabindex="-1" href="#"><i class="fa-solid fa-angle-left"></i></a></li>
+                        {% endif %}
                         {% if page != 1 %}
                             <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': 1}) }}"><i class="fa-solid fa-angles-left"></i></a></li>
                             <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page - 1}) }}"><i class="fa-solid fa-angle-left"></i></a></li>
@@ -110,6 +114,10 @@
                         {% endif %}
                         {% if page != nbPages %}
                             <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': nbPages}) }}"><i class="fa-solid fa-angles-right"></i></a></li>
+                        {% endif %}
+                        {% if page == nbPages %}
+                            <li class="page-item mb-0"><a class="page-link disabled" tabindex="-1" href="#"><i class="fa-solid fa-angle-right"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link disabled" tabindex="-1" href="#"><i class="fa-solid fa-angles-right"></i></a></li>
                         {% endif %}
                     </ul>
                 </nav>

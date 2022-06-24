@@ -6,6 +6,14 @@
 fieldset {
     display: none;
 }
+.disabled {
+    cursor: default;
+    color: lightgray;
+}
+.disabled:hover {
+    background-color: transparent;
+    color: lightgray;
+}
 .competence-choice.active {
     border: solid green 5px;
     border-radius: 10px;

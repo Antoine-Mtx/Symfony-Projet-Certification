@@ -23,11 +23,13 @@ class ComposantController extends AbstractController
      * 
      * @param integer $page
      */
-    public function index(ManagerRegistry $doctrine, Request $request, int $page = 1): Response
+    public function index(ManagerRegistry $doctrine, Request $request, int $page): Response
     {
         $nbComposants = $doctrine->getRepository(Composant::class)->count([]);
 
         // configuration de la pagination
+        $page = isset($page) ? $page : 1;
+        dd($page);
         $nbComposantsParPage = 3;
         $nbPages = ceil($nbComposants / $nbComposantsParPage);
         $composantsDeLaPage = $doctrine->getRepository(Composant::class)->findBy([], ['date_creation' => 'DESC'], $nbComposantsParPage, ($page - 1) * $nbComposantsParPage);  // on désigne le repository de la classe "composant" à notre gestionnaire $doctrine puis on utilise la méthode findBy() pour récupérer tous les composants de la page concernée
