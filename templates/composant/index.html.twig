@@ -18,10 +18,7 @@
         <div class="row g-3 align-items-center justify-content-between mb-4">
             <!-- Search -->
             <div class="col-md-8">
-                <form class="rounded position-relative">
-                    <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn bg-transparent px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6 "></i></button>
-                </form>
+                {{ form(searchForm) }}
             </div>
 
             <!-- Select option -->
@@ -90,11 +87,16 @@
         </div>
         <!-- Course list table END -->
 
-        {% if nbPages > 1 %}
+        
             <!-- Pagination START -->
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
                 <!-- Content -->
-                <p class="mb-0 text-center text-sm-start">Affiche les composants {{ indexPremierComposant }} à  {{ indexDernierComposant }} sur les {{ nbComposants }} existants</p>
+                {% if composantsDeLaPage | length == 0 %}
+                    <p class="mb-0 text-center text-sm-start">Aucun composant ne correspond à cette recherche</p>
+                {% else %}                        
+                    <p class="mb-0 text-center text-sm-start">Affiche les composants {{ indexPremierComposant }} à  {{ indexDernierComposant }} sur les {{ nbComposants }} existants</p>
+                {% endif %}
+                {% if nbPages > 1 %}
                 <!-- Pagination -->
                 <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
                     <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
@@ -103,17 +105,17 @@
                             <li class="page-item mb-0"><a class="page-link disabled" tabindex="-1" href="#"><i class="fa-solid fa-angle-left"></i></a></li>
                         {% endif %}
                         {% if page != 1 %}
-                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': 1}) }}"><i class="fa-solid fa-angles-left"></i></a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page - 1}) }}"><i class="fa-solid fa-angle-left"></i></a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page - 1}) }}">{{ page - 1 }}</a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': 1, 'mots': mots}) }}"><i class="fa-solid fa-angles-left"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page - 1, 'mots': mots}) }}"><i class="fa-solid fa-angle-left"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page - 1, 'mots': mots}) }}">{{ page - 1 }}</a></li>
                         {% endif %}
-                        <li class="page-item mb-0 active"><a class="page-link" href="{{ path('page_composant', {'page': page}) }}">{{ page }}</a></li>
+                        <li class="page-item mb-0 active"><a class="page-link" href="{{ path('page_composant', {'page': page, 'mots': mots}) }}">{{ page }}</a></li>
                         {% if (nbPages == 2 and page != nbPages) or (nbPages > 2 and page != nbPages) %}
-                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page + 1}) }}">{{ page + 1 }}</a></li>
-                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page + 1}) }}"><i class="fa-solid fa-angle-right"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page + 1, 'mots': mots}) }}">{{ page + 1 }}</a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': page + 1, 'mots': mots}) }}"><i class="fa-solid fa-angle-right"></i></a></li>
                         {% endif %}
                         {% if page != nbPages %}
-                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': nbPages}) }}"><i class="fa-solid fa-angles-right"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="{{ path('page_composant', {'page': nbPages, 'mots': mots}) }}"><i class="fa-solid fa-angles-right"></i></a></li>
                         {% endif %}
                         {% if page == nbPages %}
                             <li class="page-item mb-0"><a class="page-link disabled" tabindex="-1" href="#"><i class="fa-solid fa-angle-right"></i></a></li>
@@ -121,9 +123,9 @@
                         {% endif %}
                     </ul>
                 </nav>
+            {% endif %}
             </div>
             <!-- Pagination END -->
-        {% endif %}
 
     </div>
     <!-- Card body START -->

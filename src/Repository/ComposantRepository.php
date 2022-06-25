@@ -21,6 +21,26 @@ class ComposantRepository extends ServiceEntityRepository
         parent::__construct($registry, Composant::class);
     }
 
+    /**
+     * Recherche les composants en fonction du formulaire
+     * @return void
+     */
+    public function search($mots, $offset = 0, $limit = NULL)
+    {
+        $query = $this->createQueryBuilder('c');
+        if (isset($mots)) {
+            $query
+                ->where('MATCH_AGAINST(c.intitule, c.textContent) AGAINST (:mots boolean)>0')
+                ->setParameter('mots', $mots)
+            ;
+        }
+        $query
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
     public function add(Composant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

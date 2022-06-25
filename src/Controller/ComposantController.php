@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Composant;
 use App\Form\ComposantType;
+use App\Form\SearchItemType;
 use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,18 +24,46 @@ class ComposantController extends AbstractController
      * 
      * @param integer $page
      */
-    public function index(ManagerRegistry $doctrine, Request $request, int $page): Response
+    public function index(ManagerRegistry $doctrine, Request $request, int $page = 1, string $mots = NULL): Response
     {
-        $nbComposants = $doctrine->getRepository(Composant::class)->count([]);
+        // on crée notre formulaire dédié à la recherche par mots-clés
+        $form = $this->createForm(SearchItemType::class);
+        // on récupère les données liées au formulaire
+        $search = $form->handleRequest($request);
+
+        // attention à ce passage
+        $mots = $request->query->get('mots');
+
+        // on s'assure que les données du formulaire respectent les contraintes de validation
+        if ($form->isSubmitted() && $form->isValid()) {
+            // on récupère les mots-clés de la recherche
+            $mots = $search->get('mots')->getData();
+            // on récupère tous les items correspondant aux mots-clés 
+            $composants = $doctrine->getRepository(Composant::class)->search($mots);
+            // on dirige l'utilisateur vers la première page correspondant à sa recherche par mots-clés
+            $page = 1;
+        }
+        // on récupère tous les items correspondant aux mots-clés  
+        elseif ($mots) {
+            $composants = $doctrine->getRepository(Composant::class)->search($mots);
+        } 
+        else {
+            $composants = $doctrine->getRepository(Composant::class)->findAll();
+        }
 
         // configuration de la pagination
-        $page = isset($page) ? $page : 1;
-        dd($page);
-        $nbComposantsParPage = 3;
+        
+        // on récupère le nombre total d'items correspondant à la recherche par mots-clés (ou à l'absence de recherche)
+        $nbComposants = count($composants);
+        // on définit un nombre d'items par page
+        $nbComposantsParPage = 5;
+        // on en déduit le nombre de pages total
         $nbPages = ceil($nbComposants / $nbComposantsParPage);
-        $composantsDeLaPage = $doctrine->getRepository(Composant::class)->findBy([], ['date_creation' => 'DESC'], $nbComposantsParPage, ($page - 1) * $nbComposantsParPage);  // on désigne le repository de la classe "composant" à notre gestionnaire $doctrine puis on utilise la méthode findBy() pour récupérer tous les composants de la page concernée
-
+        // on désigne le repository de la classe concernée par la recherche à notre gestionnaire $doctrine puis on utilise la méthode custom search() pour récupérer tous les items de la page qui satisfont la recherche par mots-clés de l'utilisateur (par défaut celle-ci considère tous les items)
+        $composantsDeLaPage = $doctrine->getRepository(Composant::class)->search($mots, ($page - 1) * $nbComposantsParPage, $nbComposantsParPage);
+        // on caclule l'index du premier item de la page
         $indexPremierComposant = ($page - 1) * $nbComposantsParPage + 1;
+        // on caclule l'index du dernier item de la page
         $indexDernierComposant = min($indexPremierComposant + $nbComposantsParPage - 1, $nbComposants);
 
         return $this->render('composant/index.html.twig', [
@@ -43,7 +72,9 @@ class ComposantController extends AbstractController
             'nbPages' => $nbPages,
             'nbComposants' => $nbComposants,
             'indexPremierComposant' => $indexPremierComposant,
-            'indexDernierComposant' => $indexDernierComposant,            
+            'indexDernierComposant' => $indexDernierComposant,
+            'searchForm' => $form->createView(),
+            'mots' => $mots,        
         ]);
     }
 
@@ -137,5 +168,6 @@ class ComposantController extends AbstractController
 
         // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
         return $this->redirectToRoute('mes_composants');
-    }    
+    }
+    
 }

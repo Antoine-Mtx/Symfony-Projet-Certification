@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchController!{% endblock %}
+
+{% block body %}
+
+<div class="search-popup">
+    <form action="/recherche" class="search-input form-group">
+        <input autofocus="" type="text" name="q" autocomplete="off" placeholder="Rechercher un contenu...">
+        <button type="submit">
+            <svg class="icon icon-search">
+                <use href="/sprite.svg#search"></use>
+            </svg>
+        </button>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -2,6 +2,7 @@
 @import 'components/nav.css';
 @import 'components/profile.css';
 @import 'components/footer.css';
+@import 'components/search.css';
 
 fieldset {
     display: none;

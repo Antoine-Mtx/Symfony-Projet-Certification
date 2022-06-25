@@ -12,9 +12,14 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
+                # rajouté le 24/06/2022
+                type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        dql:
+            string_functions:
+                MATCH_AGAINST: App\Extensions\Doctrine\MatchAgainst
 
 when@test:
     doctrine:

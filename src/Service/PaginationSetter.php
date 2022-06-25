@@ -2,24 +2,21 @@
 
 namespace App\Service;
 
-class Paginator
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
+class PaginationSetter
 {
-    // targetDirectory est l'emplacement du dossier où se trouveront les fichiers chargés
-    private $targetDirectory;
-    // le slugger transforme une chaîne de caractères en une nouvelle ne comportant que des caractères ASCII conformes
-    private $slugger;
 
-    // SluggerInterface permet d'injecter directement un slugger grâce au câblage automatique des services
-    public function __construct(string $targetDirectory, SluggerInterface $slugger)
+    public function paginate($query, Request $request, int $nbItemsParPage): Paginator
     {
-        $this->targetDirectory = $targetDirectory;
-        $this->slugger = $slugger;
-    }
+        $page = $request->query->getInt('p') ?: 1;
+        $paginator = new Paginator($query);
+        $paginator
+            ->getQuery()
+            ->setFirstResult($nbItemsParPage * ($page - 1))
+            ->setMaxResults($nbItemsParPage);
 
-    public function paginate()
-    {
-        $nbItems = $doctrine->getRepository(Composant::class)->count([]);
-
+        return $paginator;
         // configuration de la pagination
         $page = isset($page) ? $page : 1;
         dd($page);
