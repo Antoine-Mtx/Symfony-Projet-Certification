@@ -72,10 +72,16 @@ class Competence
      */
     private $synopsis;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Apprentissage::class, mappedBy="competenceSuivie")
+     */
+    private $apprenants;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->composants = new ArrayCollection();
+        $this->apprenants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -245,6 +251,36 @@ class Competence
     public function setSynopsis(string $synopsis): self
     {
         $this->synopsis = $synopsis;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Apprentissage>
+     */
+    public function getApprenants(): Collection
+    {
+        return $this->apprenants;
+    }
+
+    public function addApprenant(Apprentissage $apprenant): self
+    {
+        if (!$this->apprenants->contains($apprenant)) {
+            $this->apprenants[] = $apprenant;
+            $apprenant->setCompetenceSuivie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApprenant(Apprentissage $apprenant): self
+    {
+        if ($this->apprenants->removeElement($apprenant)) {
+            // set the owning side to null (unless already changed)
+            if ($apprenant->getCompetenceSuivie() === $this) {
+                $apprenant->setCompetenceSuivie(null);
+            }
+        }
 
         return $this;
     }

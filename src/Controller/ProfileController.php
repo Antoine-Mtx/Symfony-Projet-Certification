@@ -24,6 +24,19 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * @Route("/profile/competences_suivies", name="competences_suivies")
+     */
+    public function competencesSuivies(ManagerRegistry $doctrine): Response
+    {
+        $user = $this->getUser();
+        $competencesSuivies = $user->getCompetencesSuivies();
+
+        return $this->render('profile/components/competences_suivies.html.twig', [
+            'competencesSuivies' => $competencesSuivies,
+        ]);
+    }
+
+    /**
      * @Route("/profile/update", name="update_profile")
      */
     public function update(ManagerRegistry $doctrine, Request $request, FileUploader $fileUploader): Response

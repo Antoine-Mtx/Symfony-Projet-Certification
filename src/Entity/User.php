@@ -86,6 +86,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $avatarFilename;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Apprentissage::class, mappedBy="apprenant")
+     */
+    private $apprentissages;
+
     public function __construct()
     {
         $this->messagesEnvoyes = new ArrayCollection();
@@ -94,6 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->commentaires = new ArrayCollection();
         $this->composantsCrees = new ArrayCollection();
         $this->dateCreation = new \DateTime();
+        $this->apprentissages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,12 +278,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Competence>
      */
-    public function getCompetencesCrees(): Collection
+    public function getCompetencesCreees(): Collection
     {
         return $this->competencesCrees;
     }
 
-    public function addCompetencesCree(Competence $competencesCree): self
+    public function addCompetenceCreee(Competence $competencesCree): self
     {
         if (!$this->competencesCrees->contains($competencesCree)) {
             $this->competencesCrees[] = $competencesCree;
@@ -287,7 +293,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeCompetencesCree(Competence $competencesCree): self
+    public function removeCompetenceCreee(Competence $competencesCree): self
     {
         if ($this->competencesCrees->removeElement($competencesCree)) {
             // set the owning side to null (unless already changed)
@@ -337,7 +343,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->composantsCrees;
     }
 
-    public function addComposantsCree(Composant $composantsCree): self
+    public function addComposantCree(Composant $composantsCree): self
     {
         if (!$this->composantsCrees->contains($composantsCree)) {
             $this->composantsCrees[] = $composantsCree;
@@ -347,7 +353,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeComposantsCree(Composant $composantsCree): self
+    public function removeComposantCree(Composant $composantsCree): self
     {
         if ($this->composantsCrees->removeElement($composantsCree)) {
             // set the owning side to null (unless already changed)
@@ -386,5 +392,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): ?string
     {
         return $this->pseudo;
+    }
+
+    /**
+     * @return Collection<int, Apprentissage>
+     */
+    public function getApprentissages(): Collection
+    {
+        return $this->apprentissages;
+    }
+
+    public function addApprentissage(Apprentissage $apprentissage): self
+    {
+        if (!$this->apprentissages->contains($apprentissage)) {
+            $this->apprentissages[] = $apprentissage;
+            $apprentissage->setApprenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApprentissage(Apprentissage $apprentissage): self
+    {
+        if ($this->apprentissages->removeElement($apprentissage)) {
+            // set the owning side to null (unless already changed)
+            if ($apprentissage->getApprenant() === $this) {
+                $apprentissage->setApprenant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCompetencesSuivies(): array
+    {
+        $competencesSuivies = [];
+        $apprentissages = $this->apprentissages;
+        foreach ($apprentissages as $apprentissage) {
+            $competencesSuivies []= $apprentissage->getCompetenceSuivie(); 
+        }
+
+        return $competencesSuivies;
     }
 }
