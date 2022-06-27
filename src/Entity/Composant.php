@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ComposantRepository::class)
- * @ORM\Table(name="composant", indexes={@ORM\Index(columns={"intitule", "textContent"}, flags={"fulltext"})})
+ * @ORM\Table(name="composant", indexes={@ORM\Index(columns={"intitule", "text_content"}, flags={"fulltext"})})
  */
 class Composant
 {

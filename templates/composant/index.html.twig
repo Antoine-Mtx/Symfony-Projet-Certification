@@ -18,7 +18,9 @@
         <div class="row g-3 align-items-center justify-content-between mb-4">
             <!-- Search -->
             <div class="col-md-8">
-                {{ form(searchForm) }}
+                {{ form_start(searchForm) }}
+                    {{ form_row(searchForm.mots, { 'attr': {'value': mots} }) }}
+                {{ form_end(searchForm) }}
             </div>
 
             <!-- Select option -->

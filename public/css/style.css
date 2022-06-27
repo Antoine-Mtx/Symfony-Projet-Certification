@@ -4,6 +4,9 @@
 @import 'components/footer.css';
 @import 'components/search.css';
 
+.tribute {
+    background-color: lightblue;
+}
 fieldset {
     display: none;
 }

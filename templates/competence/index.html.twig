@@ -4,7 +4,15 @@
 
 {% block body %}
 
-<h1>Compétences existantes</h1>
+<h1 class="my-3">Compétences existantes</h1>
+
+<!-- Search -->
+<div class="col-md-8 my-3">
+    {{ form_start(searchForm) }}
+        {{ form_row(searchForm.mots, { 'attr': {'value': mots} }) }}
+    {{ form_end(searchForm) }}
+    <a href="{{ path('index_competence') }}" class="btn btn-primary">Réinitialiser la recherche</a>
+</div>
 
 <div class="row g-4">
 {% for competence in competences %}

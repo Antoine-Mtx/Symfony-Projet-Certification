@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
+ * @ORM\Table(name="competence", indexes={@ORM\Index(columns={"intitule", "description"}, flags={"fulltext"})})
  */
 class Competence
 {

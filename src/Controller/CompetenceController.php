@@ -6,6 +6,7 @@ use DateTime;
 use App\Entity\Composant;
 use App\Entity\Competence;
 use App\Form\CompetenceType;
+use App\Form\SearchItemType;
 use App\Service\FileUploader;
 use App\Repository\ComposantRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,18 +23,43 @@ class CompetenceController extends AbstractController
     /**
      * @Route("/competence", name="index_competence")
      */
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, Request $request, string $mots = NULL): Response
     {
-        $competences = $doctrine->getRepository(Competence::class)->findAll(); // on désigne le repository de la classe "competence" à notre gestionnaire $doctrine puis on utilise la méthode findAll() pour récupérer toutes les instances de cette classe
+        // on crée notre formulaire dédié à la recherche par mots-clés
+        $form = $this->createForm(SearchItemType::class);
+        // on récupère les données liées au formulaire
+        $search = $form->handleRequest($request);
+
+        // attention à ce passage
+        $mots = $request->query->get('mots');
+
+        // on s'assure que les données du formulaire respectent les contraintes de validation
+        if ($form->isSubmitted() && $form->isValid()) {
+            // on récupère les mots-clés de la recherche
+            $mots = $search->get('mots')->getData();
+            // on récupère tous les items correspondant aux mots-clés 
+            $competences = $doctrine->getRepository(Competence::class)->search($mots);
+            // on dirige l'utilisateur vers la première page correspondant à sa recherche par mots-clés
+            $page = 1;
+        }
+        // on récupère tous les items correspondant aux mots-clés  
+        elseif ($mots) {
+            $competences = $doctrine->getRepository(Competence::class)->search($mots);
+        } 
+        else {
+            $competences = $doctrine->getRepository(Competence::class)->findAll();
+        }
 
         return $this->render('competence/index.html.twig', [
             'competences' => $competences,
+            'searchForm' => $form->createView(),
+            'mots' => $mots,      
         ]);
     }
 
     /**
      * @Route("/competence/add", name="add_competence")
-     * @Route("/competence/{id}/update", name="update_competence")
+     * @Route("/competence/update/{id}", name="update_competence")
      */
     public function add(ManagerRegistry $doctrine, ComposantRepository $composantRepository, Competence $competence = NULL, Request $request, FileUploader $fileUploader) {
 

@@ -21,6 +21,27 @@ class CompetenceRepository extends ServiceEntityRepository
         parent::__construct($registry, Competence::class);
     }
 
+    /**
+     * Recherche les competences en fonction du formulaire
+     * @return void
+     */
+    public function search($mots, $offset = 0, $limit = NULL)
+    {
+        $query = $this->createQueryBuilder('c');
+        if (isset($mots)) {
+            $query
+                ->where('MATCH_AGAINST(c.intitule, c.description) AGAINST (:mots boolean)>0')
+                // ->andWhere('c.domaine IN domainesSelected')
+                ->setParameter('mots', $mots)
+            ;
+        }
+        $query
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
     public function add(Competence $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
