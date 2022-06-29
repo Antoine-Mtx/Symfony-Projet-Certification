@@ -1,11 +1,12 @@
 ﻿@import 'components/card.css';
+@import 'components/home.css';
 @import 'components/nav.css';
 @import 'components/profile.css';
 @import 'components/footer.css';
 @import 'components/search.css';
 
 .tribute {
-    background-color: lightblue;
+    background-color: lightgray;
 }
 fieldset {
     display: none;
@@ -59,9 +60,6 @@ fieldset {
     border-radius: 50%;
     backdrop-filter: blur(1rem);
 } */
-.badge {
-    margin-left: 1rem;
-}
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

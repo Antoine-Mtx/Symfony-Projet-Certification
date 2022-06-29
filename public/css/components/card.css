@@ -1,14 +1,36 @@
 .card-title {
+  margin-bottom: none;
+  height: 50px;
   text-align: center;
 }
+.card-header{
+  border-bottom: none;
+}
+.card-footer {
+  border-top: none;
+  background-color: transparent;
+} 
 .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
 }
+.card-img-container {
+  height: 150px;
+  width: 100%;
+  text-align: center;
+}
 .card-img {
-  border-radius: 0.5rem;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .skillCard {
     border-radius: 0.5rem;

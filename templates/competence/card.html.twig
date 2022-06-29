@@ -1,7 +1,9 @@
 <div class="col-sm-6 col-lg-4 col-xl-3">
     <div class="card shadow h-100">
         <!-- Illustration de notre compétence -->
-        <img src="{{ asset("upload/competences/icon" ~ competence.iconeFilename) }}" class="card-img-top" alt="competence image">
+        <div class="card-img-container">
+            <img src="{{ asset("upload/competences/icon" ~ competence.iconeFilename) }}" class="card-img-top" alt="competence image">
+        </div>
         <!-- Card body -->
         <div class="card-body pb-0">
             <!-- Badge and favorite -->

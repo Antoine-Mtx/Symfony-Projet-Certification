@@ -94,11 +94,15 @@ class CompetenceController extends AbstractController
             // on définit les attributs de notre objet competence avec les données du formulaires
             $competence = $form->getData();
 
-            // on définit l'emplacement des fichiers chargés et on enregistre en base de données le chemin pour y a accéder          
+            // on définit le nouveau nom des fichiers chargés et on les enregistre dans notre base de données         
             /** @var UploadedFile $imageFile */
+            // on récupère les données correspondant au champ dévolu à l'upload de fichier de notre formulaire
             $imageFile = $form->get('imageFilename')->getData();
+            // si ces données existent (cad s'il y a effectivement eu upload d'un fichier), il faut désormais lui attribuer un emplacement et sauvegarder le nom du fichier, après s'être assuré de l'unicité de celui-ci, dans notre base de données
             if ($imageFile) {
+                // on upload le fichier dans le dossier adapté et on récupère le nouveau nom du fichier après l'ajout d'une chaîne de caractères pour s'assurer de son unicité
                 $imageFileName = $fileUploader->upload($imageFile, "/competence/img");
+                // on sauvegarde le nouveau nom de fichier affilié à notre compétence dans notre base de données
                 $competence->setImageFilename($imageFileName);
             }
             /** @var UploadedFile $iconeFile */
@@ -107,12 +111,15 @@ class CompetenceController extends AbstractController
                 $iconeFileName = $fileUploader->upload($iconeFile, "/competence/icon");
                 $competence->setIconeFilename($iconeFileName);
             }
-            
+
+            // mise à jour de la liste de composants de la compétence
+
+            // dans le cas d'une édition de compétence, on "libère" tous les composants de l'ancienne liste des composants de la compétence
             foreach ($composantsAvantUpdateArray as $composantAvantUpdate) {
                 $composantAvantUpdate->removeCompetence($competence);
             }
 
-            // on parcourt cette liste et on renseigne la propriété compétence de chacun de ces composants
+            // puis on parcourt la liste actualisée des composants et on les lie à la compétence
             foreach ($composantsActuels as $index => $composant) {
                 $composant->setCompetence($competence);
             }
@@ -131,6 +138,7 @@ class CompetenceController extends AbstractController
             return $this->redirectToRoute('mes_competences');
         }
 
+        // lorsqu'on souhaite créer une compétence, on aura besoin dans notre vue : du formulaire, des composants disponibles (cad non attribués à une autre compétence) ; lorsqu'on édite une compétence, on a également besoin des composants attribués à cette compétence
         return $this->render('competence/add.html.twig', [
             'formCompetence' => $form->createView(),
             'composantsDisponibles' => $composantsDisponibles,

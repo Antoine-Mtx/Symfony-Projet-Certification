@@ -43,7 +43,7 @@ class CreationController extends AbstractController
     
         $user = $this->getUser();
     
-        $mesCompetences = $user->getCompetencesCrees();
+        $mesCompetences = $user->getCompetencesCreees();
     
         return $this->render('creation/components/mes_competences.html.twig', [
             'mes_competences' => $mesCompetences,

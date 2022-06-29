@@ -9,7 +9,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: email # j'ai choisi le pseudo comme identifiant unique pour un utilisateur, j'aurais tout à fait pu choisir l'email
+                property: email # j'ai choisi l'email' comme identifiant unique pour un utilisateur
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

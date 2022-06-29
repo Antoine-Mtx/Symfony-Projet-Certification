@@ -26,13 +26,11 @@ class CompetenceType extends AbstractType
             ->add('description')
             ->add('imageFilename', FileType::class, [
                 'label' => 'Image',
-                // unmapped means that this field is not associated to any entity property
+                // unmapped signifie que ce champ n'est associé à aucune propriété de l'entité
                 'mapped' => false,
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
+                // on rend ce champ facultatif pour ne pas avoir à retélécharger le fichier à chaque fois qu'on modifie les détails de notre objet
                 'required' => false,
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
+                // les champs unmapped ne peuvent pas définir leur validation à l'aide d'annotations dans l'entité associée, on doit donc utiliser les classes de contraintes PHP
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -46,13 +44,8 @@ class CompetenceType extends AbstractType
             ])
             ->add('iconeFilename', FileType::class, [
                 'label' => 'Icone',
-                // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
                 'required' => false,
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -69,6 +62,18 @@ class CompetenceType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
+            ->add('Valider', SubmitType::class)
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Competence::class,
+        ]);
+    }
+
+}
 
             // ->add('composants', CollectionType::class, [
             //     // chaque élément du tableau sera de type "Composant"
@@ -95,15 +100,3 @@ class CompetenceType extends AbstractType
             //     'by_reference' => false,
             //     // 'choice_label' => 'composant',
             // ])
-            ->add('Valider', SubmitType::class)
-        ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Competence::class,
-        ]);
-    }
-
-}

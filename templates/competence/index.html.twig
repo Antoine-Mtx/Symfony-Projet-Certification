@@ -4,54 +4,54 @@
 
 {% block body %}
 
-<h1 class="my-3">Compétences existantes</h1>
+<section class="my-3">
+    
+    <h1 class="my-3">Compétences existantes</h1>
 
-<!-- Search -->
-<div class="col-md-8 my-3">
-    {{ form_start(searchForm) }}
-        {{ form_row(searchForm.mots, { 'attr': {'value': mots} }) }}
-    {{ form_end(searchForm) }}
-    <a href="{{ path('index_competence') }}" class="btn btn-primary">Réinitialiser la recherche</a>
-</div>
-
-<div class="row g-4">
-{% for competence in competences %}
-    <div class="col-sm-6 col-lg-4 col-xl-3">
-        <div class="card shadow h-100">
-            <!-- Card body -->
-            <div class="card-body pb-0">
-                <!-- Badge and favorite -->
-                <div class="d-flex justify-content-between mb-2">
-                    <a href="#" class="badge bg-purple bg-opacity-10 text-purple">All level</a>
-                    <a href="#" class="h6 mb-0"><i class="bi bi-lightbulb active"></i></a>
-                </div>
-                <!-- Image -->
-                <img src="{{ asset("upload/competence/icon/" ~ competence.iconeFilename) }}" class="card-img-top" alt="competence image">
-                <!-- Title -->
-                <h5 class="card-title fw-normal"><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h5>
-                <p class="mb-2 text-truncate-2">{{ competence.intitule }}</p>
-                <!-- Rating star -->
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                    <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
-                    <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li>
-                </ul>
-            </div>
-            <!-- Card footer -->
-            <div class="card-footer pt-0 pb-3">
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>12h 56m</span>
-                    <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>15 lectures</span>
-                </div>
-            </div>
-        </div>
+    <!-- Search -->
+    <div class="col-md-8 my-3">
+        {{ form_start(searchForm) }}
+            {{ form_row(searchForm.mots, { 'attr': {'value': mots} }) }}
+        {{ form_end(searchForm) }}
+        <a href="{{ path('index_competence') }}" class="btn btn-primary">Réinitialiser la recherche</a>
     </div>
-    <!-- Card item END -->
-{% endfor %}
-</div>
+
+    <div class="row g-4">
+        {% for competence in competences %}
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="card shadow h-100">
+                    <!-- Card body -->
+                    <div class="card-header pb-0 bg-transparent">
+                        <!-- Badge and Light -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="#" class="badge bg-primary bg-opacity-7 text-decoration-none">All level</a>
+                            <a href="#" class="h6"><i class="bi bi-plus-circle fa-lg text-color-green"></i></a>
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body pb-0">
+                        <!-- Image -->
+                        <div class="card-img-container">
+                            <img src="{{ asset("upload/competence/icon/" ~ competence.iconeFilename) }}" class="card-img" alt="competence image">
+                        </div>
+                        <!-- Title -->
+                        <h5 class="card-title fw-normal"><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h5>
+                        <p class="mb-2 text-truncate-2">{{ competence.synopsis }}</p>
+                    </div>
+                    <!-- Card footer -->
+                    <div class="card-footer pt-0 pb-3">
+                        <!-- seperator -->
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span class="h6 fw-light mb-0"><i class="bi bi-lightbulb fa-md active text-warning"></i> Brillant</span>
+                            <span class="h6 fw-light mb-0">{{ competence.apprenants | length }} {% if competence.apprenants | length > 1 %}apprenants{% else %}apprenant{% endif %} <i class="bi bi-people fa-lg text-success"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card item END -->
+        {% endfor %}
+    </div>
+</section>
 
 {% endblock %}
