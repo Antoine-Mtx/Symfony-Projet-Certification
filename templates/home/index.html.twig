@@ -41,14 +41,14 @@
 						<div class="d-flex">
 							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60" data-purecounter-delay="200" data-purecounter-duration="0">{{ utilisateurs | length }}</h5>
 						</div>
-						<p class="mb-0">Apprenants pleins de volonté</p>
+						<p class="mb-0">Apprenants désirant progresser</p>
 					</div>
 				</div>
 			</div>
 			<!-- Counter item -->
 			<div class="col-sm-6 col-xl-3">
 				<div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
-					<span class="display-6 lh-1 text-info mb-0"><i class="bi bi-patch-check-fill fa-lg"></i></span>
+					<span class="display-6 lh-1 text-info mb-0"><i class="bi bi-tools fa-lg"></i></span>
 					<div class="ms-4 h6 fw-normal mb-0">
 						<div class="d-flex">
 							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300" data-purecounter-duration="0">{{ competences | length }}</h5>
@@ -75,9 +75,11 @@
 		<ul class="nav nav-pills nav-pills-bg-soft justify-content-sm-center mb-4 px-3" id="course-pills-tab" role="tablist">
 			<!-- Tab item -->
 			{% for domaine in domaines %}
-			<li class="nav-item me-2 me-sm-5">
-				<button class="nav-link mb-2 mb-md-0 {% if (domaine.id == 1) %} active {% endif %}" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-{{ domaine.id }}" type="button" role="tab">{{ domaine }}</button>
-			</li>				
+				{% if domaine.competences | length > 0 %}
+					<li class="nav-item me-2 me-sm-5">
+						<button class="nav-link mb-2 mb-md-0 {% if (domaine.id == 1) %} active {% endif %}" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-{{ domaine.id }}" type="button" role="tab">{{ domaine }}</button>
+					</li>
+				{% endif %}				
 			{% endfor %}
 		</ul>
 		<!-- Tabs END -->
@@ -85,45 +87,47 @@
 		<!-- Tabs content START -->
 		<div class="tab-content" id="course-pills-tabContent">
 			<!-- Content START -->
-			{% for domaine in domaines %}				
-				<div class="tab-pane fade {% if (domaine.id == 1) %}active show{% endif %}" id="course-pills-tabs-{{ domaine.id }}" role="tabpanel">
-					<div class="row g-4">
-						{% for competence in domaine.competences %}
-							<div class="col-sm-6 col-lg-4 col-xl-3">
-								<div class="card shadow h-100">
-									<!-- Card body -->
-									<div class="card-header pb-0 bg-transparent">
-										<!-- Badge and Light -->
-										<div class="d-flex justify-content-between align-items-center">
-											<a href="#" class="badge bg-primary bg-opacity-7 text-decoration-none">All level</a>
-											<a href="#" class="h6"><i class="bi bi-plus-circle fa-lg text-color-green"></i></a>
+			{% for domaine in domaines %}
+				{% if domaine.competences | length > 0 %}
+					<div class="tab-pane fade {% if (domaine.id == 1) %}active show{% endif %}" id="course-pills-tabs-{{ domaine.id }}" role="tabpanel">
+						<div class="row g-4">
+							{% for competence in domaine.competences %}
+								<div class="col-sm-6 col-lg-4 col-xl-3">
+									<div class="card shadow h-100">
+										<!-- Card body -->
+										<div class="card-header pb-0 bg-transparent">
+											<!-- Badge and Light -->
+											<div class="d-flex justify-content-between align-items-center">
+												<a href="#" class="badge bg-primary bg-opacity-7 text-decoration-none">All level</a>
+												<a href="#" class="h6"><i class="bi bi-plus-circle fa-lg text-color-green"></i></a>
+											</div>
 										</div>
-									</div>
-									<!-- Card body -->
-									<div class="card-body pb-0">
-										<!-- Image -->
-										<div class="card-img-container">
-											<img src="{{ asset("upload/competence/icon/" ~ competence.iconeFilename) }}" class="card-img" alt="competence image">
+										<!-- Card body -->
+										<div class="card-body pb-0">
+											<!-- Image -->
+											<div class="card-img-container">
+												<img src="{{ asset("upload/competence/icon/" ~ competence.iconeFilename) }}" class="card-img" alt="competence image">
+											</div>
+											<!-- Title -->
+											<h5 class="card-title fw-normal"><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h5>
+											<p class="mb-2 text-truncate-2">{{ competence.synopsis }}</p>
 										</div>
-										<!-- Title -->
-										<h5 class="card-title fw-normal"><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h5>
-										<p class="mb-2 text-truncate-2">{{ competence.synopsis }}</p>
-									</div>
-									<!-- Card footer -->
-									<div class="card-footer pt-0 pb-3">
-										<!-- seperator -->
-										<hr>
-										<div class="d-flex justify-content-between">
-											<span class="h6 fw-light mb-0"><i class="bi bi-lightbulb fa-md active text-warning"></i> Brillant</span>
-											<span class="h6 fw-light mb-0">{{ competence.apprenants | length }} {% if competence.apprenants | length > 1 %}apprenants{% else %}apprenant{% endif %} <i class="bi bi-people fa-lg text-success"></i></span>
+										<!-- Card footer -->
+										<div class="card-footer pt-0 pb-3">
+											<!-- seperator -->
+											<hr>
+											<div class="d-flex justify-content-between">
+												<span class="h6 fw-light mb-0"><i class="bi bi-lightbulb fa-md active text-warning"></i> Brillant</span>
+												<span class="h6 fw-light mb-0">{{ competence.apprenants | length }} {% if competence.apprenants | length > 1 %}apprenants{% else %}apprenant{% endif %} <i class="bi bi-people fa-lg text-success"></i></span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- Card item END -->
-						{% endfor %}
+								<!-- Card item END -->
+							{% endfor %}
+						</div>
 					</div>
-				</div>
+				{% endif %}				
 			{% endfor %}
 			<!-- Content END -->
 		</div>

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DomaineController extends AbstractController
@@ -20,15 +21,17 @@ class DomaineController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response// on injecte le service Doctrine dans la méthode index de notre controller, ce qui nous permettra d'interagir avec notre base de données
     {
         $domaines = $doctrine->getRepository(Domaine::class)->findAll(); // on désigne le repository de la classe "Domaine" à notre gestionnaire $doctrine puis on utilise la méthode findAll() pour récupérer toutes les instances de cette classe
-
+        
         return $this->render('domaine/index.html.twig', [
             'domaines' => $domaines,
         ]);
     }
-
+    
     /**
      * @Route("/domaine/add", name="add_domaine")
      * @Route("/domaine/update/{id}", name="update_domaine")
+     * 
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function add(ManagerRegistry $doctrine, Domaine $domaine = NULL, Request $request, FileUploader $fileUploader) {
 
@@ -86,6 +89,8 @@ class DomaineController extends AbstractController
 
     /**
      * @Route("/domaine/delete/{id}", name="delete_domaine")
+     *  
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(ManagerRegistry $doctrine, Domaine $domaine): Response
     {

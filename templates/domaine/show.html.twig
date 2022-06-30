@@ -4,17 +4,24 @@
 
 {% block body %}
 
+<section class="my-3">
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="m-3 text-end">
+            <a href="{{ path('update_domaine', {'id' : domaine.id}) }}" class="btn btn-sm btn-success btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
+            <a href="{{ path('delete_domaine', {'id' : domaine.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer ce domaine?')" class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>
+        </div>
+    {% endif %}
+
     <div class="card border bg-transparent rounded-3 my-4">
         <!-- Card header -->
         <div class="card-header bg-transparent border-bottom d-inline-flex justify-content-center align-items-center">
-            <img class="icon" src={% if domaine.iconeFilename %}"{{ asset('upload/domaine/icon/') ~ domaine.iconeFilename }}"{% else %}"{{ asset('upload/domaine/icon/default.png') }}"{% endif %} alt="{{ domaine }} icon">
+            <img class="icon me-2" src={% if domaine.iconeFilename %}"{{ asset('upload/domaine/icon/') ~ domaine.iconeFilename }}"{% else %}"{{ asset('upload/domaine/icon/default.png') }}"{% endif %} alt="{{ domaine }} icon">
             <h1 class="card-header-title">{{ domaine }}</h1>
-            <a href="{{ path('delete_domaine', {'id' : domaine.id}) }}"><button>Supprimer</button></a>
         </div>
         <!-- Card body -->
         <div class="card-body text-center">
-            <div class="col-12">
-                <img class="image" src="{{ asset('upload/domaine/img/') ~ domaine.imageFilename }}" alt="{{ domaine }} image">
+            <div class="domaine-img-container">
+                <img class="domaine-img" src="{{ asset('upload/domaine/img/') ~ domaine.imageFilename }}" alt="{{ domaine }} image">
             </div>
         </div>
         <div class="card-footer bg-transparent">
@@ -24,14 +31,47 @@
 
     <h2 class="text-center my-4">Compétences</h2>
 
-    <div class="row g-4">
-        {% if domaine.competences | length != 0 %}
+    {% if domaine.competences | length == 0 %}
+        <p>Aucune compétence proprosée dans ce domaine pour le moment</p>
+    {% else %}            
+        <div class="row g-4">
             {% for competence in domaine.competences %}
-                {% include "competence/card.html.twig" %}
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <div class="card shadow h-100">
+                        <!-- Card body -->
+                        <div class="card-header pb-0 bg-transparent">
+                            <!-- Badge and Light -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="badge bg-primary bg-opacity-7 text-decoration-none">All level</a>
+                                <a href="#" class="h6"><i class="bi bi-plus-circle fa-lg text-color-green"></i></a>
+                            </div>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body pb-0">
+                            <!-- Image -->
+                            <div class="card-img-container">
+                                <img src="{{ asset("upload/competence/icon/" ~ competence.iconeFilename) }}" class="card-img" alt="competence image">
+                            </div>
+                            <!-- Title -->
+                            <h5 class="card-title fw-normal"><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h5>
+                            <p class="mb-2 text-truncate-2">{{ competence.synopsis }}</p>
+                        </div>
+                        <!-- Card footer -->
+                        <div class="card-footer pt-0 pb-3">
+                            <!-- seperator -->
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="h6 fw-light mb-0"><i class="bi bi-lightbulb fa-md active text-warning"></i> Brillant</span>
+                                <span class="h6 fw-light mb-0">{{ competence.apprenants | length }} {% if competence.apprenants | length > 1 %}apprenants{% else %}apprenant{% endif %} <i class="bi bi-people fa-lg text-success"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card item END -->
             {% endfor %}
-        {% else %}
-            <p>Pas encore de compétences disponibles dans ce domaine</p>                
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
+
+</section>
 
 {% endblock %}

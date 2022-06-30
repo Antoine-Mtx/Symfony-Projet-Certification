@@ -54,12 +54,6 @@ fieldset {
     flex-direction: column;
     justify-content: space-between;
 }
-/* .bi-lightbulb:hover {
-    background-color: #f7ff3c;
-    opacity: 100;
-    border-radius: 50%;
-    backdrop-filter: blur(1rem);
-} */
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -79,12 +73,12 @@ h1 {
     position: relative;
     left: 50%;
     margin-left: -50vw;
+    opacity: 0.85;
 }
 .skill-card-gallery {
     display: inline-flex;
 }
 .bg-navy {
-    /* background-color:rgb(0, 0, 128, 0.85); */
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
 }
@@ -117,4 +111,20 @@ h1 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+.domaine-img-container {
+    height: 500px;
+    width: 100%;
+    text-align: center;
+}
+.domaine-img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

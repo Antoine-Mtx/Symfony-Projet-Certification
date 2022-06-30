@@ -8,12 +8,15 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TypeController extends AbstractController
 {
     /**
      * @Route("/type", name="index_type")
+     *  
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(ManagerRegistry $doctrine): Response
     {
@@ -27,6 +30,8 @@ class TypeController extends AbstractController
     /**
      * @Route("/type/add", name="add_type")
      * @Route("/type/update/{id}", name="update_type")
+     *  
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function add(ManagerRegistry $doctrine, Type $type = NULL, Request $request) {
 
@@ -53,6 +58,8 @@ class TypeController extends AbstractController
 
     /**
      * @Route("/type/{id}", name="show_type")
+     *  
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function show(ManagerRegistry $doctrine, int $id): Response
     {

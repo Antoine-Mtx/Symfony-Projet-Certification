@@ -4,18 +4,14 @@
 
 {% block body %}
 
-<div class="m-3 text-end">
-    <a href="{{ path('update_composant', {'id': composant.id }) }}" class="btn btn-sm btn-success btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
-    <a href="{{ path('delete_composant', {'id': composant.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer ce composant ?')" class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>
-</div>
+{% if composant in app.user.composantsCrees %}
+    <div class="m-3 text-end">
+        <a href="{{ path('update_composant', {'id': composant.id }) }}" class="btn btn-sm btn-success btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
+        <a href="{{ path('delete_composant', {'id': composant.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer ce composant ?')" class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>
+    </div>
+{% endif %}
 
-<h1 class="text-center">Composant : {{ composant }}</h1>
-
-<h2>Contenu textuel</h2>
-
-<p> {{ composant.textContent }} </p>
-
-<h2>Mise en forme standard</h2>
+<h1 class="text-center">{{ composant }}</h1>
 
     {% if composant.type.affichage == 'carte' %}
         {% include "composant/type/card.html.twig" %}
