@@ -23,7 +23,7 @@ class HomeController extends AbstractController
 
         $nbConcepteurs = 0;
         foreach ($utilisateurs as $index => $utilisateur) {
-            if (in_array("concepteur", $utilisateur->getRoles())) {
+            if (in_array("ROLE_CREATOR", $utilisateur->getRoles())) {
                 $nbConcepteurs ++;
             }
         }

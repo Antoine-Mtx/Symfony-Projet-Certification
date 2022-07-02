@@ -12,9 +12,9 @@
 					<div class="display-6 lh-1 text-primary mb-0"><i class="fa-solid fa-book fa-lg"></i></div>
 					<div class="ms-4 h6 fw-normal mb-0">
 						<div class="d-flex">
-							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{{ domaines | length}}</h5>
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{{ domaines | length }}</h5>
 						</div>
-						<p class="mb-0">Domaines d'apprentissage</p>
+						<p class="mb-0">{% if domaines | length > 1 %} Domaines{% else %} Domaine{% endif %} d'apprentissage</p>
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 						<div class="d-flex">
 							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-delay="200" data-purecounter-duration="0">{{ nbConcepteurs }}</h5>
 						</div>
-						<p class="mb-0">Concepteurs de contenu</p>
+						<p class="mb-0">{% if nbConcepteurs > 1 %} Concepteurs{% else %} Concepteur{% endif %} de contenu</p>
 					</div>
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 						<div class="d-flex">
 							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="60" data-purecounter-delay="200" data-purecounter-duration="0">{{ utilisateurs | length }}</h5>
 						</div>
-						<p class="mb-0">Apprenants désirant progresser</p>
+						<p class="mb-0">{% if utilisateurs | length > 1 %} Apprenants{% else %} Apprenant{% endif %} désirant progresser</p>
 					</div>
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 						<div class="d-flex">
 							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300" data-purecounter-duration="0">{{ competences | length }}</h5>
 						</div>
-						<p class="mb-0">Compétences à développer</p>
+						<p class="mb-0">{% if competences | length > 1 %} Compétences{% else %} Compétence{% endif %} à développer</p>
 					</div>
 				</div>
 			</div>

@@ -17,7 +17,7 @@
     <div class="login-container my-4">            
         <div class="card col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
             <div class="card-header">
-                <h5 class="card-title">Veuillez vous connecter</h5>
+                <h3 class="card-title">Veuillez vous connecter</h3>
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -27,6 +27,9 @@
                 <div class="form-group">
                     <label for="inputPassword">Mot de passe</label>
                     <input type="password" name="password" id="inputPassword" class="form-control mt-2" autocomplete="current-password" required>
+                </div>
+                <div class="text-center mt-4">
+                    <span class="text-muted">Mot de passe oublié ? <u><a class="text-muted" href="#">Réninitaliser votre mot de passe</a></u></span>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 {#
