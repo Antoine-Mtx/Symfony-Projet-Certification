@@ -1,0 +1,134 @@
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/components/portal.css">
+        <title>Illustre</title>
+    </head>
+    <body>
+        <header id="portal-header">
+            <div class="container display-flex justify-content-center align-items-center">
+                <img id="header-logo" src="img/logo_dark.png" alt="logo Illustre">
+                <h1 id="portal-title">Illustre</h1>
+            </div>
+        </header>
+        <main>
+            <section id="welcome">
+                <h1 class="small-padding text-center">Si vous souhaitez apprendre ou transmettre, vous êtes au bon endroit</h1>
+                <div>
+                    <a href="{{ path('app_register') }}"><button>C'est parti !</button></a>
+                    <a href="{{ path('app_login') }}"><button>J'ai déjà un compte</button></a>
+                </div>
+            </section>
+            <section id="presentation">
+                <div class="container">
+                    <header class="section-header">
+                        <h1>Illustre, parce qu'une image vaut parfois mille mots</h1>
+                    </header>
+                    <div id="wrapper">
+                        <div class="one">
+                            <h3>Une approche contextuelle</h3>
+                            <p>Les sciences sont avant tout une aventure humaine, parcourir les grandes pages du passé nous permet de mieux cerner notre présent.</p>
+                        </div>
+                        <div class="two">
+                            <h3>Une motivation assurée</h3>
+                            <p>On t'aide à prendre l'habitude de t'entraîner grâce à nos fonctionnalités ludiques, à nos défis amusants et aux rappels de notre gentille mascotte, Duo le hibou.</p>
+                        </div>
+                        <div class="three">
+                            <h3>Un apprentissage personnalisé</h3>
+                            <p>Les sujets relatifs à la logique se sont pas assimilés au même rythme par tous, l’apprentissage personnalisé est donc tout indiqué afin que chacun puisse apprendre de façon progressive.</p>
+                        </div>
+                        <div class="four">
+                            <h3>Apprends</h3>
+                            <p>On peut apprendre efficacement sans s'ennuyer ! Développe tes compétences jour après jour grâce à des exercices motivants et à nos personnages hauts en couleur.</p>
+                        </div>
+                        <div class="five">
+                            <img src="img/learner-img.png" alt="learner image">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="small-padding" id="section-quotes">
+                <div class="container display-flex flex-direction-column align-items-center">
+                    <header class="section-header">
+                        <h1>Illustre, comme le nom de ceux qui nous font avancer</h1>
+                        <div>
+                            <hr>
+                        </div>
+                    </header>
+                    <div id="quotes-container">
+                        <div class="quote">
+                            <img class="author-img" src="img/voltaire.jpg">
+                            <div>
+                                <p class="x-large italic">Il faut savoir s'instruire dans la gaieté. Le savoir triste est un savoir mort. L'intelligence est joie.</p>
+                                <p class="small"><strong>Voltaire</strong> - écrivain, philosophe (1694 - 1778)</p>
+                            </div>
+                        </div>
+                        <div class="quote" id="mid">
+                            <div>
+                                <p class="x-large text-end italic">Savoir n'est pas suffisant - Nous devons appliquer... Être prêt n'est pas assez - Nous devons agir.</p>
+                                <p class="small text-end"><strong>Leonardo da Vinci</strong> - peintre, inventeur, ingénieur, écrivain (1452 - 1519)</p>
+                            </div>
+                            <img class="author-img" src="img/leonardo_da_vinci.jpg">
+                        </div>
+                        <div class="quote">
+                            <img class="author-img" src="img/albert_camus.jpg">
+                            <div>
+                                <p class="x-large italic">Comprendre c'est avant tout unifier.</p>
+                                <p class="small"><strong>Albert Camus</strong> - écrivain, philosophe (1913 - 1960)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="perks">
+                <div class="container display-flex">
+                    <div class="flex-3">
+                        <h1>Apprendre à son rythme, la clé pour s'illustrer</h1>
+                        <p>Il est plus que temps de se servir des outils numériques à notre disposition pour apprendre mieux et plus vite. Si la tendance est plutôt contraire à cela depuis l'avénement des ordinateurs, c'est parce que le plaisir a trop longtemps été mis de côté. Comment alors rivaliser contre des distractions toujours plus impressionnantes de technologie ?</p>
+                    </div>
+                    <div class="flex-2 text-center">
+                        <img src="img/worldwide.png" alt="worldwide img">
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="container">
+                <div class="d-flex flex-column gap-3">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h5>Services</h5>
+                            <ul>
+                                <li><a href="#">Accueil</a></li>
+                                <li><a href="#">Création de contenu</a></li>
+                                <li><a href="#">Consultation de contenu</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3 item">
+                            <h5>A propos</h5>
+                            <ul>
+                                <li><a href="#">Qui sommes-nous ?</a> <span class="badge bg-info">à venir</span></li>
+                                <li><a href="#">Notre équipe</a> <span class="badge bg-info">à venir</span></li>
+                                <li><a href="#">Nos carrières</a> <span class="badge bg-info">à venir</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 item text">
+                            <h5>Illustre</h5>
+                            <p>“Comprendre c'est avant tout unifier.”</p>
+                            <p>Ces quelques mots d'Albert Camus résument la volonté qui se cache sous ce site. Celle de vivre ensemble.</p>
+                        </div>
+                    </div>
+                    <div class="item social">
+                        <a href="#"><i class="bi bi-discord"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-pinterest"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                    <p class="copyright">Illustre © 2022</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

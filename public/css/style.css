@@ -63,17 +63,15 @@ h1 {
     text-align: center;
     margin: 1rem 0;
 }
-#logo {
-    filter: sepia(100%);
-}
 .banner {
     height: 12.5vw;
     max-height: 150px;
-    width: 100vw;
+    /* width: 100vw; */
     position: relative;
-    left: 50%;
+    top: 0;
+    /* left: 50%;
     margin-left: -50vw;
-    opacity: 0.85;
+    opacity: 0.85; */
 }
 .skill-card-gallery {
     display: inline-flex;
