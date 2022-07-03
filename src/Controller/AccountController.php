@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\ResetPasswordType;
+use App\Form\ChangePasswordFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,14 +23,14 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/account/update_password", name="update_account")
+     * @Route("/account/edit_account", name="edit_account")
      */
-    public function updatePassword(ManagerRegistry $doctrine, UserPasswordHasherInterface $userPasswordHasher, Request $request): Response
+    public function changePassword(ManagerRegistry $doctrine, UserPasswordHasherInterface $userPasswordHasher, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
         $user = $this->getUser();
         // on crée un formulaire dévolu à la modification du compte
-        $form = $this->createForm(ResetPasswordType::class, $user);
+        $form = $this->createForm(ChangePasswordFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -47,8 +47,8 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('index_profile');
         }
 
-        return $this->render('account/updatePassword.html.twig', [
-            'formUpdatePassword' => $form->createView(),
+        return $this->render('account/changePassword.html.twig', [
+            'formChangePassword' => $form->createView(),
         ]);
     }
 }

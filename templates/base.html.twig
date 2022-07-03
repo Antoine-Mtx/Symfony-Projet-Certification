@@ -72,9 +72,9 @@
                 <div class="container-lg">
                     {% include "base/header/nav.html.twig" %}
                 </div>
-                <div class="banner bg-navy"></div>
             </header>
             <main class="container-lg">
+                <div class="banner bg-navy"></div>
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success text-center my-3">
                         {{ message }}
