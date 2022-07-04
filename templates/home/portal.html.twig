@@ -4,6 +4,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/components/portal.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <title>Illustre</title>
     </head>
     <body>
@@ -17,8 +18,8 @@
             <section id="welcome">
                 <h1 class="small-padding text-center">Si vous souhaitez apprendre ou transmettre, vous êtes au bon endroit</h1>
                 <div>
-                    <a href="{{ path('app_register') }}"><button>C'est parti !</button></a>
-                    <a href="{{ path('app_login') }}"><button>J'ai déjà un compte</button></a>
+                    <a href="{{ path('app_register') }}"><button class="large">C'est parti !</button></a>
+                    <a href="{{ path('app_login') }}"><button class="large">J'ai déjà un compte</button></a>
                 </div>
             </section>
             <section id="presentation">
@@ -28,22 +29,22 @@
                     </header>
                     <div id="wrapper">
                         <div class="one">
-                            <h3>Une approche contextuelle</h3>
-                            <p>Les sciences sont avant tout une aventure humaine, parcourir les grandes pages du passé nous permet de mieux cerner notre présent.</p>
+                            <h3 class="one-title"><i class="fa-solid fa-pen-ruler x-large"></i> Faites parler votre sens créatif</h3>
+                            <p class="text-justified larger">Les sciences sont avant tout une aventure humaine, parcourir les grandes pages du passé nous permet de mieux cerner notre présent.</p>
                         </div>
                         <div class="two">
-                            <h3>Une motivation assurée</h3>
-                            <p>On t'aide à prendre l'habitude de t'entraîner grâce à nos fonctionnalités ludiques, à nos défis amusants et aux rappels de notre gentille mascotte, Duo le hibou.</p>
+                            <h3 class="two-title"><i class="fa-solid fa-masks-theater x-large"></i> Libérez vos émotions</h3>
+                            <p class="text-justified larger">Qui a dit qu'apprendre était uniquement affaire d'intellect ? On se souvient de ce qui nous stimule. L'envie d'apprendre dépend de l'apprenant, mais elle peut et doit être cultivée par ceux qui conçoivent le contenu.</p>
                         </div>
                         <div class="three">
-                            <h3>Un apprentissage personnalisé</h3>
-                            <p>Les sujets relatifs à la logique se sont pas assimilés au même rythme par tous, l’apprentissage personnalisé est donc tout indiqué afin que chacun puisse apprendre de façon progressive.</p>
+                            <h3 class="three-title"><i class="fa-solid fa-gears x-large"></i> Développez votre logique</h3>
+                            <p class="text-justified larger">Les sujets relatifs à la logique se sont pas assimilés au même rythme par tous, l’apprentissage personnalisé est donc tout indiqué afin que chacun puisse apprendre de façon progressive.</p>
                         </div>
                         <div class="four">
-                            <h3>Apprends</h3>
-                            <p>On peut apprendre efficacement sans s'ennuyer ! Développe tes compétences jour après jour grâce à des exercices motivants et à nos personnages hauts en couleur.</p>
+                            <h3 class="four-title"><i class="fa-solid fa-landmark x-large"></i> Visualisez ce que vous construisez</h3>
+                            <p class="text-justified large">On peut apprendre efficacement sans s'ennuyer ! Développe tes compétences jour après jour grâce à des exercices motivants et à nos personnages hauts en couleur.</p>
                         </div>
-                        <div class="five">
+                        <div class="five text-center">
                             <img src="img/learner-img.png" alt="learner image">
                         </div>
                     </div>
@@ -59,38 +60,44 @@
                     </header>
                     <div id="quotes-container">
                         <div class="quote">
-                            <img class="author-img" src="img/voltaire.jpg">
-                            <div>
-                                <p class="x-large italic">Il faut savoir s'instruire dans la gaieté. Le savoir triste est un savoir mort. L'intelligence est joie.</p>
-                                <p class="small"><strong>Voltaire</strong> - écrivain, philosophe (1694 - 1778)</p>
-                            </div>
+                            <figure class="author-img-container">
+                                <img class="author-img" src="img/voltaire.jpg">
+                            </figure>
+                            <figure>
+                                <blockquote class="x-large italic">Il faut savoir s'instruire dans la gaieté. Le savoir triste est un savoir mort. L'intelligence est joie.</blockquote>
+                                <figcaption class="small"><strong>Voltaire</strong> - écrivain, philosophe (1694 - 1778)</figcaption>
+                            </figure>
                         </div>
                         <div class="quote" id="mid">
-                            <div>
+                            <figure>
                                 <p class="x-large text-end italic">Savoir n'est pas suffisant - Nous devons appliquer... Être prêt n'est pas assez - Nous devons agir.</p>
                                 <p class="small text-end"><strong>Leonardo da Vinci</strong> - peintre, inventeur, ingénieur, écrivain (1452 - 1519)</p>
-                            </div>
-                            <img class="author-img" src="img/leonardo_da_vinci.jpg">
+                            </figure>
+                            <figure class="author-img-container">
+                                <img class="author-img" src="img/leonardo_da_vinci.jpg">
+                            </figure>
                         </div>
                         <div class="quote">
-                            <img class="author-img" src="img/albert_camus.jpg">
-                            <div>
+                            <figure class="author-img-container">
+                                <img class="author-img" src="img/albert_camus.jpg">
+                            </figure>
+                            <figure>
                                 <p class="x-large italic">Comprendre c'est avant tout unifier.</p>
                                 <p class="small"><strong>Albert Camus</strong> - écrivain, philosophe (1913 - 1960)</p>
-                            </div>
+                            </figure>
                         </div>
                     </div>
                 </div>
             </section>
-            <section id="perks">
+            <section id="perks" class="small-padding">
                 <h1 class="text-center">Apprendre à son rythme, la clé pour s'illustrer</h1>
                 <div class="container display-flex align-items-center">
-                    <div class="flex-3">
+                    <article class="flex-3 large">
                         <p>Il est plus que temps de se servir des outils numériques à notre disposition pour apprendre mieux et plus vite. Si la tendance est plutôt contraire à cela depuis l'avénement des ordinateurs, c'est parce que le plaisir a trop longtemps été mis de côté. Comment alors rivaliser contre des distractions toujours plus impressionnantes de technologie ?</p>
-                    </div>
-                    <div class="flex-2 text-center">
+                    </article>
+                    <aside class="flex-2 text-center">
                         <img src="img/worldwide.png" alt="worldwide img">
-                    </div>
+                    </aside>
                 </div>
             </section>
         </main>
@@ -101,17 +108,17 @@
                         <div class="flex">
                             <h3>Services</h3>
                             <ul class="list-style-none">
-                                <li><a href="#">Accueil</a></li>
-                                <li><a href="#">Création de contenu</a></li>
-                                <li><a href="#">Consultation de contenu</a></li>
+                                <li><a class="text-muted text-decoration-none" href="#">Accueil</a></li>
+                                <li><a class="text-muted text-decoration-none" href="#">Création de contenu</a></li>
+                                <li><a class="text-muted text-decoration-none" href="#">Consultation de contenu</a></li>
                             </ul>
                         </div>
                         <div class="flex">
                             <h3>A propos</h3>
                             <ul class="list-style-none">
-                                <li><a href="#">Qui sommes-nous ?</a> <span class="badge bg-info">à venir</span></li>
-                                <li><a href="#">Notre équipe</a> <span class="badge bg-info">à venir</span></li>
-                                <li><a href="#">Nos carrières</a> <span class="badge bg-info">à venir</span></li>
+                                <li><a class="text-muted text-decoration-none" href="#">Qui sommes-nous ?</a> <span class="badge bg-info">à venir</span></li>
+                                <li><a class="text-muted text-decoration-none" href="#">Notre équipe</a> <span class="badge bg-info">à venir</span></li>
+                                <li><a class="text-muted text-decoration-none" href="#">Nos carrières</a> <span class="badge bg-info">à venir</span></li>
                             </ul>
                         </div>
                         <div class="flex-2">
@@ -120,11 +127,19 @@
                             <p>Ces quelques mots d'Albert Camus résument la volonté qui se cache sous ce site. Celle de vivre ensemble.</p>
                         </div>
                     </div>
-                    <div class="item social">
-                        <a href="#"><i class="bi bi-discord"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-pinterest"></i></a>
-                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    <div class="text-center display-flex justify-content-center gap-3">
+                        <div class="brand-container">
+                            <a href="#"><i class="fa-brands fa-discord x-large text-muted text-decoration-none"></i></a>
+                        </div>
+                        <div class="brand-container">
+                            <a href="#"><i class="fa-brands fa-instagram x-large text-muted text-decoration-none"></i></a>
+                        </div>
+                        <div class="brand-container">
+                            <a href="#"><i class="fa-brands fa-pinterest x-large text-muted text-decoration-none"></i></a>
+                        </div>
+                        <div class="brand-container">
+                            <a href="#"><i class="fa-brands fa-youtube x-large text-muted text-decoration-none"></i></a>
+                        </div>
                     </div>
                     <p class="text-center">Illustre © 2022</p>
                 </div>

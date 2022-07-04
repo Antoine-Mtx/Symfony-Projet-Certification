@@ -1,5 +1,7 @@
 /* applies to all */
-
+body {
+    margin: 0;
+}
 .small-padding {
     padding: 1em 6em;
 }
@@ -34,6 +36,18 @@
 .list-style-none {
     list-style: none;
     padding-left: 0;
+}
+.text-muted {
+    color: lightslategray;
+}    
+.text-decoration-none {
+    text-decoration: none;
+}
+.text-justified {
+    text-align: justify;
+}
+.justify-content-center {
+    justify-content: center;
 }
 
 /* header */
@@ -95,7 +109,7 @@ a>button {
 #wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    gap: 30px;
     grid-auto-rows: minmax(100px, auto);
 }
 .one {
@@ -113,6 +127,18 @@ a>button {
 .four {
     grid-column: 3;
     grid-row: 2;
+}
+.one-title {
+    color: goldenrod;
+}
+.two-title {
+    color: darkorchid;
+}
+.three-title {
+    color: darkgreen;
+}
+.four-title {
+    color: deepskyblue;
 }
 .five {
     grid-column: 2;
@@ -157,6 +183,12 @@ a>button {
 .x-large {
     font-size: x-large;
 }
+.large {
+    font-size: large;
+}
+.larger {
+    font-size: larger;
+}
 small {
     font-size: small;
 }
@@ -168,4 +200,16 @@ small {
 footer {
     color: whitesmoke;
     background-color:#282d32;
+}
+.brand-container {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gap-3 {
+    gap: 3rem;
 }
