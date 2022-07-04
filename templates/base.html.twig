@@ -73,16 +73,18 @@
                     {% include "base/header/nav.html.twig" %}
                 </div>
             </header>
-            <main class="container-lg">
+            <main>
                 <div class="banner bg-navy"></div>
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success text-center my-3">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% block body %}
-            
-            {% endblock %}
+                <div class="container-lg">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center my-3">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% block body %}
+                    
+                    {% endblock %}
+                </div>
             </main>
             <footer id="page-footer" class="footer-dark">
                 {% include "base/footer/footer.html.twig" %}

@@ -1,6 +1,7 @@
 .website-title {
-    font-family: fantasy;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 1.5rem;
+    font-weight: bold;
 }
 .navbar-brand-img {
     width: 3rem;
