@@ -72,7 +72,6 @@ class CompetenceType extends AbstractType
             'data_class' => Competence::class,
         ]);
     }
-
 }
 
             // ->add('composants', CollectionType::class, [

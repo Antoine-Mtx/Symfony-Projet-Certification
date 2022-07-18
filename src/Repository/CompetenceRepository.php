@@ -25,20 +25,22 @@ class CompetenceRepository extends ServiceEntityRepository
      * Recherche les competences en fonction du formulaire
      * @return void
      */
-    public function search($mots, $offset = 0, $limit = NULL)
+    public function search(string $mots = NULL, int $offset = 0, int $limit = NULL)
     {
         $query = $this->createQueryBuilder('c');
         if (isset($mots)) {
             $query
                 ->where('MATCH_AGAINST(c.intitule, c.description) AGAINST (:mots boolean)>0')
-                // ->andWhere('c.domaine IN domainesSelected')
                 ->setParameter('mots', $mots)
             ;
         }
-        $query
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-        ;
+        if (isset($offset) && isset($limit)) {
+            $query
+                ->setFirstResult(':offset')
+                ->setMaxResults(':limit')
+            ;
+        }
+        
         return $query->getQuery()->getResult();
     }
 

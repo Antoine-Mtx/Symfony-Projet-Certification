@@ -51,4 +51,33 @@ class AccountController extends AbstractController
             'formChangePassword' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/account/delete", name="delete_account")
+     */
+    public function delete(ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        
+        $user = $this->getUser();
+
+        $email = (new TemplatedEmail())
+            ->from(new Address('illustre.mailer@gmail.com', 'Illustre mailer'))
+            ->to($user->getEmail())
+            ->subject('Lien de récupération de votre compte')
+            ->htmlTemplate('account/recoveryEmail.html.twig')
+            ->context([
+                'resetToken' => $resetToken,
+            ])
+        ;
+
+        $user->setEmail('anonymous@example.com');
+        $user->setPseudo('Anonymous '.$user->getId());
+        $user->setAvatarFilename("anonymous.jpg");
+        
+        $entityManager->flush();
+
+        // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
+        return $this->redirectToRoute('app_portal');
+    }
 }

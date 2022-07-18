@@ -17,8 +17,7 @@ class ChangePasswordFormType extends AbstractType
     {
         $builder
             ->add('oldPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+                // au lieu d'être fixé sur l'objet directement, ceci est lu et encodé dans le contrôleur
                 'mapped' => false,
                 'label' => 'Mot de passe actuel',
             ])
@@ -42,7 +41,8 @@ class ChangePasswordFormType extends AbstractType
                         // Au moins une lettre de l'alphabet Latin en minuscule : (?=.*?[a-z])
                         // Au moins un chiffre : (?=.*?[0-9])
                         // Au moins un caractère spécial : (?=.*?[#?!@$%^&*-])
-                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
+                        // Au moins 12 caractères : .{12,}
+                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/',
                         'match' => true,
                         'message' => 'Votre mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial',
                     ]),

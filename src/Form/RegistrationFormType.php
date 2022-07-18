@@ -68,12 +68,13 @@ class RegistrationFormType extends AbstractType
                         // Au moins une lettre de l'alphabet Latin en minuscule : (?=.*?[a-z])
                         // Au moins un chiffre : (?=.*?[0-9])
                         // Au moins un caractère spécial : (?=.*?[#?!@$%^&*-])
-                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
+                        // Au moins 12 caractères : .{12,}
+                        'pattern' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/',
                         'match' => true,
                         'message' => 'Votre mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial',
                     ]),
                     new Length([
-                        'min' => 8,
+                        'min' => 12,
                         'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères',
                         // la longueur maximale autorisée par Symfony pour des raisons de sécurité est de 4096, cependant, certaines personnes recommandent de la mettre à 200
                         'max' => 200,

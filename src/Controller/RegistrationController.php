@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // encoder le mot de passe simple
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('illustre.mailer@gmail.com', 'Illustre Mailer'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Veuillez confirmer votre email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
@@ -99,6 +99,6 @@ class RegistrationController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_login');
     }
 }

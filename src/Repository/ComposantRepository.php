@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Composant;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Parameter;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Composant>
@@ -25,19 +27,20 @@ class ComposantRepository extends ServiceEntityRepository
      * Recherche les composants en fonction du formulaire
      * @return void
      */
-    public function search($mots, $offset = 0, $limit = NULL)
+    public function search(string $mots = NULL, int $offset = 0, int $limit = NULL)
     {
         $query = $this->createQueryBuilder('c');
         if (isset($mots)) {
             $query
                 ->where('MATCH_AGAINST(c.intitule, c.textContent) AGAINST (:mots boolean)>0')
-                ->setParameter('mots', $mots)
+                ->setParameter(':mots', $mots)
             ;
         }
         $query
             ->setFirstResult($offset)
             ->setMaxResults($limit)
         ;
+            
         return $query->getQuery()->getResult();
     }
 

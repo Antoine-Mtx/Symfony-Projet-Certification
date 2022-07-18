@@ -17,14 +17,14 @@
             <!-- Dashboard menu -->
             <nav id="nav-profile" class="list-group list-group-item-secondary list-group-borderless">
                 <a class="list-group-item active" href="#"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Tableau de bord</a>
-                <a class="list-group-item" href="{{ path('mes_competences') }}"><i class="bi bi-tools fa-fw me-2"></i></i>Mes compétences</a>
-                <a class="list-group-item" href="{{ path('mes_composants') }}"><i class="bi bi-nut fa-fw me-2"></i>Mes composants</a>
+                <a class="list-group-item" href="{{ path('mes_competences') }}"><i class="bi bi-tools fa-fw me-2"></i></i>Compétences créées</a>
+                <a class="list-group-item" href="{{ path('mes_composants') }}"><i class="bi bi-nut fa-fw me-2"></i>Composants créés</a>
                 <a class="list-group-item" href="{{ path('add_competence') }}"><i class="bi bi-tools fa-fw me-2"></i></i>Créer une compétence</a>
                 <a class="list-group-item" href="{{ path('add_composant') }}"><i class="bi bi-nut fa-fw me-2"></i>Créer un composant</a>
             </nav>
         </div>
         <div class="main-content col-9">
-            {% include "profile/components/skills.html.twig" %}
+            {% include "profile/components/dashboard.html.twig" %}
         </div>
     </section>
     

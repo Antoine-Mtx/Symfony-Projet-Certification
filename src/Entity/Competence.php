@@ -75,13 +75,13 @@ class Competence
     /**
      * @ORM\OneToMany(targetEntity=Apprentissage::class, mappedBy="competenceSuivie")
      */
-    private $apprenants;
+    private $apprentissages;
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->composants = new ArrayCollection();
-        $this->apprenants = new ArrayCollection();
+        $this->apprentissages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -258,27 +258,27 @@ class Competence
     /**
      * @return Collection<int, Apprentissage>
      */
-    public function getApprenants(): Collection
+    public function getapprentissages(): Collection
     {
-        return $this->apprenants;
+        return $this->apprentissages;
     }
 
-    public function addApprenant(Apprentissage $apprenant): self
+    public function addapprentissage(Apprentissage $apprentissage): self
     {
-        if (!$this->apprenants->contains($apprenant)) {
-            $this->apprenants[] = $apprenant;
-            $apprenant->setCompetenceSuivie($this);
+        if (!$this->apprentissages->contains($apprentissage)) {
+            $this->apprentissages[] = $apprentissage;
+            $apprentissage->setCompetenceSuivie($this);
         }
 
         return $this;
     }
 
-    public function removeApprenant(Apprentissage $apprenant): self
+    public function removeapprentissage(Apprentissage $apprentissage): self
     {
-        if ($this->apprenants->removeElement($apprenant)) {
+        if ($this->apprentissages->removeElement($apprentissage)) {
             // set the owning side to null (unless already changed)
-            if ($apprenant->getCompetenceSuivie() === $this) {
-                $apprenant->setCompetenceSuivie(null);
+            if ($apprentissage->getCompetenceSuivie() === $this) {
+                $apprentissage->setCompetenceSuivie(null);
             }
         }
 

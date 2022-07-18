@@ -3,7 +3,7 @@
         <div id="navFirstPartContainer">
             {% include "base/header/brand.html.twig" %}
             <div class="website-title me-3">Illustre</div>
-            {% include "base/header/navSearch.html.twig" %}
+            {# {% include "base/header/navSearch.html.twig" %} #}
         </div>
 
         <div id="navSecondPartContainer">
@@ -11,7 +11,7 @@
             <!-- Nav Main menu START -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 {% if is_granted('ROLE_CREATOR') %}
-                    <a class="btn btn-warning" href="{{ path('index_creation') }}">Aller sur mon espace création</a>
+                    <a class="btn btn-warning" href="{{ path('index_creation') }}">Mon espace création</a>
                 {% endif %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!-- Nav item 1 Accueil -->
@@ -26,41 +26,42 @@
                             <li class="dropdown-submenu dropend">
                                 <a class="dropdown-item" href="#">Disciplines <span class="badge bg-info">à venir</span></a>
                             </li>
-                            <!-- Dropdown submenu -->
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item" href="{{ path('index_domaine') }}">Domaines</a>
-                                <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                                    <li> <a class="dropdown-item" href="course-categories.html">Arithmétique <span class="badge bg-success ms-2 smaller">New</span></a></li>
-                                </ul>
-                            </li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <!-- Dropdown submenu -->
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item" href="{{ path('index_domaine') }}">Domaines</a>
+                                </li>
+                            {% endif %}
                             <!-- Dropdown submenu -->
                             <li class="dropdown-submenu dropend">
                                 <a class="dropdown-item" href="{{ path('index_competence') }}">Compétences</a>
                             </li>
                         </ul>
                     </li>
-                    <!-- Nav item 3 Création -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="contentMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Création</a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="contentMenu">
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item" href="#">Disciplines <span class="badge bg-info">à venir</span></a>
-                            </li>
-                            <!-- Dropdown submenu -->
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item" href="{{ path('add_domaine') }}">Domaine</a>
-                            </li>
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item" href="{{ path('add_type') }}">Type de composant</a>
-                            </li>
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item" href="{{ path('add_composant') }}">Composant</a>
-                            </li>
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item" href="{{ path('add_competence') }}">Compétence</a>
-                            </li>
-                        </ul>
-                    </li>
+                    {% if is_granted('ROLE_CREATOR') %}
+                        <!-- Nav item 3 Création -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="contentMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Création</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="contentMenu">
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item" href="#">Disciplines <span class="badge bg-info">à venir</span></a>
+                                </li>
+                                <!-- Dropdown submenu -->
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item" href="{{ path('add_domaine') }}">Domaine</a>
+                                </li>
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item" href="{{ path('add_type') }}">Type de composant</a>
+                                </li>
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item" href="{{ path('add_composant') }}">Composant</a>
+                                </li>
+                                <li class="dropdown-submenu dropend">
+                                    <a class="dropdown-item" href="{{ path('add_competence') }}">Compétence</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- Nav Main menu END -->

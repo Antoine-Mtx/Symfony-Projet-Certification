@@ -1,0 +1,9 @@
+<h1>Bonjour !</h1>
+
+<p>Il est temps pour nous de vous dire au revoir. Si vous changez d'avis et souhaitez récupérer votre compte au cours des 2 prochaines années, il vous suffira de cliquer sur le lien ci-dessous :</p>
+
+<a href="{{ url('app_recover_account', {token: recoveryToken.token}) }}">{{ url('app_reset_password', {token: recoveryToken.token}) }}</a>
+
+<p>Ce lien expirera dans 2 ans.</p>
+
+<p>Bonne route !</p>

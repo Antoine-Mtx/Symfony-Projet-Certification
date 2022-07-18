@@ -41,8 +41,7 @@
                 <thead>
                     <tr>
                         <th scope="col" class="border-0 rounded-start">Compétence</th>
-                        <th scope="col" class="border-0">Créée le</th>
-                        <th scope="col" class="border-0 rounded-end">Action</th>
+                        <th scope="col" class="border-0">Apprentissage démarré le</th>
                     </tr>
                 </thead>
 
@@ -61,21 +60,12 @@
                                     <div class="mb-0 ms-2">
                                         <!-- Title -->
                                         <h6><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h6>
-                                        <!-- Info -->
-                                        <div class="d-sm-flex">
-                                            <p class="h6 fw-light mb-0 small me-3"><i class="fas fa-table text-orange me-2"></i>18 consultations</p>
-                                            <p class="h6 fw-light mb-0 small"><i class="fas fa-check-circle text-success me-2"></i>6 Completed</p>
-                                        </div>
                                     </div>
                                 </div>
                             </td>
                             <!-- Learners item -->
                             <td class="text-center text-sm-start">{{ competence.dateCreation | date("d/m/Y") }}</td>
                             <!-- Action item -->
-                            <td>
-                                <a href="{{ path('update_competence', {'id': competence.id }) }}" class="btn btn-sm btn-success btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
-                                <a href="{{ path('delete_competence', {'id': competence.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette compétence ?')"  class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>
-                            </td>
                         </tr>                            
                     {% endfor %}
                 </tbody>
@@ -84,22 +74,6 @@
         </div>
         <!-- Course list table END -->
 
-        <!-- Pagination START -->
-        <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
-            <!-- Content -->
-            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-            <!-- Pagination -->
-            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-                <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                    <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
-                    <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- Pagination END -->
     </div>
     <!-- Card body START -->
 </div>
