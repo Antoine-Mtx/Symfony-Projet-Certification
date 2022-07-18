@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -57,94 +58,95 @@ class CompetenceController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/competence/add", name="add_competence")
-     * @Route("/competence/update/{id}", name="update_competence")
-     */
-    public function add(ManagerRegistry $doctrine, ComposantRepository $composantRepository, Competence $competence = NULL, Request $request, FileUploader $fileUploader) {
+/**
+ * @IsGranted("ROLE_CREATOR")
+ * @Route("/competence/add", name="add_competence")
+ * @Route("/competence/update/{id}", name="update_competence")
+ */
+public function add(ManagerRegistry $doctrine, ComposantRepository $composantRepository, Competence $competence = NULL, Request $request, FileUploader $fileUploader) {
 
-        // si la compétence existe on est dans le cas "update", sinon on est dans le cas "add" et il faut créer une instance de la classe Competence
-        if (! $competence) {
-            $competence = new Competence();
-        }
-
-        // on va utiliser doctrine pour ajouter / actualiser notre compétence au niveau de la base de données
-        $entityManager = $doctrine->getManager();
-    
-        // une compétence étant un assemblage de composants, on se sert du repository de Composant pour rechercher les composants dont on a besoin ET qui n'ont pas déjà été affectés à une autre compétence
-        $composantsDisponibles = $composantRepository->findBy(['competence' => NULL]);
-
-        // dans le cas où on édite une compétence existante, on va également récupérer les composants qui lui ont été affectés
-        $composantsActuels = $competence->getComposants();
-        
-        // je crée un tableau me permettant de "photographier" la liste des composants de la compétence avant update : l'objet $composantsActuels étant lié à la compétence, lorsqu'on ajoute / retire un composant de la compétence, il est également ajouté / retiré de $composantsActuels
-        $composantsAvantUpdateArray = $composantsActuels->toArray();
-
-        // on crée un formulaire dévolu à l'ajout de compétence
-        $form = $this->createForm(CompetenceType::class, $competence);
-        $form->handleRequest($request);
-
-        // on récupère l'utilisateur connecté
-        $user = $this->getUser();
-        // on récupère la date du jour
-        $aujourdhui = new DateTime();
-
-        // on vérifie que le formulaire rempli est conforme
-        if ($form->isSubmitted() && $form->isValid()) {
-            // on définit les attributs de notre objet competence avec les données du formulaires
-            $competence = $form->getData();
-
-            // on définit le nouveau nom des fichiers chargés et on les enregistre dans notre base de données         
-            /** @var UploadedFile $imageFile */
-            // on récupère les données correspondant au champ dévolu à l'upload de fichier de notre formulaire
-            $imageFile = $form->get('imageFilename')->getData();
-            // si ces données existent (cad s'il y a effectivement eu upload d'un fichier), il faut désormais lui attribuer un emplacement et sauvegarder le nom du fichier, après s'être assuré de l'unicité de celui-ci, dans notre base de données
-            if ($imageFile) {
-                // on upload le fichier dans le dossier adapté et on récupère le nouveau nom du fichier après l'ajout d'une chaîne de caractères pour s'assurer de son unicité
-                $imageFileName = $fileUploader->upload($imageFile, "/competence/img");
-                // on sauvegarde le nouveau nom de fichier affilié à notre compétence dans notre base de données
-                $competence->setImageFilename($imageFileName);
-            }
-            /** @var UploadedFile $iconeFile */
-            $iconeFile = $form->get('iconeFilename')->getData();
-            if ($iconeFile) {
-                $iconeFileName = $fileUploader->upload($iconeFile, "/competence/icon");
-                $competence->setIconeFilename($iconeFileName);
-            }
-
-            // mise à jour de la liste de composants de la compétence
-
-            // dans le cas d'une édition de compétence, on "libère" tous les composants de l'ancienne liste des composants de la compétence
-            foreach ($composantsAvantUpdateArray as $composantAvantUpdate) {
-                $composantAvantUpdate->removeCompetence($competence);
-            }
-
-            // puis on parcourt la liste actualisée des composants et on les lie à la compétence
-            foreach ($composantsActuels as $index => $composant) {
-                $composant->setCompetence($competence);
-            }
-
-            // on définit l'utilisateur connecté comme concepteur
-            $competence->setConcepteur($user);
-            // on définit la date du jour comme date de création de la compétence
-            $competence->setDateCreation($aujourdhui);
-
-            // on prépare l'objet à l'enregistrement
-            $entityManager->persist($competence);
-            // on enregistre dans notre base de données
-            $entityManager->flush();
-
-            // une fois la compétence créée, on redirige l'utilisateur vers la liste des compétences qu'il a créées, triées de la plus récente vers la plus ancienne
-            return $this->redirectToRoute('mes_competences');
-        }
-
-        // lorsqu'on souhaite créer une compétence, on aura besoin dans notre vue : du formulaire, des composants disponibles (cad non attribués à une autre compétence) ; lorsqu'on édite une compétence, on a également besoin des composants attribués à cette compétence
-        return $this->render('competence/add.html.twig', [
-            'formCompetence' => $form->createView(),
-            'composantsDisponibles' => $composantsDisponibles,
-            'composantsActuels' => $composantsActuels,
-        ]);
+    // si la compétence existe on est dans le cas "update", sinon on est dans le cas "add" et il faut créer une instance de la classe Competence
+    if (! $competence) {
+        $competence = new Competence();
     }
+
+    // on va utiliser doctrine pour ajouter / actualiser notre compétence au niveau de la base de données
+    $entityManager = $doctrine->getManager();
+
+    // une compétence étant un assemblage de composants, on se sert du repository de Composant pour rechercher les composants dont on a besoin ET qui n'ont pas déjà été affectés à une autre compétence
+    $composantsDisponibles = $composantRepository->findBy(['competence' => NULL]);
+
+    // dans le cas où on édite une compétence existante, on va également récupérer les composants qui lui ont été affectés
+    $composantsActuels = $competence->getComposants();
+    
+    // je crée un tableau me permettant de "photographier" la liste des composants de la compétence avant update : l'objet $composantsActuels étant lié à la compétence, lorsqu'on ajoute / retire un composant de la compétence, il est également ajouté / retiré de $composantsActuels
+    $composantsAvantUpdateArray = $composantsActuels->toArray();
+
+    // on crée un formulaire dévolu à l'ajout de compétence
+    $form = $this->createForm(CompetenceType::class, $competence);
+    $form->handleRequest($request);
+
+    // on récupère l'utilisateur connecté
+    $user = $this->getUser();
+    // on récupère la date du jour
+    $aujourdhui = new DateTime();
+
+    // on vérifie que le formulaire rempli est conforme
+    if ($form->isSubmitted() && $form->isValid()) {
+        // on définit les attributs de notre objet competence avec les données du formulaires
+        $competence = $form->getData();
+
+        // on définit le nouveau nom des fichiers chargés et on les enregistre dans notre base de données         
+        /** @var UploadedFile $imageFile */
+        // on récupère les données correspondant au champ dévolu à l'upload de fichier de notre formulaire
+        $imageFile = $form->get('imageFilename')->getData();
+        // si ces données existent (cad s'il y a effectivement eu upload d'un fichier), il faut désormais lui attribuer un emplacement et sauvegarder le nom du fichier, après s'être assuré de l'unicité de celui-ci, dans notre base de données
+        if ($imageFile) {
+            // on upload le fichier dans le dossier adapté et on récupère le nouveau nom du fichier après l'ajout d'une chaîne de caractères pour s'assurer de son unicité
+            $imageFileName = $fileUploader->upload($imageFile, "/competence/img");
+            // on sauvegarde le nouveau nom de fichier affilié à notre compétence dans notre base de données
+            $competence->setImageFilename($imageFileName);
+        }
+        /** @var UploadedFile $iconeFile */
+        $iconeFile = $form->get('iconeFilename')->getData();
+        if ($iconeFile) {
+            $iconeFileName = $fileUploader->upload($iconeFile, "/competence/icon");
+            $competence->setIconeFilename($iconeFileName);
+        }
+
+        // mise à jour de la liste de composants de la compétence
+
+        // dans le cas d'une édition de compétence, on "libère" tous les composants de l'ancienne liste des composants de la compétence
+        foreach ($composantsAvantUpdateArray as $composantAvantUpdate) {
+            $composantAvantUpdate->removeCompetence($competence);
+        }
+
+        // puis on parcourt la liste actualisée des composants et on les lie à la compétence
+        foreach ($composantsActuels as $index => $composant) {
+            $composant->setCompetence($competence);
+        }
+
+        // on définit l'utilisateur connecté comme concepteur
+        $competence->setConcepteur($user);
+        // on définit la date du jour comme date de création de la compétence
+        $competence->setDateCreation($aujourdhui);
+
+        // on prépare l'objet à l'enregistrement
+        $entityManager->persist($competence);
+        // on enregistre dans notre base de données
+        $entityManager->flush();
+
+        // une fois la compétence créée, on redirige l'utilisateur vers la liste des compétences qu'il a créées, triées de la plus récente vers la plus ancienne
+        return $this->redirectToRoute('mes_competences');
+    }
+
+    // lorsqu'on souhaite créer une compétence, on aura besoin dans notre vue : du formulaire, des composants disponibles (cad non attribués à une autre compétence) ; lorsqu'on édite une compétence, on a également besoin des composants attribués à cette compétence
+    return $this->render('competence/add.html.twig', [
+        'formCompetence' => $form->createView(),
+        'composantsDisponibles' => $composantsDisponibles,
+        'composantsActuels' => $composantsActuels,
+    ]);
+}
 
     /**
      * @Route("/competence/{idCompetence}/addComposant/{idComposant}", name="add_composant_to_competence")
