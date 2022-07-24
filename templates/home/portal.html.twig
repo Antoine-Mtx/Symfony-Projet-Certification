@@ -9,44 +9,43 @@
         <title>Illustre - plateforme de partage de contenu</title>
     </head>
     <body>
-        <header id="portal-header">
-            <div class="container display-flex justify-content-center align-items-center">
-                <img id="header-logo" src="img/logo_dark.png" alt="logo Illustre">
-                <h1 id="portal-title">Illustre</h1>
-            </div>
+        <header class="display-flex justify-content-center align-items-center" id="portal-header">
+            <img id="header-logo" src="img/logo_dark.png" alt="a light bulb shines">
+            <strong class="xx-large" id="portal-title">Illustre</strong>
         </header>
         <main>
             <section id="welcome">
-                <h1 class="small-padding text-center">Si vous souhaitez apprendre ou transmettre, vous êtes au bon endroit</h1>
-                <div>
-                    <a href="{{ path('app_register') }}"><button class="large">C'est parti !</button></a>
-                    <a href="{{ path('app_login') }}"><button class="large">J'ai déjà un compte</button></a>
+                <h1 class="text-center">Vous souhaitez <strong>apprendre</strong> ou <strong>transmettre</strong> ?</br><strong>Illustre</strong> est fait pour vous</h1>
+                <div class="display-flex flex-direction-column flex-direction-row-lg align-items-center">
+                    <a href="{{ path('app_register') }}"><button class="large button-soft bg-color-goldenrod">C'est parti !</button></a>
+                    <a href="{{ path('app_login') }}"><button class="large button-soft bg-color-goldenrod">J'ai déjà un compte</button></a>
                 </div>
             </section>
-            <section id="presentation">
-                <div class="container">
-                    <header class="section-header">
-                        <h1>Illustre, parce qu'une image vaut parfois mille mots</h1>
+            <section class="small-padding" id="presentation">
+                <div class="container display-flex flex-direction-column">
+                    <header class="section-header display-flex justify-content-center align-items-center">
+                        <img class="display-none-md h-4 mr-1" src="img/learner.png" alt="all areas of knowledge come out of the mind of a student's head">
+                        <h1 class="text-center">Illustre, parce qu'une image vaut parfois mille mots</h1>
                     </header>
-                    <div id="wrapper">
-                        <div class="one">
-                            <h3 class="one-title"><i class="fa-solid fa-pen-ruler x-large"></i> Faites parler votre sens créatif</h3>
-                            <p class="text-justified larger">Les sciences sont avant tout une aventure humaine, parcourir les grandes pages du passé nous permet de mieux cerner notre présent.</p>
+                    <div id="presentation-wrapper">
+                        <div class="gc-1-gr-1-sm gc-1-gr-1-lg">
+                            <h3 class="one-title text-center"><i class="fa-solid fa-pen-ruler x-large"></i> Libérez votre créativité</h3>
+                            <p class="text-justified larger">Créez vos propres contenus à partir de vos connaissances et partagez ce qui vous a permis de progresser en mettant en valeur votre travail avec les outils de votre choix.</p>
                         </div>
-                        <div class="two">
-                            <h3 class="two-title"><i class="fa-solid fa-masks-theater x-large"></i> Libérez vos émotions</h3>
-                            <p class="text-justified larger">Qui a dit qu'apprendre était uniquement affaire d'intellect ? On se souvient de ce qui nous stimule. L'envie d'apprendre dépend de l'apprenant, mais elle peut et doit être cultivée par ceux qui conçoivent le contenu.</p>
+                        <div class="gc-2-gr-1-sm gc-2-gr-1-lg ">
+                            <h3 class="two-title text-center"><i class="fa-solid fa-masks-theater x-large"></i> Place aux émotions</h3>
+                            <p class="text-justified larger">Apprendre n'est pas uniquement affaire d'intellect. On se souvient de ce qui nous stimule et l'envie d'apprendre doit être cultivée par ceux qui conçoivent le contenu.</p>
                         </div>
-                        <div class="three">
-                            <h3 class="three-title"><i class="fa-solid fa-gears x-large"></i> Développez votre logique</h3>
-                            <p class="text-justified larger">Les sujets relatifs à la logique se sont pas assimilés au même rythme par tous, l’apprentissage personnalisé est donc tout indiqué afin que chacun puisse apprendre de façon progressive.</p>
+                        <div class="display-none display-lg gc-2-gr-1-to-3-lg display-flex justify-content-center align-items-center">
+                            <img class="img" src="img/learner_lg.png" alt="all areas of knowledge come out of the mind of a student's head">
                         </div>
-                        <div class="four">
-                            <h3 class="four-title"><i class="fa-solid fa-landmark x-large"></i> Visualisez ce que vous construisez</h3>
-                            <p class="text-justified large">On peut apprendre efficacement sans s'ennuyer ! Développe tes compétences jour après jour grâce à des exercices motivants et à nos personnages hauts en couleur.</p>
+                        <div class="gc-1-gr-3-sm gc-1-gr-2-lg ">
+                            <h3 class="three-title text-center"><i class="fa-solid fa-gears x-large"></i> Développez votre logique</h3>
+                            <p class="text-justified larger">Les sujets exigeant de la logique ne sont pas assimilés au même rythme, l’apprentissage personnalisé est une des clés pour que chacun puisse apprendre de façon progressive.</p>
                         </div>
-                        <div class="five text-center">
-                            <img src="img/learner-img.png" alt="learner image">
+                        <div class="gc-2-gr-3-sm gc-2-gr-2-lg ">
+                            <h3 class="four-title text-center"><i class="fa-solid fa-landmark x-large"></i> Visualisez vos acquis</h3>
+                            <p class="text-justified larger">On peut apprendre efficacement sans s'ennuyer ! Développe tes compétences jour après jour grâce à des exercices motivants et à nos personnages hauts en couleur.</p>
                         </div>
                     </div>
                 </div>
@@ -54,59 +53,96 @@
             <section class="small-padding" id="section-quotes">
                 <div class="container display-flex flex-direction-column align-items-center">
                     <header class="section-header">
-                        <h1>Illustre, comme le nom de ceux qui nous font avancer</h1>
+                        <h1 class="text-center">Illustre, comme le nom de ceux qui nous font avancer</h1>
                         <div>
                             <hr>
                         </div>
                     </header>
                     <div id="quotes-container">
-                        <div class="quote">
+                        <div class="quote display-flex flex-direction-column-reverse flex-direction-row-lg">
                             <figure class="author-img-container">
                                 <img class="author-img" src="img/voltaire.jpg">
                             </figure>
                             <figure>
-                                <blockquote class="x-large italic">Il faut savoir s'instruire dans la gaieté. Le savoir triste est un savoir mort. L'intelligence est joie.</blockquote>
+                                <blockquote class="x-large text-start italic">Il faut savoir s'instruire dans la gaieté. Le savoir triste est un savoir mort. L'intelligence est joie.</blockquote>
                                 <figcaption class="small"><strong>Voltaire</strong> - écrivain, philosophe (1694 - 1778)</figcaption>
                             </figure>
                         </div>
-                        <div class="quote" id="mid">
+                        <div class="quote display-flex flex-direction-column-reverse flex-direction-row-lg" id="mid">
                             <figure>
-                                <p class="x-large text-end italic">Savoir n'est pas suffisant - Nous devons appliquer... Être prêt n'est pas assez - Nous devons agir.</p>
+                                <blockquote class="x-large text-end italic">Savoir n'est pas suffisant - Nous devons appliquer... Être prêt n'est pas assez - Nous devons agir.</blockquote>
                                 <p class="small text-end"><strong>Leonardo da Vinci</strong> - peintre, inventeur, ingénieur, écrivain (1452 - 1519)</p>
                             </figure>
                             <figure class="author-img-container">
                                 <img class="author-img" src="img/leonardo_da_vinci.jpg">
                             </figure>
                         </div>
-                        <div class="quote">
+                        <div class="quote display-flex flex-direction-column-reverse flex-direction-row-lg">
                             <figure class="author-img-container">
                                 <img class="author-img" src="img/albert_camus.jpg">
                             </figure>
                             <figure>
-                                <p class="x-large italic">Comprendre c'est avant tout unifier.</p>
+                                <blockquote class="x-large text-start italic">Comprendre c'est avant tout unifier.</blockquote>
                                 <p class="small"><strong>Albert Camus</strong> - écrivain, philosophe (1913 - 1960)</p>
                             </figure>
                         </div>
                     </div>
                 </div>
             </section>
-            <section id="perks" class="small-padding">
-                <h1 class="text-center">Apprendre à son rythme, la clé pour s'illustrer</h1>
+            <section id="perks" class="large-padding">
+                <div class="display-flex justify-content-center align-items-center">
+                    <img class="display-none-md h-4 mr-1" src="img/worldwide.png" alt="the planet Earth is crossed by internet network">
+                    <h1 class="text-center">Apprendre à son rythme, la clé pour s'illustrer</h1>
+                </div>
                 <div class="container display-flex align-items-center">
                     <article class="flex-3 large">
-                        <p>Il est plus que temps de se servir des outils numériques à notre disposition pour apprendre mieux et plus vite. Si la tendance est plutôt contraire à cela depuis l'avénement des ordinateurs, c'est parce que le plaisir a trop longtemps été mis de côté. Comment alors rivaliser contre des distractions toujours plus impressionnantes de technologie ?</p>
+                        <p class="text-justified larger">Il est temps de se servir des outils numériques pour apprendre mieux et vite. Nous devons nous donner les moyens de rivaliser avec des distractions toujours plus impressionnantes de technologie. Et pour ce faire, quoi de mieux que de tenir compte de ce que souhaite les apprenants ?</p>
                     </article>
-                    <aside class="flex-2 text-center">
-                        <img src="img/worldwide.png" alt="worldwide img">
+                    <aside class="display-none display-md flex-2 text-center">
+                        <img src="img/worldwide.png" alt="the planet Earth is crossed by internet network">
                     </aside>
                 </div>
             </section>
+            <section class="small-padding" id="section-contact">
+                <div class="container">
+                    <header class="section-header text-center">
+                        <h1>Vous souhaitez nous contacter ?</h1>
+                    </header>
+                    <form action="submit">
+                        <div class="container display-grid-lg gtc-2-lg">
+                            <div class="form-name display-flex flex-direction-column m-1">
+                                <label for="" class="required">Nom</label>
+                                <input class="border-soft" type="text">
+                            </div>
+                            <div class="form-email display-flex flex-direction-column m-1">
+                                <label for="" class="required">Email</label>
+                                <input class="border-soft" type="text">
+                            </div>
+                            <div class="form-cellphone display-flex flex-direction-column m-1">
+                                <label for="">Téléphone</label>
+                                <input class="border-soft" type="text">
+                            </div>
+                            <div class="form-subject display-flex flex-direction-column m-1">
+                                <label for="">Sujet</label>
+                                <input class="border-soft" type="text">
+                            </div>
+                            <div class="form-message display-flex flex-direction-column m-1">
+                                <label for="" class="required">Message</label>
+                                <textarea class="border-soft textarea-height" name="" id=""></textarea>
+                            </div>
+                            <div class="form-button text-center m-1">
+                                <button class="button-soft larger" type="submit">Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>     
         </main>
         <footer>
-            <div class="container">
+            <div class="container large-padding">
                 <div class="display-flex flex-direction-column gap-3">
-                    <div class="display-flex">
-                        <div class="flex">
+                    <div class="display-grid gtc-4-md gap-3">
+                        <div class="gc-1-gr-1-sm gc-1-gr-1-md text-center text-start-md">
                             <h3>Services</h3>
                             <ul class="list-style-none">
                                 <li><a class="text-muted text-decoration-none" href="#">Accueil</a></li>
@@ -114,7 +150,7 @@
                                 <li><a class="text-muted text-decoration-none" href="#">Consultation de contenu</a></li>
                             </ul>
                         </div>
-                        <div class="flex">
+                        <div class="gc-2-gr-1-sm gc-2-gr-1-md text-center text-start-md">
                             <h3>A propos</h3>
                             <ul class="list-style-none">
                                 <li><a class="text-muted text-decoration-none" href="#">Qui sommes-nous ?</a> <span class="badge bg-info">à venir</span></li>
@@ -122,10 +158,10 @@
                                 <li><a class="text-muted text-decoration-none" href="#">Nos carrières</a> <span class="badge bg-info">à venir</span></li>
                             </ul>
                         </div>
-                        <div class="flex-2">
+                        <div class="gc-1-to-3-gr-2-sm gc-3-to-5-gr-1-md text-center text-start-md">
                             <h3>Illustre</h3>
                             <p>“Comprendre c'est avant tout unifier.”</p>
-                            <p>Ces quelques mots d'Albert Camus résument la volonté qui se cache sous ce site. Celle de vivre ensemble.</p>
+                            <p>Ces mots d'Albert Camus résument la volonté qui se cache sous ce site. Celle de vivre ensemble.</p>
                         </div>
                     </div>
                     <div class="text-center display-flex justify-content-center gap-3">
