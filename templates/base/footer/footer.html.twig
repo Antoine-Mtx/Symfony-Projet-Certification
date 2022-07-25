@@ -13,7 +13,28 @@
             <ul>
                 <li><a href="#">Qui sommes-nous ?</a> <span class="badge bg-info">à venir</span></li>
                 <li><a href="#">Notre équipe</a> <span class="badge bg-info">à venir</span></li>
-                <li><a href="#">Nos carrières</a> <span class="badge bg-info">à venir</span></li>
+                <li>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-link btn-sm" id="button-mentions-legales" data-bs-toggle="modal" data-bs-target="#scrollableModal">Mentions légales</button>
+
+                    <!-- Scrollable modal -->
+                    <div class="modal fade" id="scrollableModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center" id="scrollableModalLabel">Mentions Légales</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {% include "base/footer/components/mentions_legales.html.twig" %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
         <div class="col-md-6 item text">

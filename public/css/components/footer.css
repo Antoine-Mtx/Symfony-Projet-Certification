@@ -20,6 +20,15 @@
   .footer-dark ul a:hover {
     opacity:0.8;
   }
+  .modal {
+    color: black;
+  }
+  #button-mentions-legales {
+    padding: 0!important;
+    color:#f0f9ff;
+    text-decoration: none;
+    opacity:0.6;
+  }
 
   @media (max-width:767px) {
     .footer-dark .item:not(.social) {

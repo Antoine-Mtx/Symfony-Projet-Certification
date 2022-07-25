@@ -42,9 +42,9 @@
 <section class="tribute">
     <div class="d-inline-flex align-items-center m-4">
         <div class="avatar me-3">
-            <img class="avatar-img-profile rounded-circle" src="{{ competence.concepteur.avatarFilename ? asset("upload/user/avatar/"~ competence.concepteur.avatarFilename) : asset("upload/user/avatar/default.jpg") }}" alt="avatar">
+            <img class="avatar-img-profile rounded-circle" src="{{ competence.concepteur ? competence.concepteur.avatarFilename ? asset("upload/user/avatar/"~ competence.concepteur.avatarFilename) : asset("upload/user/avatar/default.jpg") : asset("upload/user/avatar/anonymous.jpg") }}" alt="avatar">
         </div>
-        <p>Compétence proposée par {{ competence.concepteur }} le {{ competence.dateCreation | date('d/m/Y') }}</p>
+        <p>Compétence proposée par {{ competence.concepteur ? competence.concepteur : "un ancien utilisateur" }} le {{ competence.dateCreation | date('d/m/Y') }}</p>
     </div>
 </section>
 
