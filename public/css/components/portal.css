@@ -150,6 +150,7 @@ input {
     color: white;
     text-shadow: 1px 1px 1px black;
     margin: 0 1rem;
+    line-height: 2rem;
 }
 .button-soft {
     padding: 0.6em 1em;
@@ -283,6 +284,7 @@ footer {
     /* welcome */
     #welcome>h1 {
         font-size: 1.75rem;
+        line-height: 2.5rem;
     }
 
     /* section presentation */
@@ -340,6 +342,16 @@ footer {
     .display-md {
         display: block;
     }
+    /* section contact */
+    .display-grid-md {
+        display: grid;
+    }
+    .gtc-2-md {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .textarea-height {
+        height: 100%;
+    }
 }
 
 @media (min-width: 992px) {
@@ -353,12 +365,13 @@ footer {
     .flex-direction-row-lg {
         flex-direction: row;
     }
-    .display-lg {
-        display: block;
+    .display-flex-lg {
+        display: flex;
     }
     /* welcome */
     #welcome>h1 {
         font-size: 2rem;
+        line-height: 3.5rem;
     }
 
 /* section presentation */
@@ -369,31 +382,21 @@ footer {
         grid-column: 1;
         grid-row: 1;
     }
-    .gc-3-gr-1-lg  {
+    .gc-3-gr-1-lg {
         grid-column: 3;
         grid-row: 1;
     }
-    .gc-1-gr-2-lg  {
+    .gc-1-gr-2-lg {
         grid-column: 1;
         grid-row: 2;
     }
-    .gc-3-gr-2-lg  {
+    .gc-3-gr-2-lg {
         grid-column: 3;
         grid-row: 2;
     }
-    .gc-2-gr-1-to-3-lg  {
+    .gc-2-gr-1-to-3-lg {
         grid-column: 2;
         grid-row: 1/3;
-    }
-    /* section contact */
-    .display-grid-lg {
-        display: grid;
-    }
-    .gtc-2-lg {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .textarea-height {
-        height: 100%;
     }
     
 /* --------------- */
