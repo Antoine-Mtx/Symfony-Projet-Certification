@@ -29,7 +29,7 @@ class Apprentissage
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="competencesSuivies")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $apprenant;
 

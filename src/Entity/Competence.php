@@ -47,7 +47,7 @@ class Competence
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="competencesCrees")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $concepteur;
 

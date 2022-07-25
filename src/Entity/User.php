@@ -303,12 +303,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeCompetenceCreee(Competence $competencesCree): self
+    public function removeCompetenceCreee(Competence $competenceCreee): self
     {
-        if ($this->competencesCrees->removeElement($competencesCree)) {
+        if ($this->competencesCrees->removeElement($competenceCreee)) {
             // set the owning side to null (unless already changed)
-            if ($competencesCree->getConcepteur() === $this) {
-                $competencesCree->setConcepteur(null);
+            if ($competenceCreee->getConcepteur() === $this) {
+                $competenceCreee->setConcepteur(null);
             }
         }
 
@@ -353,22 +353,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->composantsCrees;
     }
 
-    public function addComposantCree(Composant $composantsCree): self
+    public function addComposantCree(Composant $composantCree): self
     {
-        if (!$this->composantsCrees->contains($composantsCree)) {
-            $this->composantsCrees[] = $composantsCree;
-            $composantsCree->setConcepteur($this);
+        if (!$this->composantsCrees->contains($composantCree)) {
+            $this->composantsCrees[] = $composantCree;
+            $composantCree->setConcepteur($this);
         }
 
         return $this;
     }
 
-    public function removeComposantCree(Composant $composantsCree): self
+    public function removeComposantCree(Composant $composantCree): self
     {
-        if ($this->composantsCrees->removeElement($composantsCree)) {
+        if ($this->composantsCrees->removeElement($composantCree)) {
             // set the owning side to null (unless already changed)
-            if ($composantsCree->getConcepteur() === $this) {
-                $composantsCree->setConcepteur(null);
+            if ($composantCree->getConcepteur() === $this) {
+                $composantCree->setConcepteur(null);
             }
         }
 

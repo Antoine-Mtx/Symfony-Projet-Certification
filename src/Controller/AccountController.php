@@ -7,6 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -58,26 +59,47 @@ class AccountController extends AbstractController
     public function delete(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
+
+        // on commence par récupérer l'utilisateur
         
         $user = $this->getUser();
 
-        $email = (new TemplatedEmail())
-            ->from(new Address('illustre.mailer@gmail.com', 'Illustre mailer'))
-            ->to($user->getEmail())
-            ->subject('Lien de récupération de votre compte')
-            ->htmlTemplate('account/recoveryEmail.html.twig')
-            ->context([
-                'resetToken' => $resetToken,
-            ])
-        ;
+        // on anonymise toutes les compétences créées par l'utilisateur
 
-        $user->setEmail('anonymous@example.com');
-        $user->setPseudo('Anonymous '.$user->getId());
-        $user->setAvatarFilename("anonymous.jpg");
+        $competencesCreees = $user->getCompetencesCreees();
+
+        foreach ($competencesCreees as $competenceCreee) {
+            $user->removeCompetenceCreee($competenceCreee);
+        }
+
+        // on anonymise toutes les composants créées par l'utilisateur
+
+        $composantCrees = $user->getComposantsCrees();
+
+        foreach ($composantCrees as $composantCree) {
+            $user->removeComposantCree($composantCree);
+        }
+
+        // on anonymise tous les apprentissages de l'utilisateur
+
+        $apprentissages = $user->getApprentissages();
+
+        foreach ($apprentissages as $apprentissage) {
+            $user->removeApprentissage($apprentissage);
+        }
+
+        // on supprime toutes les données en session
+
+        $session = new Session();
+        $session->invalidate();
+
+        // on supprime l'utilisateur
+
+        $entityManager->remove($user);
         
         $entityManager->flush();
 
-        // on se sert de la méthode headers de l'objet request pour rediriger l'utilisateur sur la page d'où il vient
+        // on redirige l'utilisateur vers le portail de notre application
         return $this->redirectToRoute('app_portal');
     }
 }

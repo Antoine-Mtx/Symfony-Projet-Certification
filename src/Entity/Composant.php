@@ -42,7 +42,7 @@ class Composant
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="composantsCrees")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $concepteur;
 
