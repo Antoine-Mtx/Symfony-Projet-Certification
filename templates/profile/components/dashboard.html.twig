@@ -7,7 +7,20 @@
 
     <!-- Card body START -->
     <div class="card-body">
-
+        <div class="row">
+			<!-- Counter item -->
+			<div class="col-sm-6 col-xl-3">
+				<div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-info mb-0"><i class="bi bi-tools fa-lg"></i></span>
+					<div class="ms-4 h6 fw-normal mb-0">
+						<div class="d-flex">
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300" data-purecounter-duration="0">{{ app.user.apprentissages | length }}</h5>
+						</div>
+						<p class="mb-0">{% if app.user.apprentissages | length > 1 %} Compétences{% else %} Compétence{% endif %} en cours d'apprentissage</p>
+					</div>
+				</div>
+			</div>
+        </div>
     </div>
     <!-- Card body END -->
 </div>

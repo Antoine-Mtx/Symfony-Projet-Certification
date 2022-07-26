@@ -1,0 +1,54 @@
+<div class="card border bg-transparent rounded-3">
+    <!-- Card header START -->
+    <div class="card-header bg-transparent border-bottom">
+        <h3 class="mb-0">Tableau de bord</h3>
+    </div>
+    <!-- Card header END -->
+
+    <!-- Card body START -->
+    <div class="card-body">
+        <div class="row">
+			{% if is_granted('ROLE_ADMIN') %}
+				<!-- Counter item -->
+				<div class="col-sm-6 col-xl-3">
+					<div class="d-flex justify-content-center align-items-center p-4 bg-primary bg-opacity-10 rounded-3">
+						<div class="display-6 lh-1 text-primary mb-0"><i class="fa-solid fa-book fa-lg"></i></div>
+						<div class="ms-4 h6 fw-normal mb-0">
+							<div class="d-flex">
+								<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{{ domaines | length }}</h5>
+							</div>
+							<p class="mb-0">{% if domaines | length > 1 %} Domaines créés{% else %} Domaine créé{% endif %}</p>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			<!-- Counter item -->
+			<div class="col-sm-6 col-xl-3">
+				<div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-info mb-0"><i class="bi bi-tools fa-lg"></i></span>
+					<div class="ms-4 h6 fw-normal mb-0">
+						<div class="d-flex">
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-delay="300" data-purecounter-duration="0">{{ app.user.competencesCreees | length }}</h5>
+						</div>
+						<p class="mb-0">{% if app.user.competencesCreees| length > 1 %} Compétences créées{% else %} Compétence créée{% endif %}</p>
+					</div>
+				</div>
+			</div>
+			<!-- Counter item -->
+			<div class="col-sm-6 col-xl-3">
+				<div class="d-flex justify-content-center align-items-center p-4 bg-warning bg-opacity-10 rounded-3">
+					<span class="display-6 lh-1 text-warning mb-0">
+						<i class="bi bi-nut fa-fw me-2"></i>
+					</span>
+					<div class="ms-4 h6 fw-normal mb-0">
+						<div class="d-flex">
+							<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="200" data-purecounter-delay="200" data-purecounter-duration="0">{{ app.user.composantsCrees | length }}</h5>
+						</div>
+						<p class="mb-0">{% if app.user.composantsCrees | length > 1 %} Composants créés{% else %} Composant créé{% endif %}</p>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+    <!-- Card body END -->
+</div>

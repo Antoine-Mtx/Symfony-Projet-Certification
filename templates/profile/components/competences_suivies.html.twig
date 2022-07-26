@@ -48,9 +48,9 @@
                 <!-- Table body START -->
                 <tbody>
                     <!-- Table item -->
-                    {% for competence in app.user.competencesSuivies %}
+                    {% for apprentissage in app.user.apprentissages %}
                         <tr>
-                            <!-- Competence item -->
+                            <!-- apprentissage item -->
                             <td>
                                 <div class="d-flex align-items-center">
                                     <!-- Image -->
@@ -59,12 +59,12 @@
                                     </div>
                                     <div class="mb-0 ms-2">
                                         <!-- Title -->
-                                        <h6><a href="{{ path('show_competence', {'id': competence.id}) }}">{{ competence.intitule }}</a></h6>
+                                        <h6><a href="{{ path('show_apprentissage', {'id': apprentissage.id}) }}">{{ apprentissage }}</a></h6>
                                     </div>
                                 </div>
                             </td>
                             <!-- Learners item -->
-                            <td class="text-center text-sm-start">{{ competence.dateCreation | date("d/m/Y") }}</td>
+                            <td class="text-center text-sm-start">{{ apprentissage.dateDebut | date("d/m/Y") }}</td>
                             <!-- Action item -->
                         </tr>                            
                     {% endfor %}

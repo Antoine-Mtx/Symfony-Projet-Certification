@@ -29,10 +29,10 @@ class ProfileController extends AbstractController
     public function competencesSuivies(ManagerRegistry $doctrine): Response
     {
         $user = $this->getUser();
-        $competencesSuivies = $user->getCompetencesSuivies();
+        $apprentissages = $user->getApprentissages();
 
         return $this->render('profile/components/competences_suivies.html.twig', [
-            'competencesSuivies' => $competencesSuivies,
+            'apprentissages' => $apprentissages,
         ]);
     }
 

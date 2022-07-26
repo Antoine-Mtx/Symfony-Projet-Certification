@@ -42,7 +42,7 @@ class Apprentissage
     /**
      * @ORM\Column(type="date")
      */
-    private $dateAjout;
+    private $dateDebut;
 
     public function __construct()
     {
@@ -102,15 +102,19 @@ class Apprentissage
         return $this;
     }
 
-    public function getDateAjout(): ?\DateTimeInterface
+    public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->dateAjout;
+        return $this->dateDebut;
     }
 
-    public function setDateAjout(\DateTimeInterface $dateAjout): self
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
-        $this->dateAjout = $dateAjout;
+        $this->dateDebut = $dateDebut;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return ucfirst($this->competenceSuivie->getIntitule());
     }
 }

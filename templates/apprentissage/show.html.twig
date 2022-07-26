@@ -4,6 +4,18 @@
 
 {% block body %}
 
-<p>Apprentissage de la compétence {{ apprentissage.competenceSuivie }} par {{ apprentissage.apprenant }}</p>
+<h1>{{ apprentissage.competenceSuivie }}</h1>
+
+<div class="row g-4 col-sm-12 col-lg-9 col-lg-6 m-auto">
+    {% for composant in apprentissage.competenceSuivie.composants %}
+        <div class="my-2">
+            {% if composant.type.affichage == 'carte' %}
+                {% include "composant/type/card.html.twig" %}
+            {% elseif composant.type.affichage == 'graphique' %}
+                {% include "composant/type/graph.html.twig" %}    
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

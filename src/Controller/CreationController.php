@@ -2,19 +2,25 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Domaine;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CreationController extends AbstractController
 {
     /**
      * @Route("/creation", name="index_creation")
      */
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response 
     {
+        $entityManager = $doctrine->getManager();
+
+        $domaines = $entityManager->getRepository(Domaine::class)->findAll();
+
         return $this->render('creation/index.html.twig', [
-            'controller_name' => 'CreationController',
+            'domaines' => $domaines,
         ]);
     }
 
@@ -23,8 +29,6 @@ class CreationController extends AbstractController
      */
     public function showMesComposants(): Response
     {
-        // $entityManager = $doctrine->getManager();
-
         $user = $this->getUser();
 
         $mesComposants = $user->getComposantsCrees();
@@ -39,8 +43,6 @@ class CreationController extends AbstractController
      */
     public function showMesCompetences(): Response
     {
-        // $entityManager = $doctrine->getManager();
-    
         $user = $this->getUser();
     
         $mesCompetences = $user->getCompetencesCreees();

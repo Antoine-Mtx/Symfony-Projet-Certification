@@ -38,7 +38,7 @@ class ApprentissageController extends AbstractController
                 
             $apprentissage->setApprenant($apprenant);
             $apprentissage->setCompetenceSuivie($competence);
-            $apprentissage->setDateAjout($aujourdhui);
+            $apprentissage->setDateDebut($aujourdhui);
             $entityManager->persist($apprentissage);
             $entityManager->flush($apprentissage);
             
@@ -50,5 +50,25 @@ class ApprentissageController extends AbstractController
         }
         
         return $this->redirectToRoute('competences_suivies');
+    }
+
+    /**
+     * @Route("/apprentissage/{id}", name="show_apprentissage")
+     */
+    public function show(ManagerRegistry $doctrine, int $id): Response
+    {
+        // on récupère l'objet de la classe "apprentissage" ayant pour id "$id"
+        $apprentissage = $doctrine->getRepository(Apprentissage::class)->find($id);
+
+        if (! $apprentissage) {
+            throw $this->createNotFoundException(
+                "Aucun apprentissage répertorié avec l'id $id"
+            );
+        }
+
+        // notre méthode rend le template "apprentissage/show.html.twig" où on pourra afficher notre objet apprentissage avec "{{ apprentissage }}"
+        return $this->render('apprentissage/show.html.twig', [
+            'apprentissage' => $apprentissage,
+        ]);
     }
 }

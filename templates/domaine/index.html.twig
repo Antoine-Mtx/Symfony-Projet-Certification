@@ -4,8 +4,6 @@
 
 {% block body %}
 
-<p><a class="btn btn-success my-3"href="{{ path('add_domaine') }}">Ajouter un domaine</a></p>
-
 <div class="card border bg-transparent rounded-3 my-3">
     <!-- Card header START -->
     <div class="card-header bg-transparent border-bottom">
@@ -15,7 +13,6 @@
 
     <!-- Card body START -->
     <div class="card-body">
-
         <!-- Search and select START -->
         <div class="row g-3 align-items-center justify-content-between mb-4">
             <!-- Search -->
@@ -24,14 +21,6 @@
                     {{ form_row(searchForm.mots, { 'attr': {'value': mots} }) }}
                 {{ form_end(searchForm) }}
             </div> #}
-
-            <!-- Select option -->
-            <div class="col-md-3">
-                <!-- Short by filter -->
-                {# <form>
-
-                </form> #}
-            </div>
         </div>
         <!-- Search and select END -->
 
