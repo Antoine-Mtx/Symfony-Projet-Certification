@@ -17,11 +17,22 @@
     {% endif %}
 {% endif %}
 
-<h1 class="text-center">{{ competence }}</h1>
-
-<h2>Description</h2>
-
-<p> {{ competence.description }} </p>
+<div class="card border bg-transparent rounded-3 my-4">
+    <!-- Card header -->
+    <div class="card-header bg-transparent border-bottom d-inline-flex justify-content-center align-items-center">
+        <img class="icon me-2" src={% if competence.iconeFilename %}"{{ asset('upload/competence/icon/') ~ competence.iconeFilename }}"{% else %}"{{ asset('upload/competence/icon/default.png') }}"{% endif %} alt="{{ competence }} icon">
+        <h1 class="card-header-title">{{ competence }}</h1>
+    </div>
+    <!-- Card body -->
+    <div class="card-body text-center">
+        <div class="domaine-img-container">
+            <img class="domaine-img" src={% if competence.imageFilename %}"{{ asset('upload/competence/img/') ~ competence.imageFilename }}"{% else %}"{{ asset('upload/competence/img/default.jpeg') }}"{% endif %} alt="{{ competence }} image">
+        </div>
+    </div>
+    <div class="card-footer bg-transparent">
+        {{ competence.description }}
+    </div>
+</div>
 
 {% if app.user %}
     {% if competence in app.user.competencesSuivies %}

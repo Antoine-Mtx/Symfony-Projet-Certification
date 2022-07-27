@@ -30,7 +30,7 @@
                     <input type="password" name="password" id="inputPassword" class="form-control mt-2" autocomplete="current-password" required>
                 </div>
                 <div class="text-center mt-4">
-                    <span class="text-muted">Mot de passe oublié ? <u><a class="text-muted" href="{{ path('app_forgot_password_request') }}">Réninitaliser votre mot de passe</a></u></span>
+                    <span class="text-muted">Mot de passe oublié ? <u><a class="text-muted" href="{{ path('app_forgot_password_request') }}">Réinitialiser votre mot de passe</a></u></span>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 {#

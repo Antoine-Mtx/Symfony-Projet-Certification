@@ -110,11 +110,32 @@ input {
 .h-4 {
     height: 4rem;
 }
+.h-8 {
+    height: 8rem;
+}
+.h-10 {
+    height: 10rem;
+}
 .mr-1 {
     margin-right: 1rem;
 }
+.mr-2 {
+    margin-right: 2rem;
+}
+.ml-2 {
+    margin-left: 2rem;
+}
 .display-none {
     display: none;
+}
+.mb-2 {
+    margin-bottom: 2rem;
+}
+.m-2 {
+    margin: 2rem;
+}
+.flex-end {
+    flex-direction: row-reverse;
 }
 
 /* header */
@@ -340,6 +361,9 @@ footer {
     }
     .flex-direction-row-md {
         flex-direction: row;
+    }
+    .flex-direction-row-reverse-md {
+        flex-direction: row-reverse;
     }
     /* footer */
     .gtc-4-md {
