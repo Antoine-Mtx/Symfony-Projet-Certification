@@ -1,0 +1,20 @@
+<!-- Card item START -->
+<div class="card shadow h-100" style="width: fit-content">
+    <!-- Card header -->
+    <div class="card-header" style="background-color: {{ composant.type.couleur }}; color: white;">
+        {{ composant.type.intitule }} : {{ composant.intitule }}
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <div id="ggb-element"></div>
+    </div>
+</div>
+<!-- Card item END -->
+
+<script>  
+    var params = {"appName": "graphing", "width": 600, "height": 450, "showToolBar": true, "showAlgebraInput": true, "showMenuBar": true };
+    var applet = new GGBApplet(params, true);
+    window.addEventListener("load", function() { 
+        applet.inject('ggb-element');
+    });
+</script>

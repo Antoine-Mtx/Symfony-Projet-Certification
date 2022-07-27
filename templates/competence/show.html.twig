@@ -8,7 +8,11 @@
     {% if competence in app.user.competencesCreees %}
         <div class="m-3 text-end">
             <a href="{{ path('update_competence', {'id': competence.id }) }}" class="btn btn-sm btn-success btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
-            <a href="{{ path('delete_competence', {'id': competence.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette compétence ?')" class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>
+            {% if competence.apprentissages is not empty %}
+                <a href="#" onclick="return confirm('Voulez-vous vraiment supprimer cette compétence ?')"  class="btn btn-sm btn-danger btn-round me-1 mb-0 disabled"><i class="fas fa-fw fa-times"></i></a>
+            {% else %}
+                <a href="{{ path('delete_competence', {'id': competence.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer cette compétence ?')"  class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>                                    
+            {% endif %}
         </div>
     {% endif %}
 {% endif %}
@@ -20,9 +24,13 @@
 <p> {{ competence.description }} </p>
 
 {% if app.user %}
-    <div class="text-center">
-        <a class="btn btn-success my-3" href="{{ path('new_apprentissage', {'competence_id': competence.id}) }}">Suivre cette compétence</a>
-    </div>
+    {% if competence in app.user.competencesSuivies %}
+        <p class="text-center">Vous suivez déjà cette compétence</p>
+    {% else %}
+        <div class="text-center">
+            <a class="btn btn-success my-3" href="{{ path('new_apprentissage', {'competence_id': competence.id}) }}">Suivre cette compétence</a>
+        </div>
+    {% endif %}
 {% else %}
     <p class="text-center">Vous devez être <span><a href="{{ path('app_login') }}">connecté</a></span> pour suivre cette compétence</p>
 {% endif %}

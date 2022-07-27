@@ -64,7 +64,11 @@
                             <!-- Action item -->
                             <td>
                                 <a href="{{ path('update_domaine', {'id': domaine.id }) }}" class="btn btn-sm btn-success btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
-                                <a href="{{ path('delete_domaine', {'id': domaine.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer ce domaine ?')" class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>
+                                {% if domaine.competences is not empty %}
+                                    <a href="#" onclick="return confirm('Voulez-vous vraiment supprimer ce domaine ?')" class="btn btn-sm btn-danger btn-round me-1 mb-0 disabled"><i class="fas fa-fw fa-times"></i></a>
+                                {% else %}
+                                    <a href="{{ path('delete_domaine', {'id': domaine.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer ce domaine ?')" class="btn btn-sm btn-danger btn-round me-1 mb-0"><i class="fas fa-fw fa-times"></i></a>                                    
+                                {% endif %}
                             </td>
                         </tr>                            
                     {% endfor %}

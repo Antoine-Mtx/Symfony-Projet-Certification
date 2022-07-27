@@ -6,13 +6,15 @@
 
 <h1>{{ apprentissage.competenceSuivie }}</h1>
 
-<div class="row g-4 col-sm-12 col-lg-9 col-lg-6 m-auto">
+<div class="row g-4 col-sm-12 col-lg-6 m-auto">
     {% for composant in apprentissage.competenceSuivie.composants %}
         <div class="my-2">
             {% if composant.type.affichage == 'carte' %}
                 {% include "composant/type/card.html.twig" %}
+            {% elseif composant.type.affichage == 'illustration' %}
+                {% include "composant/type/illustration.html.twig" %}
             {% elseif composant.type.affichage == 'graphique' %}
-                {% include "composant/type/graph.html.twig" %}    
+                {% include "composant/type/interactiveGraph.html.twig" %}   
             {% endif %}
         </div>
     {% endfor %}

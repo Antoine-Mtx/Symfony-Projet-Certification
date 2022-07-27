@@ -13,10 +13,15 @@
 
 <h1 class="text-center">{{ composant }}</h1>
 
+<div class="m-4 d-flex justify-content-center">
     {% if composant.type.affichage == 'carte' %}
         {% include "composant/type/card.html.twig" %}
+    {% elseif composant.type.affichage == 'illustration' %}
+        {% include "composant/type/illustration.html.twig" %}
     {% elseif composant.type.affichage == 'graphique' %}
-        {% include "composant/type/graph.html.twig" %}    
+        {% include "composant/type/interactiveGraph.html.twig" %}   
     {% endif %}
+</div>
+
 
 {% endblock %}
