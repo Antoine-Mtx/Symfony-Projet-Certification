@@ -31,6 +31,9 @@ body {
 .display-inline-block {
     display: inline-block;
 }
+.display-inline-flex {
+    display: inline-flex;
+}
 .justify-content-center {
     justify-content: center;
 }
@@ -96,10 +99,13 @@ small {
     font-size: small;
 }
 .img {
-    max-width: 100%; 
+    max-width: minmax(100%, 250px);
 }
 input {
     line-height: 1.5rem;
+}
+.h-3 {
+    height: 3rem;
 }
 .h-4 {
     height: 4rem;
@@ -135,7 +141,7 @@ input {
 /* section welcome */
 
 #welcome {
-    height: calc(100vh - 70px);
+    height: calc(100vh - 4rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,7 +156,8 @@ input {
     color: white;
     text-shadow: 1px 1px 1px black;
     margin: 0 1rem;
-    line-height: 2rem;
+    font-size: 1.75rem;
+    line-height: 2.5rem;
 }
 .button-soft {
     padding: 0.6em 1em;
@@ -173,8 +180,8 @@ a>button {
 
 #presentation-wrapper {
     display: grid;
-    gap: 30px;
-    grid-auto-rows: minmax(100px, auto);
+    gap: 2rem;
+    grid-auto-rows: auto;
 }
 .one-title {
     color: goldenrod;
@@ -197,12 +204,22 @@ a>button {
     border: 1px solid lightgray;
     background-color: whitesmoke;
 }
+blockquote {
+    margin-inline: 0;
+}
 .quote {
     padding-bottom: 0.5em;
     padding-top: 0.5em;
 }
 .author-img {
     width: 5rem;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    margin: 10px 15px;
+}
+.author-img-small {
+    width: 3rem;
     height: auto;
     object-fit: contain;
     border-radius: 50%;
@@ -269,7 +286,7 @@ footer {
     justify-content: center;
     align-items: center;
 }
-.gap-3 {
+.gap-3by2 {
     gap: 1.5rem;
 }
 
@@ -312,10 +329,18 @@ footer {
         grid-row: 2;
     }    
     /* --------------- */
-
 }
 
 @media (min-width: 768px) {
+    .gap-3by2-md {
+        gap: 1.5rem;
+    }
+    .display-none-md {
+        display: none;
+    }
+    .flex-direction-row-md {
+        flex-direction: row;
+    }
     /* footer */
     .gtc-4-md {
         grid-template-columns: repeat(4, 1fr);
@@ -400,4 +425,26 @@ footer {
     }
     
 /* --------------- */
+}
+
+@media (max-width: 768px) {
+    .display-until-md {
+        display: none;
+    }
+    /* presentation */
+    /* #presentation-wrapper {
+        gap: 2rem;
+        grid-auto-rows: minmax(70px, auto);
+    } */
+}
+
+@media (max-width: 576px) {
+    figure {
+        margin-inline: 1rem;
+    }
+    /* presentation */
+    #presentation-wrapper {
+        gap: 0;
+        grid-auto-rows: minmax(70px, auto);
+    }
 }

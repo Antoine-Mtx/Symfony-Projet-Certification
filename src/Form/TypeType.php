@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -18,6 +19,13 @@ class TypeType extends AbstractType
         $builder
         ->add('intitule', TextType::class)
         ->add('description', TextareaType::class)
+        ->add('affichage', ChoiceType::class, [
+            'choices'  => [
+                'texte sous forme de carte' => 'carte',
+                'représentation graphique interactive' => 'graphique',
+                'illustration' => 'illustration',
+            ],
+        ])
         ->add('couleur', ColorType::class, [
             'label' => 'Couleur associée'
         ])

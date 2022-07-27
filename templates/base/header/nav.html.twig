@@ -10,10 +10,10 @@
             {% include "base/header/navbarToggler.html.twig" %}
             <!-- Nav Main menu START -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                {% if is_granted('ROLE_CREATOR') %}
-                    <a class="btn btn-warning" href="{{ path('index_creation') }}">Mon espace création</a>
-                {% endif %}
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto m-2 mb-lg-0">
+                    {% if is_granted('ROLE_CREATOR') %}
+                        <li class="nav-item"><a class="btn btn-warning" href="{{ path('index_creation') }}">Mon espace création</a></li>
+                    {% endif %}
                     <!-- Nav item 1 Accueil -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="{{ path('app_home') }}" aria-haspopup="true" aria-expanded="false">Accueil</a> <!-- data-bs-toggle : affiche/retire une liste déroulante ; aria-haspopup :  -->

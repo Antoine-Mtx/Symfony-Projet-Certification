@@ -43,8 +43,6 @@ fieldset {
     object-fit: cover;
 }
 #page-header {
-    position: sticky;
-    top: 0;
     z-index: 100;
     border-bottom: 1px solid grey;
 }
@@ -63,15 +61,13 @@ h1 {
     text-align: center;
     margin: 1rem 0;
 }
+main {
+    position: relative;
+}
 .banner {
     height: 12.5vw;
+    min-height: 100px;
     max-height: 150px;
-    /* width: 100vw; */
-    position: relative;
-    top: 0;
-    /* left: 50%;
-    margin-left: -50vw;
-    opacity: 0.85; */
 }
 .skill-card-gallery {
     display: inline-flex;

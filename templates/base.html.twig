@@ -67,13 +67,15 @@
     </head>
     <body>
         <div id="page-container">
-            <header id="page-header" class="bg-white">
-                <div class="container-lg">
-                    {% include "base/header/nav.html.twig" %}
+            <header>
+                <div id="page-header" class="bg-white sticky-top">
+                    <div class="container-lg">
+                        {% include "base/header/nav.html.twig" %}
+                    </div>
                 </div>
+                <div class="banner bg-navy"></div>
             </header>
             <main>
-                <div class="banner bg-navy"></div>
                 <div class="container-lg">
                     {% for message in app.flashes('success') %}
                         <div class="alert alert-success text-center my-3">
